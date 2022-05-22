@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>my resources</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<meta name="author" content="codedthemes" />
+<!-- Favicon icon -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<!-- Google font-->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500"
+	rel="stylesheet">
+<!-- waves.css -->
+<link rel="stylesheet" href="pages/waves/css/waves.min.css"
+	type="text/css" media="all">
+<!-- Required Fremwork -->
+<link rel="stylesheet" type="text/css"
+	href="css/bootstrap/css/bootstrap.min.css">
+<!-- waves.css -->
+<link rel='stylesheet'
+	href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css'>
+<link rel="stylesheet" href="pages/waves/css/waves.min.css"
+	type="text/css" media="all">
+<!-- themify icon -->
+<link rel="stylesheet" type="text/css"
+	href="icon/themify-icons/themify-icons.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" type="text/css"
+	href="icon/font-awesome/css/font-awesome.min.css">
+<!-- scrollbar.css -->
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" type="text/css" href="css/dropdown.css">
+<!-- am chart export.css -->
+<link rel="stylesheet"
+	href="https://www.amcharts.com/lib/3/plugins/export/export.css"
+	type="text/css" media="all" />
+<!-- Style.css -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="theme-loader">
+		<div class="loader-track">
+			<div class="preloader-wrapper">
+				<div class="spinner-layer spinner-blue">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+				<div class="spinner-layer spinner-red">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="pcoded" class="pcoded">
+		<div class="pcoded-overlay-box"></div>
+		<div class="pcoded-container navbar-wrapper">
+			<nav class="navbar header-navbar pcoded-header">
+				<div class="navbar-wrapper">
+					<div class="navbar-logo">
+						<a class="mobile-menu waves-effect waves-light"
+							id="mobile-collapse" href="#!"> <i class="ti-menu"></i>
+						</a>
+						<div class="mobile-search waves-effect waves-light">
+							<div class="header-search">
+								<div class="main-search morphsearch-search">
+									<div class="input-group">
+										<span class="input-group-addon search-close"><i
+											class="ti-close"></i></span> <input type="text" class="form-control"
+											placeholder="Enter Keyword"> <span
+											class="input-group-addon search-btn"><i
+											class="ti-search"></i></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="index.html"> <img class="img-fluid"
+							src="images/logo.png" alt="Theme-Logo" />
+						</a> <a class="mobile-options waves-effect waves-light"> <i
+							class="ti-more"></i>
+						</a>
+					</div>
+
+					<div class="navbar-container container-fluid">
+						<ul class="nav-left">
+							<li>
+								<div class="sidebar_toggle">
+									<a href="javascript:void(0)"><i class="ti-menu"></i></a>
+								</div>
+							</li>
+							<li class="header-search">
+								<div class="main-search morphsearch-search">
+									<div class="input-group">
+										<span class="input-group-addon search-close"><i
+											class="ti-close"></i></span> <input type="text" class="form-control">
+										<span class="input-group-addon search-btn"><i
+											class="ti-search"></i></span>
+									</div>
+								</div>
+							</li>
+							<li><a href="#!" onclick="javascript:toggleFullScreen()"
+								class="waves-effect waves-light"> <i class="ti-fullscreen"></i>
+							</a></li>
+						</ul>
+						<ul class="nav-right">
+							<li class="header-notification"><a href="#!"
+								class="waves-effect waves-light"> <i class="ti-bell"></i> <span
+									class="badge bg-c-red"></span>
+							</a>
+								<ul class="show-notification">
+									<li>
+										<h6>Notifications</h6> <label class="label label-danger">New</label>
+									</li>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="images/avatar-2.jpg" alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">John Doe</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit amet,
+													consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="images/avatar-4.jpg" alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">Joseph William</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit amet,
+													consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="images/avatar-3.jpg" alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">Sara Soudein</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit amet,
+													consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+								</ul></li>
+							<li class="user-profile header-notification"><a href="#!"
+								class="waves-effect waves-light"> <img
+									th:src="@{${userimage}}" class="img-radius"
+									alt="User-Profile-Image"> <span th:text="${first}"></span>
+									<span th:text="${last}"></span> <i class="ti-angle-down"></i>
+							</a>
+								<ul class="show-notification profile-notification">
+									<li class="waves-effect waves-light"><a href="#!"> <i
+											class="ti-settings"></i> Settings
+									</a></li>
+									<li class="waves-effect waves-light"><a
+										href="user-profile.html"> <i class="ti-user"></i> Profile
+									</a></li>
+									<li class="waves-effect waves-light"><a
+										th:href="@{/chating}"> <i class="ti-email"></i> My
+											Messages
+									</a></li>
+									<li class="waves-effect waves-light"><a
+										href="auth-lock-screen.html"> <i class="ti-lock"></i> Lock
+											Screen
+									</a></li>
+									<li class="waves-effect waves-light"><a
+										th:href="@{logout}"> <i class="ti-layout-sidebar-left"></i>
+											Logout
+									</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<nav class="pcoded-navbar">
+					<div class="sidebar_toggle">
+						<a href="#"><i class="icon-close icons"></i></a>
+					</div>
+					<div class="pcoded-inner-navbar main-menu">
+					 <div style="background: black;color: white">
+						<div class="">
+							<div class="main-menu-header">
+								<img class="img-80 img-radius" th:src="@{${userimage}}"
+									alt="User-Profile-Image">
+								<div class="user-details">
+									<em> <span th:text="${first}" id="more-details"><i
+											class="fa fa-caret-down"></i></span><span th:text="${last}"></span>
+									</em>
+
+								</div>
+							</div>
+
+							<div class="main-menu-content">
+								<ul>
+									<li class="more-details"><a href="user-profile.html"><i
+											class="ti-user"></i>View Profile</a> <a href="#!"><i
+											class="ti-settings"></i>Settings</a> <a th:href="@{logout}"><i
+											class="ti-layout-sidebar-left"></i>Logout</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="p-15 p-b-0">
+							<form class="form-material">
+								<div class="form-group form-primary">
+									<input type="text" name="footer-email" class="form-control"
+										required> <span class="form-bar"></span> <label
+										class="float-label"><i class="fa fa-search m-r-10"></i>Search
+										Friend</label>
+								</div>
+							</form>
+						</div>
+						<div class="pcoded-navigation-label"
+							data-i18n="nav.category.navigation">Layout</div>
+						<ul class="pcoded-item pcoded-left-item">
+							<li class=""><a href="index.html"
+								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
+										class="ti-home"></i><b>D</b></span> <span class="pcoded-mtext"
+									data-i18n="nav.dash.main">Dashboard</span> <span
+									class="pcoded-mcaret"></span>
+							</a></li>
+							<li class="pcoded-hasmenu">
+							<a href="javascript:void(0)"
+								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
+										class="ti-layout-grid2-alt"></i></span> <span class="pcoded-mtext"
+									data-i18n="nav.basic-components.main">Components</span> <span
+									class="pcoded-mcaret"></span>
+							</a>
+								<ul style="background: black;color: white" class="pcoded-submenu">
+									<li class=" "><a href="accordion.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext" data-i18n="nav.basic-components.alert">Accordion</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="breadcrumb.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext"
+											data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="button.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext" data-i18n="nav.basic-components.alert">Button</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="tabs.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext"
+											data-i18n="nav.basic-components.breadcrumbs">Tabs</span> <span
+											class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="color.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="label-badge.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext"
+											data-i18n="nav.basic-components.breadcrumbs">Label
+												Badge</span> <span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="tooltip.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tooltip</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="typography.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext"
+											data-i18n="nav.basic-components.breadcrumbs">Typography</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="notification.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext" data-i18n="nav.basic-components.alert">Notification</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="icon-themify.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext"
+											data-i18n="nav.basic-components.breadcrumbs">Themify</span> <span
+											class="pcoded-mcaret"></span>
+									</a></li>
+
+								</ul>
+								</li>
+						</ul>
+						<div class="pcoded-navigation-label"
+							data-i18n="nav.category.forms">Forms &amp; Tables</div>
+						<ul class="pcoded-item pcoded-left-item">
+							<li><a th:href="@{/resource}"
+								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
+										class="ti-layers"></i><b>FC</b></span> <span class="pcoded-mtext"
+									data-i18n="nav.form-components.main">My Resource</span> <span
+									class="pcoded-mcaret"></span>
+							</a></li>
+							<li><a th:href="@{/history}" class="waves-effect waves-dark">
+									<span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+									<span class="pcoded-mtext" data-i18n="nav.form-components.main">Basic
+										Table</span> <span class="pcoded-mcaret"></span>
+							</a></li>
+
+						</ul>
+
+						<div class="pcoded-navigation-label"
+							data-i18n="nav.category.forms">friends  &amp; Chats</div>
+						<ul class="pcoded-item pcoded-left-item">
+							<li><a th:href="@{/friends}" class="waves-effect waves-dark">
+									<span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+									<span class="pcoded-mtext" data-i18n="nav.form-components.main">Friends</span>
+									<span class="pcoded-mcaret"></span>
+							</a></li>
+							<li><a th:href="@{/chating}"
+								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
+										class="ti-layers"></i><b>FC</b></span> <span class="pcoded-mtext"
+									data-i18n="nav.form-components.main">Chats</span> <span
+									class="pcoded-mcaret"></span>
+							</a></li>
+							<li class="pcoded-hasmenu"><a href="javascript:void(0)"
+								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
+										class="ti-layout-grid2-alt"></i></span> <span class="pcoded-mtext"
+									data-i18n="nav.basic-components.main">Pages</span> <span
+									class="pcoded-mcaret"></span>
+							</a>
+								<ul class="pcoded-submenu">
+									<li class=" "><a th:href="@{/signin}"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a th:href="@{/signup}"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext"
+											data-i18n="nav.basic-components.breadcrumbs">Register</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class=" "><a href="sample-page.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
+											class="pcoded-mtext"
+											data-i18n="nav.basic-components.breadcrumbs">Sample
+												Page</span> <span class="pcoded-mcaret"></span>
+									</a></li>
+								</ul></li>
+
+						</ul>
+
+					</div>
+						</div>
+				</nav>
+				<div class="pcoded-content">
+					<!-- Page-header start -->
+					<div class="page-header">
+						<div class="page-block">
+							<div class="row align-items-center">
+								<div class="col-md-8">
+									<div class="page-header-title">
+										<h5 class="m-b-10">User Resources</h5>
+										<p class="m-b-0">Welcome to my resource page</p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<ul class="breadcrumb-title">
+										<li class="breadcrumb-item"><a href="index.html"> <i
+												class="fa fa-home"></i>
+										</a></li>
+										<li class="breadcrumb-item"><a href="#!">My Resource</a>
+										</li>
+										<li class="breadcrumb-item"><a href="#!">course</a></li>
+										<li class="breadcrumb-item"><a id="jibu" href="#!"></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Page-header end -->
+					<div class="pcoded-inner-content">
+						<!-- Main-body start -->
+						<div class="main-body">
+							<div class="page-wrapper">
+								<!-- Page-body start -->
+								<div class="page-body">
+									<div class="row">
+										<!-- task, page, download counter  start -->
+										<div class="col-xl-3 col-md-6">
+											<div class="card">
+												<div class="card-block">
+													<div class="row align-items-center">
+														<div class="col-8">
+															<h4 id="cont5" class="text-c-purple"></h4>
+															<h6 class="text-muted m-b-0">All reserved</h6>
+														</div>
+														<th:block th:each="pdf,p :${allfiles}">
+															<input type="hidden" th:value="${p.size}" id="all" />
+												
+														</th:block>
+														<div class="col-4 text-right">
+															<i class="fa fa-bar-chart f-28"></i>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer bg-c-purple">
+													<div class="row align-items-center">
+														<div class="col-9">
+															<p class="text-white m-b-0">Total Files</p>
+														</div>
+														<div class="col-3 text-right">
+															<i class="fa fa-line-chart text-white f-16"></i>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-md-6">
+											<div class="card">
+												<div class="card-block">
+													<div class="row align-items-center">
+														<div class="col-8">
+															<h4 id="cont6" class="text-c-green"></h4>
+															<h6 class="text-muted m-b-0">Images and Others</h6>
+														</div>
+														<th:block th:each="pdf,p :${otherfiles}">
+															<input type="hidden" th:value="${p.size}" id="inner" />
+														</th:block>
+														<div class="col-4 text-right">
+															<i class="fa fa-file-text-o f-28"></i>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer bg-c-green">
+													<div class="row align-items-center">
+														<div class="col-9">
+															<p class="text-white m-b-0">All Images</p>
+														</div>
+														<div class="col-3 text-right">
+															<i class="fa fa-line-chart text-white f-16"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-md-6">
+											<div class="card">
+												<div class="card-block">
+													<div class="row align-items-center">
+														<div class="col-8">
+															<h4 id="cont4" class="text-c-red"></h4>
+															<h6 class="text-muted m-b-0">docx</h6>
+														</div>
+														<th:block th:each="pdf,p :${docsfiles}">
+															<input type="hidden" th:value="${p.size}" id="docs" />
+														</th:block>
+														<div class="col-4 text-right">
+															<i class="fa fa-calendar-check-o f-28"></i>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer bg-c-red">
+													<div class="row align-items-center">
+														<div class="col-9">
+															<p class="text-white m-b-0">word Documents</p>
+														</div>
+														<div class="col-3 text-right">
+															<i class="fa fa-line-chart text-white f-16"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-md-6">
+											<div class="card">
+												<div class="card-block">
+													<div class="row align-items-center">
+														<div class="col-8">
+															<h4 id="cont3" class="text-c-blue"></h4>
+															<h6 class="text-muted m-b-0">pdf</h6>
+														</div>
+														<th:block th:each="pdf,p :${pdffiles}">
+															<input type="hidden" th:value="${p.size}" id="pdf" />
+														</th:block>
+														<div class="col-4 text-right">
+															<i class="fa fa-hand-o-down f-28"></i>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer bg-c-blue">
+													<div class="row align-items-center">
+														<div class="col-9">
+															<p class="text-white m-b-0">PDF files</p>
+														</div>
+														<div class="col-3 text-right">
+															<i class="fa fa-line-chart text-white f-16"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- task, page, download counter  end -->
+                                           <div style="margin-left:14px;width: 100%" class="media" th:if="${message}">
+
+												<div class="alert alert-info alert-dismissible fade show"
+													th:text="${message}">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+
+												</div>
+
+											</div>
+										<!--  sale analytics start -->
+										<div class="col-xl-8 col-md-12">
+											<div class="card">
+												<div class="card-header">
+													<h5>New Resource Implementation</h5>
+
+													<div class="card-header-right">
+														<ul class="list-unstyled card-option">
+															<li><i class="fa fa fa-wrench open-card-option"></i></li>
+															<li><i class="fa fa-window-maximize full-card"></i></li>
+															<li><i class="fa fa-minus minimize-card"></i></li>
+															<li><i class="fa fa-refresh reload-card"></i></li>
+
+														</ul>
+													</div>
+													<section class="section">
+														<aside class="menu">
+															<p class="menu-label text-c-green">Categories</p>
+															<ul class="menu-list">
+																<li style="height: auto"><a>Share New File</a>
+																	<p class="menu-label">Permissions</p>
+
+																	<ul>
+																		<li><a onclick="myPublic()">Public</a>
+
+
+
+																			<ul id="public">
+																				<li><p>This File can be accessed by any one
+																						within the system</p></li>
+																				<li>
+																					<form id="myfomm"
+																						onsubmit="showvaluee()" th:action="@{/savefile}"
+																						th:object="${mycourse}" method="POST"
+																						enctype="multipart/form-data">
+
+																						<div class="col-sm-10">
+																							<input required name="cid" autocomplete="off"
+																								placeholder="choose course" class="form-control"
+																								id="publix" onchange="my_Publicx()" list="datd" />
+																						</div>
+																						<datalist id="datd">
+																							<th:block th:each="course :${courses}">
+																								<option th:text="${course.course_name}"
+																									th:value="${course.id}"></option>
+
+																							</th:block>
+																						</datalist>
+																						<br> <br>
+																						<div style="display: none;" id="unii">
+																							<span style="color: green; margin: 10px 0">upload
+																								file</span>
+																							<div class="form-group row">
+																								<input type="hidden" name="public" th:value="3">
+																								<div class="col-sm-10">
+																									<input accept="image/jpg,image/jpeg,.pdf,.xls,.docx,.xlsx" required th:field="*{files}" type="file"
+																										multiple="multiple" class="form-control">
+																								</div>
+																							</div>
+																							<button type="submit"
+																								class="btn waves-effect waves-light hor-grd btn-grd-success">Submit
+																							</button>
+																						</div>
+
+
+																					</form>
+																				</li>
+																			</ul></li>
+																		<li><a onclick="myPrivate()">Private</a>
+																			<ul id="private">
+																				<li><p>This File can be accessed Only with
+																						you for security reasons</p></li>
+																				<li><form id="ff" th:action="@{/savefile}"
+																						th:object="${mycourse}" method="POST"
+																						enctype="multipart/form-data">
+																						<div class="col-sm-10">
+																							<input required name="cid" autocomplete="off"
+																								placeholder="choose course" class="form-control"
+																								id="publi" onchange="my_Public()" list="datd" />
+																						</div>
+																						<datalist id="datd">
+																							<th:block th:each="course :${courses}">
+																								<option th:text="${course.course_name}"
+																									th:value="${course.id}"></option>
+
+																							</th:block>
+																						</datalist>
+																						<br> <br>
+																						<div style="display: none;" id="uni">
+																							<span style="color: green; margin: 10px 0">upload
+																								file</span>
+																							<div class="form-group row">
+																								<input type="hidden" name="public" th:value="4">
+																								<div class="col-sm-10">
+																									<input accept="image/jpg,image/jpeg,.pdf,.xls,.docx,.xlsx" required th:field="*{files}" type="file"
+																										multiple="multiple" class="form-control">
+																								</div>
+																							</div>
+																							<button type="submit"
+																								class="btn waves-effect waves-light hor-grd btn-grd-success">Submit
+																							</button>
+																						</div>
+																					</form></li>
+																			</ul></li>
+																		<li><a onclick="myTag()">Tag Friend</a>
+																			<ul id="tag">
+																				<li><p>This File can be accessed Only with
+																						your close friends only</p></li>
+																				<li>
+																					<form id="fm" th:action="@{/savefile}"
+																						th:object="${mycourse}" method="POST"
+																						enctype="multipart/form-data">
+																						<span style="color: green; margin: 10px 0">upload
+																							file</span>
+																											<div class="col-sm-10">
+																							<input required name="cid" autocomplete="off"
+																								placeholder="choose course" class="form-control"
+																								id="publis" onchange="my_Publics()" list="datd" />
+																						</div>
+																						<datalist id="datd">
+																							<th:block th:each="course :${courses}">
+																								<option th:text="${course.course_name}"
+																									th:value="${course.id}"></option>
+
+																							</th:block>
+																						</datalist>
+																						<br> <br>
+																						<div style="display: none;" id="unis">
+																							<span style="color: green; margin: 10px 0">upload
+																								file</span>
+																							<div class="form-group row">
+																								<input type="hidden" name="public" th:value="5">
+																								<div class="col-sm-10">
+																									<input accept="image/jpg,image/jpeg,.pdf,.xls,.docx,.xlsx" id="fil" required th:field="*{files}" type="file"
+																										multiple="multiple" class="form-control">
+																								</div>
+																							</div>
+																						</div>
+																					</form>
+																				</li>
+																			</ul></li>
+
+																	</ul></li>
+																<li><a onclick="myfiles()">View New Tagged
+																		Files</a>
+																	<p class="menu-label">Tagged Files</p>
+																	<ul>
+																		<li><a>PDF</a></li>
+																		<li><a>IMAGES</a></li>
+																		<li><a>DOCS</a></li>
+																	</ul></li>
+																<li><a onclick="availabePublic()">View Public
+																		Files</a>
+																	<p class="menu-label">Public Files</p>
+																	<ul>
+																		<li><a>PDF</a></li>
+																		<li><a>IMAGES</a></li>
+																		<li><a>IMAGES</a></li>
+																	</ul></li>
+																<li><a onclick="manageAccess()">Manage Access
+																		Files</a>
+																	<p class="menu-label">Files Management</p>
+																	<ul>
+																		<li><a>Public</a></li>
+																		<li><a>Private</a></li>
+																		<li><a>Tagged</a></li>
+
+																	</ul></li>
+																<li><a>Customize Resources</a>
+																	<p class="menu-label">All Incoming resources</p>
+																	<ul>
+																		<li><a href="">JSON</a></li>
+																		<li><a href="">AJAX</a></li>
+																	</ul></li>
+															</ul>
+														</aside>
+													</section>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-4 col-md-12">
+											<div id="tagged" class="card">
+												<div class="card-block">
+													<div class="row">
+														<div class="col">
+															<h4 id="cont2"></h4>
+															<p class="text-muted">New Files</p>
+														</div>
+														<div class="col-auto">
+															<label class="label label-success">+20%</label>
+														</div>
+													</div>
+													<div class="card-block">
+														<th:block th:each="pri,iStat :${Prilfiles}" id="tg">
+															<input type="hidden" id="mysiz" th:value="${iStat.size}" />
+															<div class="align-middle m-b-30">
+																<div class="d-inline-block">
+																	<h6 th:text="${pri.file_name}"></h6>
+																	<p th:text="${pri.size}" class="text-muted m-b-0"></p>
+																</div>
+															
+																<a href="" style="float: right">download</a>
+															</div>
+														</th:block>
+														<div class="text-center">
+															<a href="#!" class="b-b-primary text-primary">View
+																all Files</a>
+														</div>
+													</div>
+
+
+												</div>
+											</div>
+											<div id="available" class="card quater-card">
+												<div class="card-block">
+													<h5 class="text-muted m-b-15">Available public files</h5>
+													<h6>
+														<span id="cont"></span> <span>files</span>
+													</h6>
+													<div class="card-block">
+														<th:block th:each="pub,iStat :${Publfiles}">
+															<div class="align-middle m-b-30" id="publi">
+																<input type="hidden" th:value="${iStat.size}"
+																	id="mysize" />
+																<div class="d-inline-block">
+																	<h6 th:text="${pub.file_name}"></h6>
+																	<p th:text="${pub.size}" class="text-muted m-b-0"></p>
+																</div>
+																[[${iStat.size}]]
+																<a href="" style="float: right">download</a>
+															</div>
+														</th:block>
+														<div class="text-center">
+															<a href="#!" class="b-b-primary text-primary">View
+																all Files</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--  sale analytics end -->
+
+										<!--  project and team member start -->
+										<div id="friends" class="col-xl-8 col-md-12">
+											<div class="card table-card">
+												<div class="card-header">
+													<h5>Tag Your close friends</h5>
+													<div class="card-header-right">
+														<ul class="list-unstyled card-option">
+															<li><i class="fa fa fa-wrench open-card-option"></i></li>
+															<li><i class="fa fa-window-maximize full-card"></i></li>
+															<li><i class="fa fa-minus minimize-card"></i></li>
+															<li><i class="fa fa-refresh reload-card"></i></li>
+															<li><i class="fa fa-trash close-card"></i></li>
+														</ul>
+													</div>
+												</div>
+												<div class="card-block">
+													<div class="table-responsive">
+														<table class="table table-hover">
+															<thead>
+																<tr>
+																	<th>
+																		<div class="chk-option">
+																			<div class="checkbox-fade fade-in-primary">
+																				<label class="check-task"> <input
+																					type="checkbox" value=""> <span class="cr">
+																						<i class="cr-icon fa fa-check txt-default"></i>
+																				</span>
+																				</label>
+																			</div>
+																		</div> Select All
+																	</th>
+																	<th>Name</th>
+																	<th>Due Date</th>
+																	<th class="text-right">Priority</th>
+																</tr>
+															</thead>
+															<tbody>
+															<th:block th:each="friend :${newFriends}"
+															>
+																<tr>
+																	<td>
+																		<div class="chk-option">
+																			<div class="checkbox-fade fade-in-primary">
+																				<label class="check-task"> <input id="aft"
+																					type="checkbox" value=""> <span class="cr">
+																						<i class="cr-icon fa fa-check txt-default"></i>
+																				</span>
+																				</label>
+																			</div>
+																		</div>
+																		<div class="d-inline-block align-middle">
+																			<img th:src="${friend.getPhotosImagePath}" alt="user image"
+																				class="img-radius img-40 align-top m-r-15">
+																			<div class="d-inline-block">
+																				<em><span th:text="${friend.first}"></span> <span
+																					th:text="${friend.last}"></span></em>
+																				<p class="text-muted m-b-0">Programmer</p>
+																			</div>
+																		</div>
+																	</td>
+																	<td>Able Pro</td>
+																	<td>Jun, 26</td>
+																	<td class="text-right"><label
+																		class="label label-danger">Low</label></td>
+																</tr>
+															
+													</th:block>
+															</tbody>
+														</table>
+														<div style="float: center; margin-left: 100px">
+															<button id="myButton" disabled
+																class="btn waves-effect waves-light hor-grd btn-grd-success">Submit</button>
+														</div>
+														<div class="text-right m-r-20">
+															<a href="#!" class=" b-b-primary text-primary">View
+																all Friends</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-4 col-md-12">
+											<div id="closeFr" class="card ">
+												<div class="card-header">
+													<h5>Close Friends</h5>
+													<span>Those who have closed Access to your files</span>
+													<div class="card-header-right">
+														<ul class="list-unstyled card-option">
+															<li><i class="fa fa fa-wrench open-card-option"></i></li>
+															<li><i class="fa fa-window-maximize full-card"></i></li>
+															<li><i class="fa fa-minus minimize-card"></i></li>
+															<li><i class="fa fa-refresh reload-card"></i></li>
+															<li><i class="fa fa-trash close-card"></i></li>
+														</ul>
+													</div>
+												</div>
+												<div class="card-block">
+													<div class="align-middle m-b-30">
+														<img src="images/avatar-2.jpg" alt="user image"
+															class="img-radius img-40 align-top m-r-15">
+														<div class="d-inline-block">
+															<h6>David Jones</h6>
+															<p class="text-muted m-b-0">Developer</p>
+														</div>
+													</div>
+													<div class="align-middle m-b-30">
+														<img src="images/avatar-1.jpg" alt="user image"
+															class="img-radius img-40 align-top m-r-15">
+														<div class="d-inline-block">
+															<h6>David Jones</h6>
+															<p class="text-muted m-b-0">Developer</p>
+														</div>
+													</div>
+													<div class="align-middle m-b-30">
+														<img src="images/avatar-3.jpg" alt="user image"
+															class="img-radius img-40 align-top m-r-15">
+														<div class="d-inline-block">
+															<h6>David Jones</h6>
+															<p class="text-muted m-b-0">Developer</p>
+														</div>
+													</div>
+													<div class="align-middle m-b-30">
+														<img src="images/avatar-4.jpg" alt="user image"
+															class="img-radius img-40 align-top m-r-15">
+														<div class="d-inline-block">
+															<h6>David Jones</h6>
+															<p class="text-muted m-b-0">Developer</p>
+														</div>
+													</div>
+													<div class="align-middle m-b-10">
+														<img src="images/avatar-5.jpg" alt="user image"
+															class="img-radius img-40 align-top m-r-15">
+														<div class="d-inline-block">
+															<h6>David Jones</h6>
+															<p class="text-muted m-b-0">Developer</p>
+														</div>
+													</div>
+													<div class="text-center">
+														<a href="#!" class="b-b-primary text-primary">View all
+															Friends</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--  project and team member end -->
+									</div>
+								</div>
+								<!-- Page-body end -->
+							</div>
+							<div id="styleSelector"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function getData() {
+			var valu = document.getElementById("mycs").value;
+			return ducument.getElementById("jibu").innerHTML = "anu";
+		}
+	</script>
+	<script type="text/javascript">
+		function my_Public() {
+
+			var select_status = $('#publi').val();
+			var vaa=document.getElementById("ff");
+			var inn=vaa.elements[1].value.toString();
+			if (select_status == inn) {
+				$('#uni').show();
+			} else {
+				$('#uni').hide();
+			}
+		}
+		function my_Publicx() {
+
+			var select_status = $('#publix').val();
+			var formm=document.getElementById("myfomm");
+			var inn=formm.elements[1].value.toString();
+			if (select_status == inn) {
+				$('#unii').show();
+			} else {
+				$('#unii').hide();
+			}
+		}
+		function my_Publics() {
+		
+			var select_status = $('#publis').val();
+			var formm=document.getElementById("fm");
+			var inn=formm.elements[1].value.toString();
+			if (select_status ==inn) {
+				$('#unis').show();
+				$('#friends').show();
+			} else {
+				$('#unis').hide();
+				$('#friends').hide();
+			}
+		
+		}
+	</script>
+	<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js "></script>
+	<script type="text/javascript" src="js/popper.js/popper.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js "></script>
+	<script type="text/javascript" src="pages/widget/excanvas.js "></script>
+	<!-- waves js -->
+	<script src="pages/waves/js/waves.min.js"></script>
+	<!-- jquery slimscroll js -->
+	<script type="text/javascript"
+		src="js/jquery-slimscroll/jquery.slimscroll.js "></script>
+	<!-- modernizr js -->
+	<script type="text/javascript" src="js/modernizr/modernizr.js "></script>
+	<!-- slimscroll js -->
+	<script type="text/javascript" src="js/SmoothScroll.js"></script>
+	<script src="js/jquery.mCustomScrollbar.concat.min.js "></script>
+	<!-- Chart js -->
+	<script type="text/javascript" src="js/chart.js/Chart.js"></script>
+	<!-- amchart js -->
+	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+	<script src="pages/widget/amchart/gauge.js"></script>
+	<script src="pages/widget/amchart/serial.js"></script>
+	<script src="pages/widget/amchart/light.js"></script>
+	<script src="pages/widget/amchart/pie.min.js"></script>
+	<script
+		src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+	<!-- menu js -->
+	<script src="js/pcoded.min.js"></script>
+	<script src="js/vertical-layout.min.js "></script>
+	<!-- custom js -->
+	<script type="text/javascript"
+		src="pages/dashboard/custom-dashboard.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var pd = document.getElementById("pdf").value;
+			var doc = document.getElementById("docs").value;
+			var all = document.getElementById("all").value;
+			var outhhh= document.getElementById("inner");
+			document.getElementById("cont5").innerHTML = all;
+			document.getElementById("cont4").innerHTML = doc;
+			document.getElementById("cont3").innerHTML = pd;
+			var zero='0';
+			if(outhhh.value==null){
+				document.getElementById("cont6").innerHTML = zero.toString();
+			}
+			else{
+				document.getElementById("cont6").innerHTML = outhhh.value;
+			}
+		
+		}
+	</script>
+	<script type="text/javascript">
+		var isExpanded = false;
+
+		function myPublic() {
+			document.getElementById("public").style.display = isExpanded ? "none"
+					: "block";
+			document.getElementById("public").style.display = isExpanded ? "block"
+					: "none";
+			isExpanded = !isExpanded;
+
+		}
+	</script>
+	<script type="text/javascript">
+		var isExpanded = false;
+		function availabePublic() {
+			document.getElementById("available").style.display = isExpanded ? "block"
+					: "none";
+			document.getElementById("available").style.display = isExpanded ? "none"
+					: "block";
+			isExpanded = !isExpanded;
+			var v1 = document.getElementById("mysize").value;
+			document.getElementById("cont").innerHTML = v1;
+		}
+	</script>
+	<script type="text/javascript">
+		var isExpanded = false;
+		function myPrivate() {
+			document.getElementById("private").style.display = isExpanded ? "none"
+					: "block";
+			document.getElementById("private").style.display = isExpanded ? "block"
+					: "none";
+			isExpanded = !isExpanded;
+		}
+	</script>
+	<script type="text/javascript">
+		var isExpanded = false;
+		function myTag() {
+			document.getElementById("tag").style.display = isExpanded ? "none"
+					: "block";
+			document.getElementById("tag").style.display = isExpanded ? "block"
+					: "none";
+			isExpanded = !isExpanded;
+		}
+	</script>
+	<script type="text/javascript">
+		var isExpanded = false;
+		function manageAccess() {
+
+			document.getElementById("closeFr").style.display = isExpanded ? "block"
+					: "none";
+			document.getElementById("closeFr").style.display = isExpanded ? "none"
+					: "block";
+			isExpanded = !isExpanded;
+		}
+	</script>
+	<script type="text/javascript">
+		function myfiles() {
+			document.getElementById("tagged").style.display = isExpanded ? "block"
+					: "none";
+			document.getElementById("tagged").style.display = isExpanded ? "none"
+					: "block";
+			isExpanded = !isExpanded;
+			var va = document.getElementById("mysiz").value;
+			document.getElementById("cont2").innerHTML = va;
+		}
+	</script>
+	<script type="text/javascript">
+		
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#myButton").click(function() {
+				$("#fm").submit();
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		var fil = document.getElementById("fil");
+		var tfr = document.getElementById("aft")
+		var submit = document.getElementById("myButton")
+		 const checkEnableButton=()=>{
+			 submit.disabled= !(
+					 fil.value &&
+					 tfr.checked
+					 )
+		 }
+		 fil.addEventListener('change',checkEnableButton)
+		 tfr.addEventListener('change',checkEnableButton)
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>ShareMe</title>
+<!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+<!-- Meta -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description"
+	content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+<meta name="keywords"
+	content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+<meta name="author" content="codedthemes" />
+<!-- Favicon icon -->
+
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<!-- Google font-->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500"
+	rel="stylesheet">
+<!-- Required Fremwork -->
+<link rel="stylesheet" type="text/css"
+	href="css/bootstrap/css/bootstrap.min.css">
+<!-- waves.css -->
+<link rel="stylesheet" href="pages/waves/css/waves.min.css"
+	type="text/css" media="all">
+<!-- themify-icons line icon -->
+<link rel="stylesheet" type="text/css"
+	href="icon/themify-icons/themify-icons.css">
+<!-- ico font -->
+<link rel="stylesheet" type="text/css"
+	href="icon/icofont/css/icofont.css">
+<!-- Font Awesome -->
+<!-- Style.css -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body themebg-pattern="theme1">
+	<!-- Pre-loader start -->
+	<div class="theme-loader">
+		<div class="loader-track">
+			<div class="preloader-wrapper">
+				<div class="spinner-layer spinner-blue">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+				<div class="spinner-layer spinner-red">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Pre-loader end -->
+	<section class="login-block">
+		<!-- Container-fluid starts -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+
+<div class="modal fade modal-icon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Themify Icons</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="icon-list-demo">
+                            <i id="icon" class="fa fa-wpbeginner fa-lg"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            Name
+                            <input class="form-control" type="text" id="name" value="fa fa-wpbeginner">
+                        </div>
+                        <div class="form-group">
+                            Code
+                            <input class="form-control" type="text" id="code" value='<i class="fa fa-wpbeginner"></i>'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+					<div class="card-block">
+						<div class="data-table-main icon-list-demo">
+							<div class="row">
+								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 outer-ellipsis">
+									<i class="ti-arrow-up"></i> ti-arrow-up
+								</div>
+								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 outer-ellipsis">
+									<i class="ti-arrow-right"></i> ti-arrow-right
+								</div>
+							</div>
+							<!-- end of data table -->
+						</div>
+					</div>
+
+					<form id="myformm" th:action="@{/signup/save}" th:object="${uni}" method="POST"
+						enctype="multipart/form-data"
+						class="md-float-material form-material">
+						<div class="text-center">
+							<img style="width: 140px; height: 140px"
+								src="images/udomlogo.png" alt="udomlogo.png">
+						</div>
+						<div class="auth-box card">
+							<div class="card-block">
+								<div class="row m-b-20">
+									<div class="col-md-12">
+										<h3 class="text-center txt-primary">Sign up</h3>
+									</div>
+								</div>
+								<div th:if="${ok}">
+									<button type="button"
+										class="closebtn waves-effect waves-light btn-success btn-square btn-block"
+										data-dismiss="alert">
+										<strong th:text="${ok}"> </strong>
+									</button>
+
+								</div>
+								<div th:if="${param.error}">
+									<button type="button"
+										class="closebtn waves-effect waves-light btn-danger btn-square btn-block"
+										data-dismiss="alert">
+										<strong th:text="${error}"> </strong>
+									</button>
+
+								</div>
+								<div class="form-group form-primary">
+									<input th:field="*{first}" type="text" name="first-name"
+										class="form-control" required> <span class="form-bar"></span>
+									<label class="float-label">First Name</label>
+									<div class="text-danger" th:if="${#fields.hasErrors('first')}"
+										th:errors="*{first}"></div>
+								</div>
+								<div class="form-group form-primary">
+									<input th:field="*{last}" type="text" name="last-name"
+										class="form-control" required> <span class="form-bar"></span>
+									<label class="float-label">Last Name</label>
+									<div class="text-danger" th:if="${#fields.hasErrors('last')}"
+										th:errors="*{last}"></div>
+								</div>
+								<div class="form-group form-primary">
+									<input th:field="*{email}" type="text" name="email"
+										class="form-control" required> <span class="form-bar"></span>
+									<label class="float-label">Your Email Address</label>
+									<div class="text-danger" th:if="${#fields.hasErrors('email')}"
+										th:errors="*{email}"></div>
+								</div>
+								<div class="form-group form-primary">
+									<input th:field="*{age}" type="text" name="age"
+										class="form-control" required> <span class="form-bar"></span>
+									<label class="float-label">Age</label>
+									<div class="text-danger" th:if="${#fields.hasErrors('age')}"
+										th:errors="*{age}"></div>
+								</div>
+								<div class="form-group form-primary">
+									<label>Profile Photo</label> <input id="fileimage" type="file"
+										name="image" accept="image/jpg,image/jpeg">
+								</div>
+								<p id="thumb" style="display: none" align="center">
+									<img style="border-radius: 50%; width: 100px; height: 100px"
+										id="thumbnail" alt="my thumb" />
+								</p>
+								<label>Roles: </label>
+								<div class="form-group form-primary">
+
+									<th:block th:each="role : ${listRoles}">
+										<div class="col-md-12">
+
+											<label> <input id="cp1" type="checkbox"
+												th:field="*{roles}" th:value="${role.Id}"> <span
+												class="cr"></span> <span th:text="${role.role_name}"
+												class="text-inverse"></span>
+											</label>
+
+										</div>
+									</th:block>
+								</div>
+
+
+
+
+								<div class="card-block accordion-block">
+									<div id="accordion" role="tablist" aria-multiselectable="true">
+										<div class="accordion-panel">
+											<div class="accordion-heading" role="tab" id="headingTwo">
+												<h3 class="card-title accordion-title">
+													<a class="accordion-msg waves-effect waves-dark"
+														data-toggle="collapse" data-parent="#accordion"
+														href="#collapseTwo" aria-expanded="false"
+														aria-controls="collapseTwo">University </a>
+												</h3>
+											</div>
+											<div id="collapseTwo" class="panel-collapse collapse"
+												role="tabpanel" aria-labelledby="headingTwo">
+												<div class="accordion-content accordion-desc">
+
+													<div class="form-group form-primary">
+														<input autocomplete="off" class="form-control" id="university"
+															onchange="my_university()" list="datd"> <span
+															class="form-bar"></span> <label class="float-label">Choose
+															University</label>
+														<datalist id="datd">
+															<th:block th:each="university : ${universities}">
+																<option th:text="${university.un_name}"
+																	th:value="${university.id}"></option>
+
+															</th:block>
+														</datalist>
+													</div>
+													<div style="display: none;" id="uni">
+
+														<div class="form-group form-primary">
+															<input autocomplete="off" class="form-control" id="messagetype"
+																onchange="fun_showtextbox()" list="dats"> <span
+																class="form-bar"></span> <label class="float-label">Choose
+																your College</label>
+															<datalist id="dats">
+																<th:block th:each="coll :${colleges}">
+
+																	<option th:text="${coll.coll_name}"
+																		th:value="${coll.id}"></option>
+																</th:block>
+															</datalist>
+														</div>
+
+
+														<div style="display: none;" id="mobileno_textbox">
+
+
+															<div class="form-group form-primary">
+																<input autocomplete="off" th:field="*{programme}" class="form-control"
+																	id="mesagetype" onchange="fun_showtextbx()" list="data">
+																<span class="form-bar"></span> <label
+																	class="float-label">Choose your Programme</label>
+																<datalist id="data">
+																	<th:block th:each="prog :${programmes}">
+																		<option th:text="${prog.prog_name}"
+																			th:value="${prog.id}"></option>
+																	</th:block>
+																</datalist>
+															</div>
+
+															<div style="display: none;" id="mobileno_textbx">
+																<div class="form-group form-primary">
+
+																	<div class="form-group form-primary">
+																		<input autocomplete="off" class="form-control" id="year"
+																			onchange="showYear()" list="dataa"> <span
+																			class="form-bar"></span> <label class="float-label">Year
+																			of study</label>
+																		<datalist id="dataa">
+
+																			<option value="first">FIRST YEAR</option>
+																			<option value="second">SECOND YEAR</option>
+																			<option value="third">THIRD YEAR</option>
+																			<option value="last">FORTH YEAR</option>
+																		</datalist>
+																	</div>
+
+
+
+																	<div style="display: none;" id="course">
+
+																		<div class="form-group form-primary">
+																			<input autocomplete="off" class="form-control" id="mesgetype"
+																				onchange="fun_showtextbcx()" list="date"> <span
+																				class="form-bar"></span> <label class="float-label">Semister
+																			</label>
+																			<datalist id="date">
+
+																				<option value="semist2">Semister 01</option>
+																				<option value="semist1">Semister 02</option>
+																			</datalist>
+																		</div>
+
+
+
+																		<div style="display: none;" id="mobileno_textbcx">
+																			<p style="margin: 5px 0">My courses</p>
+																			<th:block th:each="course : ${listcourses}">
+																				<div class="col-md-12">
+
+																					<label> <input id="cp1" type="checkbox"
+																						th:field="*{courses}" th:value="${course.id}">
+																						<span class="cr"></span> <span
+																						th:text="${course.code}" class="text-inverse"></span>
+																					</label>
+
+																				</div>
+																			</th:block>
+
+																		</div>
+
+
+																		<div style="display: none;" id="semi1">
+																			<p style="margin: 5px 0">My courses</p>
+																			<th:block th:each="course : ${listcourseSEM1}">
+																				<div class="col-md-12">
+
+																					<label> <input th:value="${course.id}"
+																						id="cp8" type="checkbox" th:field="*{courses}">
+																						<span th:text="${course.code}"
+																						class="text-inverse"></span>
+																					</label>
+
+																				</div>
+																			</th:block>
+
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group form-primary">
+											<input
+												title="must contain at least one number and one upper case letter
+     and lowercase letters at least 8 or more characters"
+												required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+												type="password" name="password1" class="form-control"
+												id="password"> <span class="form-bar"></span> <label
+												class="float-label">Password</label>
+
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group form-primary">
+											<input id="password2" th:field="*{password}" type="password"
+												name="password" class="form-control" required> <span
+												class="form-bar"></span> <label class="float-label">Confirm
+												Password</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('password')}"
+												th:errors="*{password}"></div>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row m-t-25 text-left">
+									<div class="col-md-12">
+										<div class="checkbox-fade fade-in-primary">
+											<label> <input type="checkbox" value=""> <span
+												class="cr"><i
+													class="cr-icon icofont icofont-ui-check txt-primary"></i></span> <span
+												class="text-inverse">I read and accept <a href="#">Terms
+														&amp; Conditions.</a></span>
+											</label>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="checkbox-fade fade-in-primary">
+											<label> <input type="checkbox" value=""> <span
+												class="cr"><i
+													class="cr-icon icofont icofont-ui-check txt-primary"></i></span> <span
+												class="text-inverse">Send me the <a href="#!">Newsletter</a>
+													weekly.
+											</span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="row m-t-30">
+									<div class="col-md-12">
+										<button onclick="validatePass()" type="submit"
+											class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 ti-arrow-right">
+											Sign up now</button>
+									</div>
+								</div>
+								<p class="text-inverse text-left">
+									<a th:href="@{/home}"><b>Back to home</b></a>
+								</p>
+								<hr />
+
+							</div>
+						</div>
+
+					</form>
+
+					<div>
+
+						<form class="md-float-material form-material"></form>
+					</div>
+
+
+
+				</div>
+				<!-- end of col-sm-12 -->
+			</div>
+			<!-- end of row -->
+		</div>
+		<!-- end of container-fluid -->
+	</section>
+
+    <script type="text/javascript" src="js/jquery/jquery.min.js"></script>     <script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js "></script>     <script type="text/javascript" src="js/popper.js/popper.min.js"></script>     <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js "></script>
+<!-- waves js -->
+<script src="pages/waves/js/waves.min.js"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" src="js/jquery-slimscroll/jquery.slimscroll.js "></script>
+<!-- modernizr js -->
+    <script type="text/javascript" src="js/SmoothScroll.js"></script>     <script src="js/jquery.mCustomScrollbar.concat.min.js "></script>
+<!-- Custom js -->
+<script type="text/javascript" src="pages/icon-modal.js"></script>
+<script src="js/pcoded.min.js"></script>
+<script src="js/vertical-layout.min.js "></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
+
+	<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js "></script>
+	<script type="text/javascript" src="js/popper.js/popper.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js "></script>
+	<!-- waves js -->
+	<script src="pages/waves/js/waves.min.js"></script>
+	<!-- jquery slimscroll js -->
+	<script type="text/javascript"
+		src="js/jquery-slimscroll/jquery.slimscroll.js "></script>
+	<!-- modernizr js -->
+	<script type="text/javascript" src="js/SmoothScroll.js"></script>
+	<script src="js/jquery.mCustomScrollbar.concat.min.js "></script>
+	<!-- i18next.min.js -->
+	<script type="text/javascript"
+		src="bower_components/i18next/js/i18next.min.js"></script>
+	<script type="text/javascript"
+		src="bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
+	<script type="text/javascript"
+		src="bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
+	<script type="text/javascript"
+		src="bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
+	<script type="text/javascript" src="js/common-pages.js"></script>
+	<script type="text/javascript">
+function validatePass(){
+	var p1=document.getElementById("password").value;
+	var p2=document.getElementById("password1").value;
+	if(p1!=p2){
+		alert("password does't match match");
+		return false;
+		
+	}
+	else{
+		return true;
+	}
+}
+</script>
+
+	<script type="text/javascript">
+		function fun_showtextbox() {
+
+			var select_status = $('#messagetype').val();
+			var formm=document.getElementById("myformm");
+			var inn=formm.elements[9].value.toString();
+			if (select_status == inn
+					) {
+				$('#mobileno_textbox').show();
+			} else {
+				$('#mobileno_textbox').hide();
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		function my_university() {
+
+			var select_status = $('#university').val();
+
+			if (select_status == '16') {
+				$('#uni').show();
+			} else {
+				$('#uni').hide();
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		function showYear() {
+
+			var select_status = $('#year').val();
+
+			if (select_status == 'second') {
+				$('#course').show();
+			} else {
+				$('#course').hide();
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		function fun_showtextbx() {
+
+			var select_status = $('#mesagetype').val();
+			var formm=document.getElementById("myformm");
+			var inn=formm.elements[10].value.toString();
+			if (select_status == inn
+					) {
+				$('#mobileno_textbx').show();
+				if (select_status == 'se') {
+					document.getElementById("cp8").checked = false;
+					document.getElementById("unable").disabled = true;
+
+				} else {
+					document.getElementById("unable").disabled = false;
+				}
+				
+			}
+
+			else {
+				$('#mobileno_textbx').hide();
+			}
+		}
+	</script>
+	<script type="text/javascript">
+ const cpa=document.getElementById('cp1')
+ const cpb=document.getElementById("cp2")
+ const cpc=document.getElementById("cp3")
+ const cpd=document.getElementById("cp4")
+ const cpe=document.getElementById("cp5")
+ const cpf=document.getElementById("cp6")
+ const cpg=document.getElementById("cp7")
+ const cph=document.getElementById("cp8")
+ const cpi=document.getElementById("cp9")
+ const cpj=document.getElementById("cp10")
+ const cpk=document.getElementById("cp11")
+ const cpl=document.getElementById("cp12")
+ const cpm=document.getElementById("cp13")
+ const submit=document.getElementById('sign')
+ const user=document.getElementById("username")
+ const pass1=document.getElementById("p1")
+ const email=document.getElementById("email")
+ const pass2=document.getElementById("p2")
+ const Year=document.getElementById("year")
+ const checkEnableButton=()=>{
+	 submit.disabled= !(
+			 cpk.checked &&
+			 cpl.checked &&
+			 cpm.checked &&
+			 cpg.checked &&
+			 cph.checked &&
+			 cpi.checked &&
+			 cpj.checked &&
+			 cpc.checked &&
+			 cpd.checked &&
+			 cpe.checked &&
+			 cpf.checked &&
+			 cpa.checked &&
+			 cpb.checked &&
+			 pass1.value &&
+			 pass2.value &&
+			 year.value &&
+			 user.value &&
+			 email.value
+			 )
+ }
+ cpa.addEventListener('change',checkEnableButton)
+ cpb.addEventListener('change',checkEnableButton)
+ cpc.addEventListener('change',checkEnableButton)
+ cpd.addEventListener('change',checkEnableButton)
+ cpe.addEventListener('change',checkEnableButton)
+ cpf.addEventListener('change',checkEnableButton)
+ cpg.addEventListener('change',checkEnableButton)
+ cph.addEventListener('change',checkEnableButton)
+ cpi.addEventListener('change',checkEnableButton)
+ cpj.addEventListener('change',checkEnableButton)
+ cpk.addEventListener('change',checkEnableButton)
+ cpl.addEventListener('change',checkEnableButton)
+ cpm.addEventListener('change',checkEnableButton)
+ pass1.addEventListener('change',checkEnableButton)
+ user.addEventListener('change',checkEnableButton)
+ pass2.addEventListener('change',checkEnableButton)
+ email.addEventListener('change',checkEnableButton)
+ 
+</script>
+
+	<script type="text/javascript">
+
+        function fun_showtextbcx(){
+
+        var select_status=$('#mesgetype').val();
+
+                if(select_status == 'semist1')
+                {
+                        $('#mobileno_textbcx').show();        
+                } 
+                else
+                {
+                        $('#mobileno_textbcx').hide();
+                      
+                }
+                if(select_status == 'semist2')
+                {
+                        $('#semi1').show();        
+                } 
+                else
+                {
+                        $('#semi1').hide();
+                      
+                }
+        }
+
+</script>
+	<script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
+	<script>
+	$(document).ready(function(){
+		$('#fileimage').change(function(){
+			$('#thumb').show();
+			showImageThumbnail(this);
+		});
+	});
+	</script>
+	<script>
+function showImageThumbnail(fileinput){
+	file=fileinput.files[0];
+	reader=new FileReader();
+	reader.onload=function(e){
+		$('#thumbnail').attr('src',e.target.result);
+	};
+	reader.readAsDataURL(file);
+}
+</script>
+</body>
+
+</html>

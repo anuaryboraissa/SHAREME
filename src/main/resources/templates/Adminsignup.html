@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>admin sign up</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description"
+	content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+<meta name="keywords"
+	content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+<meta name="author" content="codedthemes" />
+<!-- Favicon icon -->
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<!-- Google font-->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500"
+	rel="stylesheet">
+<!-- Required Fremwork -->
+<link rel="stylesheet" type="text/css"
+	href="/css/bootstrap/css/bootstrap.min.css">
+<!-- waves.css -->
+<link rel="stylesheet" href="/pages/waves/css/waves.min.css"
+	type="text/css" media="all">
+<!-- themify-icons line icon -->
+<link rel="stylesheet" type="text/css"
+	href="/icon/themify-icons/themify-icons.css">
+<!-- ico font -->
+<link rel="stylesheet" type="text/css"
+	href="/icon/icofont/css/icofont.css">
+<!-- Font Awesome -->
+<!-- Style.css -->
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body themebg-pattern="theme1">
+	<div class="theme-loader">
+		<div class="loader-track">
+			<div class="preloader-wrapper">
+				<div class="spinner-layer spinner-blue">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+				<div class="spinner-layer spinner-red">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<section class="login-block">
+		<!-- Container-fluid starts -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+
+
+
+
+					<div class="md-float-material form-material">
+						<div class="text-center">
+							<img src="/images/udomlogo.png"
+								style="width: 140px; height: 140px" alt="logo.png">
+						</div>
+						<div class="auth-box card">
+							<div class="card-block">
+								<div class="row m-b-20">
+									<div class="col-md-12">
+										<h3 class="text-center txt-primary">Admin Pannel Form</h3>
+									</div>
+								</div>
+
+								<div th:if="${message}">
+									<button type="button"
+										class="closebtn waves-effect waves-light btn-success btn-square btn-block"
+										data-dismiss="alert">
+										<strong th:text="${message}"> </strong>
+									</button>
+
+								</div>
+								<div th:if="${perror}">
+									<button type="button"
+										class="closebtn waves-effect waves-light btn-danger btn-square btn-block"
+										data-dismiss="alert">
+										<strong th:text="${perror}"> </strong>
+									</button>
+
+								</div>
+								<div class="alert alert-warning"
+									th:if="${#fields.hasErrors('${programme.prog_name}')}"
+									th:errors="*{programme.prog_name}">
+									<ul>
+										<li th:each="err :${#fields.errors('programme.*')}"
+											th:text="${err}" />
+									</ul>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 col-xl-6">
+
+										<!-- Nav tabs -->
+										<ul id="bars" class="nav nav-tabs md-tabs tabs-left b-none"
+											role="tablist">
+											<li class="nav-item"><a class="nav-link active"
+												data-toggle="tab" href="#home5" role="tab">University</a>
+												<div class="slide"></div></li>
+											<li class="nav-item"><a class="nav-link"
+												data-toggle="tab" href="#profile5" role="tab">College</a>
+												<div class="slide"></div></li>
+											<li class="nav-item"><a class="nav-link"
+												data-toggle="tab" href="#messages5" role="tab">Programme</a>
+												<div class="slide"></div></li>
+											<li class="nav-item"><a class="nav-link"
+												data-toggle="tab" href="#settings5" role="tab">Intake</a>
+												<div class="slide"></div></li>
+											<li class="nav-item"><a class="nav-link"
+												data-toggle="tab" href="#settings9" role="tab">Permissions</a>
+												<div class="slide"></div></li>
+											<li class="nav-item"><a class="nav-link"
+												data-toggle="tab" href="#settings6" role="tab">Courses</a>
+												<div class="slide"></div></li>
+										</ul>
+										<!-- Tab panes -->
+										<div class="tab-content tabs-left-content card-block">
+											<div style="width: 250px" class="tab-pane active" id="home5"
+												role="tabpanel">
+												<form id="f1" method="POST" th:action="@{/admin/saveuni}"
+													th:object="${university}">
+													<div class="form-group form-primary">
+														<input th:field="*{un_name}" id="uni" type="text"
+															name="uni-name" class="form-control" required> <span
+															class="form-bar"></span> <label class="float-label">University
+															Name</label>
+														<div id="unin">
+															<div class="text-danger"
+																th:if="${#fields.hasErrors('un_name')}"
+																th:errors="*{un_name}"></div>
+														</div>
+													</div>
+													<button id="univer" type="submit" onclick="Replaca()"
+														class="btn waves-effect waves-light hor-grd btn-grd-success anu">Save</button>
+												</form>
+											</div>
+
+											<div style="width: 250px" class="tab-pane" id="profile5"
+												role="tabpanel">
+												<form class="allforms" id="f2" method="POST"
+													th:action="@{/admin/savecoll}" th:object="${colleg}">
+
+													<div class="form-group form-primary">
+														<input th:field="*{university}" class="form-control"
+															id="colll" onchange="showColleg()" list="dats"> <span
+															class="form-bar"></span> <label class="float-label">Choose
+															your University</label>
+														<datalist id="dats">
+															<th:block th:each="unii : ${universities}">
+																<option th:value="${unii.id}" th:text="${unii.un_name}"></option>
+															</th:block>
+														</datalist>
+													</div>
+
+													<div style="display: none;" id="on">
+														<div class="form-group form-primary">
+															<input th:field="*{coll_name}" id="coll" type="text"
+																name="coll-name" class="form-control" required>
+															<span class="form-bar"></span> <label class="float-label">College
+																Name</label>
+															<div id="unin">
+																<div class="text-danger"
+																	th:if="${#fields.hasErrors('coll_name')}"
+																	th:errors="*{coll_name}"></div>
+															</div>
+														</div>
+														<button id="colege" type="submit"
+															class="btn waves-effect waves-light hor-grd btn-grd-success">Save</button>
+													</div>
+
+												</form>
+											</div>
+											<div style="width: 250px" class="tab-pane" id="messages5"
+												role="tabpanel">
+												<form th:action="@{/admin/savepr}" th:object="${programme}"
+													class="allforms" id="f3" method="POST">
+
+													<div class="form-group form-primary">
+														<input th:field="*{university}" class="form-control"
+															id="pro" onchange="showProg()" list="data"> <span
+															class="form-bar"></span> <label class="float-label">Choose
+															your University</label>
+														<datalist id="data">
+															<th:block th:each="unii : ${universities}">
+																<option th:value="${unii.id}" th:text="${unii.un_name}"></option>
+															</th:block>
+														</datalist>
+													</div>
+
+
+													<div id="myreplace"></div>
+													<div style="display: none;" id="onn">
+														<div class="form-group form-primary">
+															<input th:field="*{prog_name}" id="prog" type="text"
+																name="programe" class="form-control" required> <span
+																class="form-bar"></span> <label class="float-label">Programme
+																Name </label>
+															<div id="unin">
+																<div class="text-danger"
+																	th:if="${#fields.hasErrors('prog_name')}"
+																	th:errors="*{prog_name}"></div>
+															</div>
+														</div>
+														<div class="form-group form-primary">
+															<input th:field="*{cr}" id="cr" type="text" name="cr"
+																class="form-control" required> <span
+																class="form-bar"></span> <label class="float-label">Programme
+																CR </label>
+															<div id="unin">
+																<div class="text-danger"
+																	th:if="${#fields.hasErrors('cr')}" th:errors="*{cr}"></div>
+															</div>
+														</div>
+														<div class="form-group form-primary">
+															<input th:field="*{years}" id="year" type="number"
+																name="years" class="form-control" required> <span
+																class="form-bar"></span> <label class="float-label">Years
+															</label>
+
+															<div id="unin">
+																<div class="text-danger"
+																	th:if="${#fields.hasErrors('years')}"
+																	th:errors="*{years}"></div>
+															</div>
+														</div>
+
+														<button id="program" type="submit" onclick="Repleca()"
+															class="btn waves-effect waves-light hor-grd btn-grd-success">Save</button>
+													</div>
+													<div style="display: none;" id="udom">
+
+														<div class="form-group form-primary">
+															<span class="form-bar"></span> <label class="float-label">Choose
+																college</label> <input th:field="*{college}"
+																class="form-control" id="collg" onchange="showColl()"
+																list="date">
+															<datalist id="date">
+																<th:block th:each="coll : ${colleges}">
+																	<option th:value="${coll.id}"
+																		th:text="${coll.coll_name}"></option>
+																</th:block>
+															</datalist>
+														</div>
+
+
+
+													</div>
+
+												</form>
+											</div>
+											<div style="width: 250px" class="tab-pane" id="settings5"
+												role="tabpanel">
+												<form id="f4" method="POST" th:action="@{/admin/saveint}"
+													th:object="${intake}">
+
+													<div class="form-group form-primary">
+														<input th:field="*{university}" class="form-control"
+															id="pro" onchange="showProg()" list="data"> <span
+															class="form-bar"></span> <label class="float-label">Choose
+															your University</label>
+														<datalist id="data">
+															<th:block th:each="unii : ${universities}">
+																<option th:value="${unii.id}" th:text="${unii.un_name}"></option>
+															</th:block>
+														</datalist>
+													</div>
+
+
+													<div class="form-group form-primary">
+														<input th:field="*{year}" id="intake" type="text"
+															name="age" class="form-control" required> <span
+															class="form-bar"></span> <label class="float-label">Intake
+															year</label>
+														<div class="text-danger"
+															th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
+													</div>
+													<div class="form-group form-primary">
+														<input th:field="*{int_name}" id="intake" type="text"
+															name="age" class="form-control" required> <span
+															class="form-bar"></span> <label class="float-label">Intake
+															Name</label>
+														<div class="text-danger"
+															th:if="${#fields.hasErrors('int_name')}"
+															th:errors="*{int_name}"></div>
+													</div>
+													<button id="intak" type="submit"
+														class="btn waves-effect waves-light hor-grd btn-grd-success">Save</button>
+												</form>
+											</div>
+											<div style="width: 250px" class="tab-pane" id="settings9"
+												role="tabpanel">
+												<form id="ff" method="POST" th:action="@{/admin/saveperm}"
+													th:object="${permission}">
+													<div class="form-group form-primary">
+														<input th:field="*{P_name}" id="perm" type="text"
+															name="uni-name" class="form-control" required> <span
+															class="form-bar"></span> <label class="float-label">Permission
+															Name</label>
+														<div id="unin">
+															<div class="text-danger"
+																th:if="${#fields.hasErrors('P_name')}"
+																th:errors="*{P_name}"></div>
+														</div>
+													</div>
+													<button id="univer" type="submit" onclick="Replaca()"
+														class="btn waves-effect waves-light hor-grd btn-grd-success anu">Save</button>
+												</form>
+											</div>
+											<div style="width: 250px" class="tab-pane" id="settings6"
+												role="tabpanel">
+												<form class="allforms" id="f5" method="POST"
+													th:action="@{/admin/savecs}" th:object="${course}">
+
+
+													<div class="form-group form-primary">
+														<input class="form-control" id="couni"
+															onchange="showCouni()" list="data"> <span
+															class="form-bar"></span> <label class="float-label">Choose
+															your University</label>
+														<datalist id="data">
+															<th:block th:each="unii : ${universities}">
+																<option th:value="${unii.id}" th:text="${unii.un_name}"></option>
+															</th:block>
+														</datalist>
+													</div>
+
+													<div style="display: none;" id="coun">
+														<div id="replace"></div>
+														<div class="card-block accordion-block">
+															<div id="accordion" role="tablist"
+																aria-multiselectable="true">
+																<div class="accordion-panel">
+																	<div class="accordion-heading" role="tab"
+																		id="headingTwo">
+																		<h3 class="card-title accordion-title">
+																			<a class="accordion-msg waves-effect waves-dark"
+																				data-toggle="collapse" data-parent="#accordion"
+																				href="#collapseTwo" aria-expanded="false"
+																				aria-controls="collapseTwo">Courses </a>
+																		</h3>
+																	</div>
+																	<div id="collapseTwo" class="panel-collapse collapse"
+																		role="tabpanel" aria-labelledby="headingTwo">
+																		<div class="accordion-content accordion-desc">
+
+
+																			<select th:field="*{year}" name="messagetype"
+																				style="width: 150px; height: 33px; margin-bottom: 15px"
+																				id="yearr" class="selectpicker"
+																				data-style="select-with-transition"
+																				title="News Type" data-size="7"
+																				onchange="showYear()">
+
+																				<option th:value="1">FIRST YEAR</option>
+																				<option th:value="2">SECOND YEAR</option>
+																				<option th:value="3">THIRD YEAR</option>
+																				<option th:value="4">LAST YEAR</option>
+																			</select>
+																			<div style="display: none;" id="course">
+																				<select th:field="*{semister}" name="messagetype"
+																					style="width: 150px; height: 33px; margin-bottom: 15px"
+																					id="onee" class="selectpicker"
+																					data-style="select-with-transition"
+																					title="News Type" data-size="7"
+																					onchange=" showSemist()">
+
+																					<option th:value="1">SEMISTER 1</option>
+																					<option th:value="2">SEMISTER 2</option>
+
+																				</select>
+																				<div style="display: none;" id="semister">
+																					<div class="form-group form-primary">
+																						<input th:field="*{course_name}" id="title"
+																							type="text" name="title" class="form-control"
+																							required> <span class="form-bar"></span>
+																						<label class="float-label">Course Title </label>
+																						<div class="text-danger"
+																							th:if="${#fields.hasErrors('course_name')}"
+																							th:errors="*{course_name}"></div>
+																					</div>
+																					<div class="form-group form-primary">
+																						<input th:field="*{code}" id="name" type="text"
+																							name="code" class="form-control" required>
+																						<span class="form-bar"></span> <label
+																							class="float-label">Course Code </label>
+																						<div id="unin">
+																							<div class="text-danger"
+																								th:if="${#fields.hasErrors('code')}"
+																								th:errors="*{code}"></div>
+																						</div>
+																					</div>
+																					<div class="form-group form-primary">
+																						<input th:field="*{instructor}" id="instruct"
+																							type="text" name="instructor"
+																							class="form-control" required> <span
+																							class="form-bar"></span> <label
+																							class="float-label">Course Instructor </label>
+																						<div id="unin">
+																							<div class="text-danger"
+																								th:if="${#fields.hasErrors('instructor')}"
+																								th:errors="*{instructor}"></div>
+																						</div>
+																					</div>
+																					<div class="form-group form-primary">
+																						<input th:field="*{department}" id="instruct"
+																							type="text" name="instructor"
+																							class="form-control" required> <span
+																							class="form-bar"></span> <label
+																							class="float-label">Course Department</label>
+																						<div id="unin">
+																							<div class="text-danger"
+																								th:if="${#fields.hasErrors('department')}"
+																								th:errors="*{department}"></div>
+																						</div>
+																						<div id="progg" style="display: none;">
+																							<p style="margin: 5px 0">Take By Programmes</p>
+																							<th:block th:each="pro : ${listProg}">
+																								<div class="col-md-12">
+
+																									<label> <input id="cp1" type="checkbox"
+																										th:field="*{programme}" th:value="${pro.id}">
+																										<span class="cr"></span> <span
+																										th:text="${pro.prog_name}"
+																										class="text-inverse"></span>
+																									</label>
+
+																								</div>
+																							</th:block>
+																						</div>
+																						<button disabled id="add" type="submit"
+																							class="btn waves-effect waves-light hor-grd btn-grd-success">Save</button>
+
+
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+
+														<div style="display: none;" id="counn">
+
+															<div class="form-group form-primary">
+																<input class="form-control"
+																	placeholder="choose your college" id="collge"
+																	onchange="showColle()" list="datt" />
+																<datalist id="datt">
+																	<th:block th:each="coll : ${colleges}">
+																		<option th:value="${coll.id}"
+																			th:text="${coll.coll_name}"></option>
+																	</th:block>
+																</datalist>
+															</div>
+
+
+
+														</div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+
+
+
+
+
+
+
+
+								<hr />
+
+							</div>
+						</div>
+					</div>
+					<div>
+						<form class="md-float-material form-material"></form>
+					</div>
+
+
+
+				</div>
+				<!-- end of col-sm-12 -->
+			</div>
+			<!-- end of row -->
+		</div>
+		<!-- end of container-fluid -->
+	</section>
+	<script type="text/javascript">
+	$(function(){
+		$("#bars").tabs();
+		$("#butt").click(function(a){
+			a.preventDefault();
+			$('#bars a[href="#profile5"]').tab('show');
+		})
+	})
+</script>
+	<script type="text/javascript">
+ function Replaca(){
+	 $("#unin").appendTo("#replaca");
+ }
+</script>
+
+	<script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js "></script>
+	<script type="text/javascript"
+		src="/js/jquery-ui/jquery.ui.tabs.min.js "></script>
+	<script type="text/javascript" src="/js/popper.js/popper.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js "></script>
+	<!-- waves js -->
+	<script src="/pages/waves/js/waves.min.js"></script>
+	<!-- jquery slimscroll js -->
+	<script type="text/javascript"
+		src="/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+	<!-- modernizr js -->
+	<script type="text/javascript" src="/js/SmoothScroll.js"></script>
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js "></script>
+	<!-- i18next.min.js -->
+
+	<script type="text/javascript">
+		function showYear() {
+
+			var select_status = $('#yearr').val();
+
+			if (select_status == '2' || select_status == '1') {
+				$('#course').show();
+			} else {
+				$('#course').hide();
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		function showCouni() {
+
+			var select_status = $('#couni').val();
+
+			if (select_status == '15' || select_status == '17' || select_status == '18') {
+				$('#coun').show();
+				$('#counn').hide();
+				$('#replace').hide();
+			} 
+			else if(select_status == '16') {
+				$('#replace').show();
+				$('#counn').show();
+				$('#coun').hide();
+				
+			}
+			else {
+				$('#coun').hide();
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		function showColleg() {
+
+			var select_status = $('#colll').val();
+
+			if (select_status == '16') {
+				$('#on').show();
+			} else {
+				$('#on').hide();
+			}
+		}
+		
+	</script>
+	<script type="text/javascript">
+		function showColl() {
+
+			var select_status = $('#collg').val();
+			if (select_status == '2' || select_status == '1' || select_status == '3'
+					|| select_status == '4' || select_status == '5' || select_status == '6'
+						|| select_status == '7') {
+				$('#onn').show();
+				
+			} else {
+				$('#onn').hide();
+			}
+		}
+		
+	</script>
+	<script type="text/javascript">
+		function showColle() {
+
+			var select_status = $('#collge').val();
+			if (select_status == '22' || select_status == '21' || select_status == '20'
+					|| select_status == '19' || select_status == '18' || select_status == '17'
+						|| select_status == '15' || select_status == '16') {
+				if(select_status == '22'){
+					$('#progg').show();
+				}
+			$("#collge").appendTo("#replace");
+				$('#coun').show();
+			} 
+			
+			else {
+				$('#coun').hide();
+			}
+		}
+		
+	</script>
+	<script type="text/javascript">
+		function showProg() {
+
+			var select_status = $('#pro').val();
+
+			if (select_status == '15' || select_status == '17' || select_status == '18') {
+				$('#onn').show();
+				$('#udom').hide();
+				$("#myreplace").hide();
+			} 
+			else if (select_status == '16') {
+				$('#udom').show();
+				$('#onn').hide();
+				$("#collg").appendTo("#myreplace");
+			}
+			else{
+				$('#onn').hide();
+				$('#udom').hide();
+			}
+		}
+		
+	</script>
+	<script type="text/javascript">
+		function showSemist() {
+
+			var select_status = $('#onee').val();
+
+			if (select_status == '1' || select_status == '2') {
+				$('#semister').show();
+			} else {
+				$('#semister').hide();
+			}
+		}
+		
+	</script>
+	<script type="text/javascript">
+	const uni=document.getElementById("uni")
+	const coll=document.getElementById("coll")
+	const prog=document.getElementById("prog")
+	const cr=document.getElementById("cr")
+	const intakee=document.getElementById("intake")
+	const tt1=document.getElementById("title")
+	const tt2=document.getElementById("name")
+	const tt3=document.getElementById("instruct")
+	const submit=document.getElementById("add")
+	const submit2=document.getElementById("butt")
+	const checkEnableButton=()=>{
+		 submit.disabled=!( 
+				 tt1.value &&
+				 tt2.value &&
+				 tt3.value 
+			
+				 )	
+		 }
+	const checkEnableButton2=()=>{
+		submit2.disabled=!(
+				uni.value &&
+				coll.value &&
+				prog.value && 
+				intakee.value &&
+				cr.value 
+				 )
+	}
+	 tt1.addEventListener('change',checkEnableButton)
+	 tt2.addEventListener('change',checkEnableButton)
+	 tt3.addEventListener('change',checkEnableButton)
+	 coll.addEventListener('change',checkEnableButton2)
+	  uni.addEventListener('change',checkEnableButton2)
+	  prog.addEventListener('change',checkEnableButton2)
+	  intakee.addEventListener('change',checkEnableButton2)
+	  cr.addEventListener('change',checkEnableButton2)
+
+	/*
+	document.getElementById("add").onclick=function(){
+	
+		return false;
+		/*
+		var node=document.createElement("td");
+		var text=document.getElementById("title").value;
+		var textNode=document.createTextNode(text);
+		var node1=document.createElement("td");
+		var text1=document.getElementById("name").value;
+		var textNode1=document.createTextNode(text1);
+		var node2=document.createElement("td");
+		var text2=document.getElementById("instruct").value;
+		var textNode2=document.createTextNode(text2);
+		node2.appendChild(textNode2);
+		node1.appendChild(textNode1);
+		node.appendChild(textNode);
+		document.getElementById("mylist").appendChild(node);
+		document.getElementById("mylist").appendChild(node1);
+		document.getElementById("mylist").appendChild(node2);
+		document.getElementById("title").value="";
+		document.getElementById("name").value="";
+		document.getElementById("instruct").value="";
+		*/
+	
+	</script>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+		type="text/javascript">
+	
+	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		submitForms=function(){
+			 document.getElementById("f3").submit();
+			 document.getElementById("f5").submit();
+			    }
+	</script>
+	<script type="text/javascript">
+	function addData(){
+		document.getElementById("table").style.display="block";
+		var table=document.getElementById("table");
+		var row=table.insertRow(-1);
+		var t1=row.insertCell(0);
+		var t2=row.insertCell(1);
+		var t3=row.insertCell(2);
+		var m1=document.getElementById("title").value;
+		var m2=document.getElementById("name").value;
+		var m3=document.getElementById("instruct").value;	
+				t1.innerHTML=document.getElementById("title").value;
+				t2.innerHTML=document.getElementById("name").value;
+				t3.innerHTML=document.getElementById("instruct").value;
+			
+		document.getElementById("title").value="";
+		document.getElementById("name").value="";
+		document.getElementById("instruct").value="";
+		document.getElementById("add").disabled=true;
+	}
+
+	</script>
+	<script type="text/javascript"
+		src="bower_components/i18next/js/i18next.min.js"></script>
+	<script type="text/javascript"
+		src="bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
+	<script type="text/javascript"
+		src="bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
+	<script type="text/javascript"
+		src="bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
+	<script type="text/javascript" src="/js/common-pages.js"></script>
+</body>
+</html>
