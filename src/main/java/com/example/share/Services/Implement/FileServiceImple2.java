@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.share.Entities.Course;
 import com.example.share.Entities.Files;
 import com.example.share.Entities.Permission;
+import com.example.share.Entities.Student;
 import com.example.share.Repositories.CourseRepostry;
 import com.example.share.Repositories.FilesRepostry;
 import com.example.share.Repositories.PermissionRepostry;
@@ -33,7 +34,7 @@ public class FileServiceImple2 {
 	}
 	@Autowired
 	private FilesRepostry filerepo;
-  public Files saveCourseFiles(Course course,long pid,long cid) {
+  public Files saveCourseFiles(Course course,long pid,long cid,Student ownid,Collection<Student> tagged,String desc) {
 	Course cours=crepo.findCoursById(cid);
 	Files myfiles = null;
 	 Collection<Permission> pubFil=permRepo.findPermById(pid);
@@ -56,9 +57,15 @@ public class FileServiceImple2 {
 				filess.setModifiedFileName(modifiedFilename);
 				filess.setType(FilenameUtils.getExtension(filename));
 				filess.setCourse(cours);
+				filess.setStudent(ownid);
 				long fileSize=file.getSize();
 				filess.setSize(readableFileSize(fileSize));
 				filess.setPermission(pubFil);
+				filess.setDescription(desc);
+				if(tagged!=null) {
+					filess.setTagged(tagged);
+					
+				}
 				myfiles=filerepo.save(filess);
 		  }
 	  }
@@ -78,9 +85,21 @@ public class FileServiceImple2 {
   public Collection<Files> allFiles() {
 	  return filerepo.findAll();
   }
+  public Collection<Files> getFileHistory(long perm,long ownid) {
+	  return filerepo.findHistryFilesById(perm, ownid);
+  }
+  public Collection<Files> taggedFiles(long id) {
+	  return filerepo.findTaggedById(id);
+  }
   
-  public Collection<Files> otherFiles(String type1,String type2) {
-	  return filerepo.findTotalOthersByType(type1,type2);
+  public Collection<Files> otherFiles(String type1,String type2,long ownid) {
+	  return filerepo.findTotalOthersByType(type1,type2,ownid);
+  }
+  public Collection<Files> otherFilesTagged(String type1,String type2,long ownid) {
+	  return filerepo.findTotalOthersTaggedByType(type1, type2, ownid);
+  }
+  public Collection<Files> taggedFiles(String type1,long ownid) {
+	  return filerepo.findByIdTagged(type1, ownid);
   }
   public Collection<Files> notOwnerFiles(long permid,long owid) {
 	  return filerepo.findNotOwnerFileById(permid, owid);

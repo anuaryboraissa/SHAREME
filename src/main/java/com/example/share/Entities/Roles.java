@@ -21,7 +21,7 @@ public class Roles {
     
 	@ManyToMany(mappedBy="roles")
 	private Collection<Student> student;
-
+	
 	public Roles() {
 		super();
 	}

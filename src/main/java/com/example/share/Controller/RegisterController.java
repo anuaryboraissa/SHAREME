@@ -1,13 +1,17 @@
 package com.example.share.Controller;
 
+import java.io.IOException;
+import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 
 import javax.management.relation.RoleResult;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.share.Controller.DTOS.GroupDTO;
 import com.example.share.Controller.DTOS.StudentDTO;
 import com.example.share.Entities.College;
 import com.example.share.Entities.Course;
 import com.example.share.Entities.FileAploadUtil;
+import com.example.share.Entities.Groups;
 import com.example.share.Entities.Programme;
 import com.example.share.Entities.Roles;
 import com.example.share.Entities.Student;
@@ -35,6 +41,7 @@ import com.example.share.Repositories.ProgrammeRepostry;
 import com.example.share.Repositories.RoleRepo;
 import com.example.share.Repositories.StudentRepostry;
 import com.example.share.Repositories.UniversityRepostry;
+import com.example.share.Services.Implement.StudentsServices;
 import com.example.share.Services.Implement.UniversityImpl;
 
 import antlr.StringUtils;
@@ -52,6 +59,9 @@ public class RegisterController {
 
 	@Autowired
 	private StudentRepostry stdrepo;
+
+	@Autowired
+	private StudentsServices services;
 	@Autowired
 	private UniversityRepostry unirepo;
 	@Autowired
@@ -81,6 +91,7 @@ public class RegisterController {
 		return new StudentDTO();
 	}
 	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));

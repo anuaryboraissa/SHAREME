@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Mega Able bootstrap admin template by codedthemes</title>
+<!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+<!-- Meta -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description"
+	content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+<meta name="keywords"
+	content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+<meta name="author" content="codedthemes" />
+<!-- Favicon icon -->
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<!-- Google font-->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500"
+	rel="stylesheet">
+<!-- waves.css -->
+<link rel="stylesheet" href="/pages/waves/css/waves.min.css"
+	type="text/css" media="all">
+<!-- Required Fremwork -->
+<link rel="stylesheet" type="text/css"
+	href="/css/bootstrap/css/bootstrap.min.css">
+<!-- waves.css -->
+<link rel="stylesheet" href="/pages/waves/css/waves.min.css"
+	type="text/css" media="all">
+<!-- themify icon -->
+<link rel="stylesheet" type="text/css"
+	href="/icon/themify-icons/themify-icons.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" type="text/css"
+	href="/icon/font-awesome/css/font-awesome.min.css">
+<!-- scrollbar.css -->
+<link rel="stylesheet" type="text/css"
+	href="/css/jquery.mCustomScrollbar.css">
+<!-- am chart export.css -->
+<link rel="stylesheet"
+	href="https://www.amcharts.com/lib/3/plugins/export/export.css"
+	type="text/css" media="all" />
+<!-- Style.css -->
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+
+
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+<style>
+.chat {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.card {
+	height: 500px;
+	border-radius: 15px !important;
+	background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.contacts_body {
+	padding: 0.75rem 0 !important;
+	overflow-y: auto;
+	white-space: nowrap;
+}
+
+.msg_card_body {
+	overflow-y: auto;
+}
+
+.card-header {
+	border-radius: 15px 15px 0 0 !important;
+	border-bottom: 0 !important;
+}
+
+.card-footer {
+	border-radius: 0 0 15px 15px !important;
+	border-top: 0 !important;
+}
+
+.container {
+	align-content: center;
+}
+
+.search {
+	border-radius: 15px 0 0 15px !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+}
+
+.search:focus {
+	box-shadow: none !important;
+	outline: 0px !important;
+}
+
+.type_msg {
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	height: 60px !important;
+	overflow-y: auto;
+}
+
+.type_msg:focus {
+	box-shadow: none !important;
+	outline: 0px !important;
+}
+
+.attach_btn {
+	border-radius: 15px 0 0 15px !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+
+.send_btn {
+	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+
+.search_btn {
+	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+
+.contacts {
+	list-style: none;
+	padding: 0;
+}
+
+.contacts li {
+	width: 100% !important;
+	padding: 5px 10px;
+	margin-bottom: 15px !important;
+}
+
+.active {
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.user_img {
+	height: 70px;
+	width: 70px;
+	border: 1.5px solid #f5f6fa;
+}
+
+.user_img_msg {
+	height: 40px;
+	width: 40px;
+	border: 1.5px solid #f5f6fa;
+}
+
+.img_cont {
+	position: relative;
+	height: 70px;
+	width: 70px;
+}
+
+.img_cont_msg {
+	height: 40px;
+	width: 40px;
+}
+
+.online_icon {
+	position: absolute;
+	height: 15px;
+	width: 15px;
+	background-color: #4cd137;
+	border-radius: 50%;
+	bottom: 0.2em;
+	right: 0.4em;
+	border: 1.5px solid white;
+}
+
+.offline {
+	background-color: #c23616 !important;
+}
+
+.user_info {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: 15px;
+}
+
+.user_info span {
+	font-size: 10px;
+	color: white;
+}
+
+.user_info p {
+	font-size: 10px;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.video_cam {
+	margin-left: 50px;
+	margin-top: 5px;
+}
+
+.video_cam span {
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+	margin-right: 20px;
+}
+
+.msg_cotainer {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: 10px;
+	border-radius: 25px;
+	background-color: #82ccdd;
+	padding: 10px;
+	position: relative;
+}
+
+.msg_cotainer_send {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 10px;
+	border-radius: 25px;
+	background-color: #78e08f;
+	padding: 10px;
+	position: relative;
+}
+
+.msg_time {
+	position: absolute;
+	left: 0;
+	bottom: -15px;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 10px;
+}
+
+.msg_time_send {
+	position: absolute;
+	right: 0;
+	bottom: -15px;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 10px;
+}
+
+.msg_head {
+	position: relative;
+}
+
+#action_menu_btn {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.action_menu {
+	z-index: 1;
+	position: absolute;
+	padding: 15px 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	border-radius: 15px;
+	top: 30px;
+	right: 15px;
+	display: none;
+}
+
+.action_menu ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.action_menu ul li {
+	width: 100%;
+	padding: 10px 15px;
+	margin-bottom: 5px;
+}
+
+.action_menu ul li i {
+	padding-right: 10px;
+}
+
+.action_menu ul li:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+@media ( max-width : 576px) {
+	.contacts_card {
+		margin-bottom: 15px !important;
+	}
+}
+</style>
+</head>
+
+<body>
+	<!-- Pre-loader start -->
+	<div class="theme-loader">
+		<div class="loader-track">
+			<div class="preloader-wrapper">
+				<div class="spinner-layer spinner-blue">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+				<div class="spinner-layer spinner-red">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Pre-loader end -->
+	<div id="pcoded" class="pcoded">
+		<div class="pcoded-overlay-box"></div>
+		<div class="pcoded-container navbar-wrapper">
+			<nav class="navbar header-navbar pcoded-header">
+				<div class="navbar-wrapper">
+					<div class="navbar-logo">
+						<a class="mobile-menu waves-effect waves-light"
+							id="mobile-collapse" href="#!"> <i class="ti-menu"></i>
+						</a>
+						<div class="mobile-search waves-effect waves-light">
+							<div class="header-search">
+								<div class="main-search morphsearch-search">
+									<div class="input-group">
+										<span class="input-group-addon search-close"><i
+											class="ti-close"></i></span> <input type="text" class="form-control"
+											placeholder="Enter Keyword"> <span
+											class="input-group-addon search-btn"><i
+											class="ti-search"></i></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="index.html"> <img class="img-fluid"
+							src="/images/logo.png" alt="Theme-Logo" />
+						</a> <a class="mobile-options waves-effect waves-light"> <i
+							class="ti-more"></i>
+						</a>
+					</div>
+
+					<div class="navbar-container container-fluid">
+						<ul class="nav-left">
+							<li>
+								<div class="sidebar_toggle">
+									<a href="javascript:void(0)"><i class="ti-menu"></i></a>
+								</div>
+							</li>
+							<li class="header-search">
+								<div class="main-search morphsearch-search">
+									<div class="input-group">
+										<span class="input-group-addon search-close"><i
+											class="ti-close"></i></span> <input type="text" class="form-control">
+										<span class="input-group-addon search-btn"><i
+											class="ti-search"></i></span>
+									</div>
+								</div>
+							</li>
+							<li><a href="#!" onclick="javascript:toggleFullScreen()"
+								class="waves-effect waves-light"> <i class="ti-fullscreen"></i>
+							</a></li>
+						</ul>
+						<ul class="nav-right">
+							<li class="header-notification"><a href="#!"
+								class="waves-effect waves-light"> <i class="ti-bell"></i> <span
+									class="badge bg-c-red"></span>
+							</a>
+								<ul class="show-notification">
+									<li>
+										<h6>Notifications</h6> <label class="label label-danger">New</label>
+									</li>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="/images/avatar-2.jpg" alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">John Doe</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit amet,
+													consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="/images/avatar-4.jpg" alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">Joseph William</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit amet,
+													consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="/images/avatar-3.jpg" alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">Sara Soudein</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit amet,
+													consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+								</ul></li>
+							<li class="user-profile header-notification"><a href="#!"
+								class="waves-effect waves-light"> <img
+									th:src="@{${userimage}}" class="img-radius"
+									alt="User-Profile-Image"><span th:text="${first}"></span>
+									<span th:text="${last}"></span> <i class="ti-angle-down"></i>
+							</a>
+								<ul class="show-notification profile-notification">
+									<li class="waves-effect waves-light"><a href="#!"> <i
+											class="ti-settings"></i> Settings
+									</a></li>
+									<li class="waves-effect waves-light"><a
+										href="user-profile.html"> <i class="ti-user"></i> Profile
+									</a></li>
+									<li class="waves-effect waves-light"><a th:href="@{/chat}">
+											<i class="ti-email"></i> My Messages
+									</a></li>
+									<li class="waves-effect waves-light"><a
+										href="auth-lock-screen.html"> <i class="ti-lock"></i> Lock
+											Screen
+									</a></li>
+									<li class="waves-effect waves-light"><a
+										th:href="@{logout}"> <i class="ti-layout-sidebar-left"></i>
+											Logout
+									</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<div class="pcoded-main-container">
+				<div class="pcoded-wrapper">
+					<nav class="pcoded-navbar">
+						<div class="sidebar_toggle">
+							<a href="#"><i class="icon-close icons"></i></a>
+						</div>
+						<div class="pcoded-inner-navbar main-menu">
+							<div style="background-color: black; color: white;">
+								<div class="">
+									<div class="main-menu-header">
+										<img class="img-80 img-radius" th:src="@{${userimage}}"
+											alt="User-Profile-Image">
+										<div class="user-details">
+											<em> <span th:text="${first}+' '+${last}"
+												id="more-details"><i class="fa fa-caret-down"></i></span>
+											</em>
+										</div>
+									</div>
+									<div class="main-menu-content">
+										<ul>
+											<li class="more-details"><a href="user-profile.html"><i
+													class="ti-user"></i>View Profile</a> <a href="#!"><i
+													class="ti-settings"></i>Settings</a> <a th:href="@{logout}"><i
+													class="ti-layout-sidebar-left"></i>Logout</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="p-15 p-b-0">
+									<form class="form-material">
+										<div class="form-group form-primary">
+											<input type="text" name="footer-email" class="form-control"
+												required=""> <span class="form-bar"></span> <label
+												class="float-label"><i class="fa fa-search m-r-10"></i>Search
+												Friend</label>
+										</div>
+									</form>
+								</div>
+								<div class="pcoded-navigation-label"
+									data-i18n="nav.category.navigation">Layout</div>
+								<ul class="pcoded-item pcoded-left-item">
+									<li class="active"><a href="index.html"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-home"></i><b>D</b></span> <span
+											class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+											<span class="pcoded-mcaret"></span>
+									</a></li>
+									<li class="pcoded-hasmenu"><a href="javascript:void(0)"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+											<span class="pcoded-mtext"
+											data-i18n="nav.basic-components.main">Components</span> <span
+											class="pcoded-mcaret"></span>
+									</a>
+										<ul class="pcoded-submenu">
+
+											<li class=" "><a href="icon-themify.html"
+												class="waves-effect waves-dark"> <span
+													class="pcoded-micon"><i class="ti-angle-right"></i></span>
+													<span class="pcoded-mtext"
+													data-i18n="nav.basic-components.breadcrumbs">Themify</span>
+													<span class="pcoded-mcaret"></span>
+											</a></li>
+
+										</ul></li>
+								</ul>
+								<div class="pcoded-navigation-label"
+									data-i18n="nav.category.forms">Resources manaegement</div>
+								<ul class="pcoded-item pcoded-left-item">
+									<li><a th:href="@{/resource}"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+											<span class="pcoded-mtext"
+											data-i18n="nav.form-components.main">My Resource</span> <span
+											class="pcoded-mcaret"></span>
+									</a></li>
+									<li><a th:href="@{/history}"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+											<span class="pcoded-mtext"
+											data-i18n="nav.form-components.main">History</span> <span
+											class="pcoded-mcaret"></span>
+									</a></li>
+
+								</ul>
+
+
+								<div class="pcoded-navigation-label"
+									data-i18n="nav.category.forms">friends &amp; Chats</div>
+								<ul class="pcoded-item pcoded-left-item">
+									<li><a th:href="@{/friends}"
+										class="waves-effect waves-dark"> <span
+											class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+											<span class="pcoded-mtext"
+											data-i18n="nav.form-components.main">Friends</span> <span
+											class="pcoded-mcaret"></span>
+									</a></li>
+									<li><a th:href="@{/chat}" class="waves-effect waves-dark">
+											<span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+											<span class="pcoded-mtext"
+											data-i18n="nav.form-components.main">Chats</span> <span
+											class="pcoded-mcaret"></span>
+									</a></li>
+								</ul>
+
+							</div>
+						</div>
+					</nav>
+					<div class="modal fade" id="myModal">
+						<div class="modal-dialog">
+							<div style="background: #e9ecef" class="modal-content">
+
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h5 class="modal-title">
+										Profile Description of <span class="text text-primary"
+											th:text="${namee}"></span>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- Modal body -->
+								<div class="modal-body">
+									<div class="text-center">
+										<p>Profile Photo</p>
+										<img alt="user" th:src="${picha2}"
+											class="rounded-circle user_img">
+									</div>
+									<div th:if="${ehh}==1" style="padding: 20px">
+										<h6>
+											Age: <span class="text text-primary" th:text="${agee}"></span>
+										</h6>
+										<h6>
+											University: <span class="text text-primary"
+												th:text="${university}"></span>
+										</h6>
+										<h6>
+											Programme: <span class="text text-primary" th:text="${prog}"></span>
+										</h6>
+										<h6>
+											Year oof study: <span class="text text-primary"
+												th:text="${yearr}"></span>
+										</h6>
+										<h6>
+											takes: <span class="text text-primary" th:text="${couse}"></span>
+										</h6>
+										<h6>
+											Email: <span class="text text-primary" th:text="${email}"></span>
+										</h6>
+									</div>
+									<div th:if="${ehh}==2" style="padding: 20px">
+										<h6>
+											Group Participants: <span class="text text-primary"
+												th:text="${agee}"></span>
+										</h6>
+										<th:block th:each="part :${gstd}">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img th:src="${part.getPhotosImagePath}"
+													class="rounded-circle user_img"> <span
+													class="online_icon"></span>
+											</div>
+											<div class="user_info">
+									          <h6><span style="color:black" th:text="${part.first}"></span> <span style="color:black" th:text="${part.last}"></span></h6>
+									        </div>
+									     
+										</div>
+										   <div style="float: right;margin-top: -50px">
+										   <th:block th:each="admi :${admin}">
+										     <button th:if="${admi}==${part}" th:text="Admin" class="btn btn-secondary btn-sm"></button>
+										     <button th:if="${admi}!=${part}" th:text="None" class="btn btn-secondary btn-sm"></button>
+										   </th:block>
+									       
+									        </div>
+										</th:block>
+
+									</div>
+
+
+
+								</div>
+
+								<!-- Modal footer -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger"
+										data-dismiss="modal">Close</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="pcoded-content">
+						<!-- Page-header start -->
+
+						<!-- Page-header end -->
+						<div class="pcoded-inner-content">
+							<div th:if="${messagee}" style="margin-left: 14px; width: 100%"
+								class="media">
+
+								<div style="display: inline-flex;"
+									class="alert alert-info alert-dismissible fade show">
+									<div th:text="${messagee}"></div>
+									<a style="margin-left: 5px" th:href="@{/history}"
+										th:if="${mojaa}==1">more details</a>
+									<button style="margin-top: -5px" type="button" class="close"
+										data-dismiss="alert">&times;</button>
+
+								</div>
+
+							</div>
+							<!-- Main-body start -->
+							<div class="main-body">
+								<div class="page-wrapper">
+									<!-- Page-body start -->
+									<div class="page-body">
+
+										<div class="row">
+											<div class="container-fluid h-100">
+												<div class="row justify-content-center h-100">
+													<div style="margin-top: -20px"
+														class="col-md-4 col-xl-3 chat">
+														<div class="card mb-sm-3 mb-md-0 contacts_card">
+															<div class="card-header">
+																<div class="input-group">
+																	<input type="text" placeholder="Search..." name=""
+																		class="form-control search">
+																	<div style="margin-top: -5px"
+																		class="input-group-prepend">
+																		<span class="input-group-text search_btn"><i
+																			class="fas fa-search"></i></span>
+																	</div>
+																</div>
+
+
+
+																<h6 class="text text-light">
+																	Unreaded messages <cite class="label-icon"
+																		style="float: right"> <i
+																		class="icofont icofont-envelope"></i> <label
+																		style="font-size: 14px"
+																		class="badge badge-primary badge-top-right"
+																		th:text="${tmsg}"></label>
+																	</cite>
+																</h6>
+															</div>
+															<div class="card-body contacts_body">
+																<form th:action="@{/chating}" method="post">
+																	<ul th:each="st: ${whosendMetxt}" class="contacts">
+
+																		<li style="margin-top: -17px" class="active">
+																			<div class="d-flex bd-highlight">
+																				<div class="img_cont">
+																					<img th:src="${st.getPhotosImagePath}"
+																						class="rounded-circle user_img"> <span
+																						class="online_icon"></span>
+																				</div>
+																				<div class="user_info">
+																					<span th:text="${st.first}"></span>
+																					<th:block th:each="ms :${tmsgs}">
+																						<th:block th:each="mss :${st.getMsgfrom}">
+																							<p
+																								style="width: 40px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+																								th:if="${ms}==${mss}" th:text="${ms.msg}"></p>
+																						</th:block>
+																					</th:block>
+
+																					<div style="float: right;">
+
+																						<button type="submit" th:formaction="@{/chating}"
+																							th:name="toid" th:value="${st.id}"
+																							style="width: 40px; font-size: 12px;"
+																							class="btn btn-link text-success btn-sm">view</button>
+																						<button th:formaction="@{/deletemsg}"
+																							th:name="toid" th:value="${st.id}" type="submit"
+																							style="width: 40px; font-size: 12px;"
+																							class="btn btn-link text-danger btn-sm">delete</button>
+																					</div>
+																				</div>
+
+																			</div>
+
+																		</li>
+																	</ul>
+																	<ul style="padding-left: 10px" th:each="grp :${mygrps}">
+																		<li style="margin-top: -17px" class="active">
+																			<div class="d-flex bd-highlight">
+																				<div class="img_cont">
+																					<img th:src="${grp.getPhotosImagePath}"
+																						class="rounded-circle user_img"> <span
+																						class="online_icon"></span>
+																				</div>
+																				<div class="user_info">
+																					<span th:text="${grp.grp_name}"></span>
+																					<div style="float: right; margin-left: -10px">
+
+																						<button th:value="${grp.id}" type="submit"
+																							th:formaction="@{/Gchating}" th:name="toid"
+																							style="width: 30px; font-size: 12px;"
+																							class="btn btn-link text-success btn-sm">view</button>
+																						<button th:value="${grp.id}"
+																							th:formaction="@{/deletemsg}" th:name="toid"
+																							type="submit"
+																							style="width: 30px; font-size: 12px;"
+																							class="btn btn-link text-danger btn-sm">delete</button>
+																					</div>
+																				</div>
+																			</div>
+																		</li>
+																	</ul>
+																</form>
+															</div>
+															<div class="card-footer"></div>
+														</div>
+													</div>
+													<div th:if="${from}" style="margin-top: -20px"
+														class="col-md-8 col-xl-6 chat">
+														<div class="card">
+															<div class="card-header msg_head">
+																<div class="d-flex bd-highlight">
+																	<div class="img_cont">
+																		<img th:src="${picha2}"
+																			class="rounded-circle user_img"> <span
+																			class="online_icon"></span>
+																	</div>
+																	<div class="user_info">
+																		<span>Chat with <em class="text text-warning"
+																			th:text="${from}"></em></span>
+																		<p>
+																			<cite class="text text-light" th:text="${totConver}"></cite>
+																			Messages
+																		</p>
+																	</div>
+																	<div style="display: inline-flex;" class="video_cam">
+																		<span><i class="fas fa-video"></i></span> <span><i
+																			class="fas fa-phone"></i></span>
+																	</div>
+																</div>
+																<span id="action_menu_btn"><i
+																	class="fas fa-ellipsis-v"></i></span>
+																<div class="action_menu">
+																	<form th:action="@{/achieve}" method="post">
+																		<ul>
+																			<li data-toggle="modal" data-target="#myModal"><i
+																				class="fas fa-user-circle"></i>
+																				<button class="btn btn-link" type="button">view
+																					profile</button></li>
+																			<li><i class="fas fa-users"></i>
+																				<button class="btn btn-link"
+																					th:formaction="@{/deletemsg}" th:name="toid"
+																					th:value="${toid}" type="submit">Delete</button></li>
+																			<li><i class="fas fa-plus"></i>
+																				<button class="btn btn-link"
+																					th:formaction="@{/achieve}" th:name="toid"
+																					th:value="${toid}" type="submit">achieve</button></li>
+																			<li th:if="${ipo}"><i class="fas fa-ban"></i>
+																				<button class="btn btn-link" th:name="block"
+																					th:value="${toid}" type="submit"
+																					th:formaction="@{/blockSt}">block</button></li>
+																		</ul>
+																	</form>
+																</div>
+															</div>
+															<div class="card-body msg_card_body">
+
+																<th:block th:each="all :${allsentRec}">
+																	<th:block th:each="sen :${sent}">
+																		<div th:if="${sen}==${all}"
+																			class="d-flex justify-content-end mb-4">
+																			<div class="msg_cotainer_send">
+																				<div th:text="${sen.msg}"></div>
+																				<th:block th:each="sn :${sen.seenn}">
+																				<span class="msg_time_send" th:if="${sn.id}==2"
+																					th:text="seen"></span> <span class="msg_time_send"
+																					th:if="${sn.id}==1" th:text="sent"></span>
+																				</th:block>
+																			</div>
+																			<div class="img_cont_msg">
+																				<img th:src="${picha}"
+																					class="rounded-circle user_img_msg">
+																			</div>
+																		</div>
+																	</th:block>
+																	<th:block th:each="rceive :${sendby}">
+																		<div th:if="${rceive}==${all}"
+																			class="d-flex justify-content-start mb-4">
+																			<div class="img_cont_msg">
+																				<img th:if="${ehh}==1" th:src="${picha2}"
+																					class="rounded-circle user_img_msg">
+																				<th:block th:if="${ehh}==2"
+																					th:each="alll :${allstd}">
+																					<th:block th:each="fr :${rceive.getStdfrom}">
+																						<img th:if="${alll}==${fr}"
+																							th:src="${alll.getPhotosImagePath}"
+																							class="rounded-circle user_img_msg">
+																					</th:block>
+																				</th:block>
+
+																			</div>
+																			<div class="msg_cotainer">
+																				<th:block th:if="${ehh}==2"
+																					th:each="alll :${allstd}">
+																					<th:block th:each="fr :${rceive.getStdfrom}">
+																					<span th:if="${alll}==${fr}" th:text="${alll.first}" style="font-size: 10px;color: white;">anu</span>
+																					</th:block>
+																				</th:block>
+																			
+																				<div th:text="${rceive.msg}"></div>
+
+																				<span style="margin-left: 10px" class="msg_time"
+																					th:text="${rceive.time}"></span>
+																			</div>
+																		</div>
+																	</th:block>
+																</th:block>
+															</div>
+															<div class="card-footer">
+																<form th:action="@{msgreq}" th:method="post"
+																	th:object="${messag}">
+																	<div class="input-group">
+																		<div class="input-group-append">
+																			<span class="input-group-text attach_btn"><i
+																				class="fas fa-paperclip"></i></span>
+																		</div>
+																		<div id="mam">
+																			<input id="mimi" type="checkbox"
+																				th:field="*{stdfrom}" th:value="${ownid}"> <input
+																				id="mimii" type="checkbox" th:field="*{stdto}"
+																				th:value="${toid}"> <input> <input
+																				id="iddd" type="checkbox" th:field="*{groups}"
+																				th:value="${toidg}"> <input>
+																		</div>
+																		<textarea th:field="*{msg}"
+																			class="form-control type_msg"
+																			placeholder="Type your message..."></textarea>
+																		<div class="input-group-append">
+																			<span class="input-group-text send_btn">
+																				<button id="ind" th:if="${toid}" type="submit"
+																					style="border-radius: 20px 250px 250px 20px"
+																					class="btn waves-effect waves-light btn-success btn-icon">
+																					<i class="fas fa-location-arrow"></i>
+																				</button>
+																				<button id="grpp" th:if="${toidg}" type="submit"
+																					th:formaction="@{msgreq}"
+																					style="border-radius: 20px 250px 250px 20px"
+																					class="btn waves-effect waves-light btn-success btn-icon">
+																					<i class="fas fa-location-arrow"></i>
+																				</button>
+																			</span>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<!--  project and team member start -->
+
+
+											<!--  project and team member end -->
+										</div>
+									</div>
+									<!-- Page-body end -->
+								</div>
+								<div id="styleSelector"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+document.getElementById("ind").onclick=function(){
+	document.getElementById("mimii").checked=true;
+}
+</script>
+	<script type="text/javascript">
+document.getElementById("grpp").onclick=function(){
+	document.getElementById("iddd").checked=true;
+}
+</script>
+	<script type="text/javascript">
+		window.onload=onPageLosd();
+	function onPageLosd(){
+		document.getElementById("mimi").checked=true;
+		document.getElementById("mam").style.display="none";
+	}
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js "></script>
+	<script type="text/javascript" src="/js/popper.js/popper.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js "></script>
+	<script type="text/javascript" src="/pages/widget/excanvas.js "></script>
+	<!-- waves js -->
+	<script src="/pages/waves/js/waves.min.js"></script>
+	<!-- jquery slimscroll js -->
+	<script type="text/javascript"
+		src="/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+	<!-- modernizr js -->
+	<script type="text/javascript" src="/js/modernizr/modernizr.js "></script>
+	<!-- slimscroll js -->
+	<script type="text/javascript" src="/js/SmoothScroll.js"></script>
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js "></script>
+	<!-- Chart js -->
+	<script type="text/javascript" src="/js/chart.js/Chart.js"></script>
+	<!-- amchart js -->
+	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+	<script src="/pages/widget/amchart/gauge.js"></script>
+	<script src="/pages/widget/amchart/serial.js"></script>
+	<script src="/pages/widget/amchart/light.js"></script>
+	<script src="/pages/widget/amchart/pie.min.js"></script>
+	<script
+		src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+	<!-- menu js -->
+	<script src="/js/pcoded.min.js"></script>
+	<script src="/js/vertical-layout.min.js "></script>
+	<!-- custom js -->
+	<script type="text/javascript"
+		src="/pages/dashboard/custom-dashboard.js"></script>
+	<script type="text/javascript" src="/js/script.js "></script>
+	<script>
+		$(document).ready(function() {
+			$('#action_menu_btn').click(function() {
+				$('.action_menu').toggle();
+			});
+		});
+	</script>
+</body>
+
+</html>

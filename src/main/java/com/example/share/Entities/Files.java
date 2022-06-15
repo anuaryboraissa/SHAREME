@@ -1,5 +1,6 @@
 package com.example.share.Entities;
 
+
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
 
 
 @Entity
@@ -21,6 +24,7 @@ public class Files {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="rsc_id")
 	private long Id;
+	@Size(max =200,min = 2)
 	@Column(name="FileName",nullable=false)
     private String file_name;
 	@Column(name="FileType")
@@ -29,10 +33,27 @@ public class Files {
 	private String ModifiedFileName;
 	@Column(name="File_size")
 	private String size;
+	@Size(max =200,min = 10)
+	@Column(name="File_Description")
+	private String description;
 	
 	@ManyToOne
 	@JoinColumn(name="course_id")
 	private Course course;
+	@ManyToOne
+	@JoinColumn(name="std_id")
+	private Student student;
+	
+	
+	 @ManyToMany
+		@JoinTable(
+				name="File_tagged",
+				joinColumns= @JoinColumn(
+						name="file_Id"),
+				inverseJoinColumns=@JoinColumn(
+						name="std_Id")
+				  )
+	private Collection<Student> tagged;
 	
 	 @ManyToMany
 		@JoinTable(
@@ -54,6 +75,31 @@ public class Files {
 		this.type = type;
 		ModifiedFileName = modifiedFileName;
 		this.size = size;
+	}
+	
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Collection<Student> getTagged() {
+		return tagged;
+	}
+
+	public void setTagged(Collection<Student> tagged) {
+		this.tagged = tagged;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public long getId() {

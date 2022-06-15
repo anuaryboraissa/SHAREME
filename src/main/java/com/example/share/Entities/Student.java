@@ -1,5 +1,6 @@
 package com.example.share.Entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sun.istack.NotNull;
 
@@ -56,7 +59,10 @@ public class Student {
 	private int age;
 	@Column(name="st_photo",nullable = true,length = 64)
 	private String photos;
-	
+	 @ManyToMany(mappedBy="stdto")
+		private Collection<Messages> msgto;
+	 @ManyToMany(mappedBy="stdfrom")
+		private Collection<Messages> msgfrom;
 	@ManyToOne()
 	@JoinColumn(name="progr_id", referencedColumnName = "progr_id")    
 	private Programme programme;
@@ -65,11 +71,14 @@ public class Student {
 	@JoinColumn(name="perm_id", referencedColumnName = "permit_id")    
 	private Permission permission;
 	
+	
 	@OneToMany(targetEntity=Requests.class, mappedBy="studentfrom",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<Requests> fromStd;
-	@OneToMany(targetEntity=Requests.class, mappedBy="studentfrom",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	@OneToMany(targetEntity=Requests.class, mappedBy="studentTo",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<Requests> toStd;
 	
+	@Transient
+	private List<MultipartFile> files=new ArrayList<MultipartFile>();
 	
 	 @ManyToMany
 		@JoinTable(
@@ -80,7 +89,11 @@ public class Student {
 						name="course_Id")
 				  )
 	 private Collection<Course> courses;
-	
+    @ManyToMany(mappedBy="student")
+	private Collection<Groups> groups;
+	 
+	 @ManyToMany(mappedBy="tagged")
+		private Set<Files> file;
 	 @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 		@JoinTable(
 				name="std_Roles",
@@ -90,7 +103,33 @@ public class Student {
 						name="ROle_Id")
 				  )
 	private Collection<Roles> roles;
-	 
+	 @ManyToMany
+		@JoinTable(
+				name="std_Archieve",
+				joinColumns= @JoinColumn(
+						name="st_Id"),
+				inverseJoinColumns=@JoinColumn(
+						name="msg_id")
+				  )
+	private Collection<Messages> achieve;
+	 @ManyToMany
+		@JoinTable(
+				name="std_See",
+				joinColumns= @JoinColumn(
+						name="st_Id"),
+				inverseJoinColumns=@JoinColumn(
+						name="msg_id")
+				  )
+	private Collection<Messages> seen;
+	 @ManyToMany
+		@JoinTable(
+				name="std_delete",
+				joinColumns= @JoinColumn(
+						name="st_Id"),
+				inverseJoinColumns=@JoinColumn(
+						name="msg_id")
+				  )
+	private Collection<Messages> deletee;
 	public Student() {
 		super();
 	}
@@ -111,9 +150,85 @@ public class Student {
 		this.courses = courses;
 		this.roles = roles;
 	}
-	
+        public Student(Collection<Roles> roles) {
+		super();
+		this.roles = roles;
+	}
 
- 
+	public Student(long id, @NotBlank(message = "first name must not be empty") @Size(min = 3, max = 15) String first,
+			@NotBlank(message = "last name must not be empty") @Size(min = 3, max = 15) String last,
+			Collection<Roles> roles) {
+		super();
+		this.id = id;
+		this.first = first;
+		this.last = last;
+		this.roles = roles;
+	}
+
+	public Collection<Messages> getAchieve() {
+		return achieve;
+	}
+
+	public void setAchieve(Collection<Messages> achieve) {
+		this.achieve = achieve;
+	}
+
+	public Collection<Messages> getSeen() {
+		return seen;
+	}
+
+	public void setSeen(Collection<Messages> seen) {
+		this.seen = seen;
+	}
+
+	public Collection<Messages> getDeletee() {
+		return deletee;
+	}
+
+	public void setDeletee(Collection<Messages> deletee) {
+		this.deletee = deletee;
+	}
+
+	public Collection<Groups> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Collection<Groups> groups) {
+		this.groups = groups;
+	}
+
+	public Set<Files> getFile() {
+		return file;
+	}
+
+	public void setFile(Set<Files> file) {
+		this.file = file;
+	}
+
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
+
+	public Collection<Messages> getMsgfrom() {
+		return msgfrom;
+	}
+
+	public void setMsgfrom(Collection<Messages> msgfrom) {
+		this.msgfrom = msgfrom;
+	}
+
+	public Collection<Messages> getMsgto() {
+		return msgto;
+	}
+
+	public void setMsgto(Collection<Messages> msgto) {
+		this.msgto = msgto;
+	}
+
 	public Collection<Requests> getFromStd() {
 		return fromStd;
 	}

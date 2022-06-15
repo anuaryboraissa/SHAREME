@@ -60,7 +60,7 @@ public class Course {
 	@Transient
 	private List<MultipartFile> files=new ArrayList<MultipartFile>();
 	
-	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 			name="course_prog",
 			joinColumns= @JoinColumn(

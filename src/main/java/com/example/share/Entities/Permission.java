@@ -32,7 +32,7 @@ public class Permission {
     
     @ManyToMany(mappedBy="permission")
 	private Set<Files> files;
-    
+
     @OneToMany(targetEntity=Student.class, mappedBy="permission",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	private Collection<Student> student;
 	public Permission() {
@@ -42,6 +42,7 @@ public class Permission {
 		super();
 		this.P_name = name;
 	}
+	
 
 	public Permission(int status) {
 		super();
