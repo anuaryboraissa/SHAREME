@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,13 +51,25 @@ public class UploadController {
 	@Autowired
 	private CourseRepostry Student;
 	@RequestMapping("/resource")
-	public String viewRegister(Authentication auth,HttpServletRequest request,Model m) {
+	public String viewRegister(Authentication auth,HttpServletRequest request,Model m,
+			String keyword,String keyword2,String tagfile) {
 		  Principal userPrincipal = request.getUserPrincipal();
 		  Student mystd=stdrepol.findByEmail(userPrincipal.getName());
+		  Collection<Files> pubFiles=fileRepo.searchNotOwnerFileByKey(3, mystd.getId(), keyword);
+		  Collection<Files> tagFiles=fileRepo.searcFileTaggedByKeyword(mystd.getId(),tagfile);
+		  Collection<Student> serchedFr=stdrepol.searchByKey(userPrincipal.getName(),0,mystd.getId(),keyword2);
+		 
 		  Collection<Course> courses=Student.findCoursetById(mystd.getId());
 		  Collection<Files> Publfiles=fileservice.notOwnerFiles(3,mystd.getId());
 		  Collection<Files> taggedFiles=fileservice.taggedFiles(mystd.getId());
-		  m.addAttribute("taggedFiles",taggedFiles);
+		  if(tagfile==null) {
+			  m.addAttribute("taggedFiles",taggedFiles);
+		  }
+		  else {
+			  m.addAttribute("tagfile",tagfile); 
+			  m.addAttribute("taggedFiles",tagFiles); 
+		  }
+		 
 		  Collection<Student> students=service.selectAll();
 		  m.addAttribute("allstd",students);
 		  Collection<Files> Prilfiles=fileRepo.findFilePermById(5);
@@ -84,10 +98,23 @@ public class UploadController {
 		  m.addAttribute("taggedPdf",taggedPdf);
 		  m.addAttribute("otherTaggedfiles",otherTaggedfiles);
 		  m.addAttribute("taggeddocx",taggeddocx);
-		  m.addAttribute("newFriends",newFriends);
+		  if(keyword2==null) {
+			  m.addAttribute("newFriends",newFriends);  
+		  }
+		  else {
+			  m.addAttribute("keyword2",keyword2); 
+			   m.addAttribute("newFriends",serchedFr); 
+		  }
 		  m.addAttribute("mycourse",mycourse);
 		  m.addAttribute("student",student);
-		  m.addAttribute("Publfiles",Publfiles);
+		  if(keyword==null) {
+			  m.addAttribute("Publfiles",Publfiles);  
+		  }
+		  else {
+			    m.addAttribute("keyword", keyword);
+				m.addAttribute("Publfiles", pubFiles);
+		  }
+		  System.out.println("keyword is "+keyword);
 		  m.addAttribute("otherfiles",otherfiles);
 		  m.addAttribute("pdffiles",pdffiles);
 		  m.addAttribute("allfiles",allfiles);
@@ -160,5 +187,17 @@ public class UploadController {
 				 throw new FileNotFoundException("Error while downloading file...");
 			 }
 		 }
+	 }
+	 
+	 @GetMapping("/search")
+	 public String searchItems(@RequestParam("keyword") String key,Model m) {
+		Collection<Files> pubFiles=fileRepo.searcFilesByKeyword(key);
+		m.addAttribute("Publfiles", pubFiles);
+       
+		if (pubFiles.isEmpty()) {
+			System.out.println("is empty");
+		}
+		return "redirect:/resource";
+		 
 	 }
 }

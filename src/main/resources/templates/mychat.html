@@ -654,24 +654,29 @@
 												th:text="${agee}"></span>
 										</h6>
 										<th:block th:each="part :${gstd}">
-										<div class="d-flex bd-highlight">
-											<div class="img_cont">
-												<img th:src="${part.getPhotosImagePath}"
-													class="rounded-circle user_img"> <span
-													class="online_icon"></span>
+											<div class="d-flex bd-highlight">
+												<div class="img_cont">
+													<img th:src="${part.getPhotosImagePath}"
+														class="rounded-circle user_img"> <span
+														class="online_icon"></span>
+												</div>
+												<div class="user_info">
+													<h6>
+														<span style="color: black" th:text="${part.first}"></span>
+														<span style="color: black" th:text="${part.last}"></span>
+													</h6>
+												</div>
+
 											</div>
-											<div class="user_info">
-									          <h6><span style="color:black" th:text="${part.first}"></span> <span style="color:black" th:text="${part.last}"></span></h6>
-									        </div>
-									     
-										</div>
-										   <div style="float: right;margin-top: -50px">
-										   <th:block th:each="admi :${admin}">
-										     <button th:if="${admi}==${part}" th:text="Admin" class="btn btn-secondary btn-sm"></button>
-										     <button th:if="${admi}!=${part}" th:text="None" class="btn btn-secondary btn-sm"></button>
-										   </th:block>
-									       
-									        </div>
+											<div style="float: right; margin-top: -50px">
+												<th:block th:each="admi :${admin}">
+													<button th:if="${admi}==${part}" th:text="Admin"
+														class="btn btn-secondary btn-sm"></button>
+													<button th:if="${admi}!=${part}" th:text="None"
+														class="btn btn-secondary btn-sm"></button>
+												</th:block>
+
+											</div>
 										</th:block>
 
 									</div>
@@ -722,16 +727,20 @@
 														class="col-md-4 col-xl-3 chat">
 														<div class="card mb-sm-3 mb-md-0 contacts_card">
 															<div class="card-header">
-																<div class="input-group">
-																	<input type="text" placeholder="Search..." name=""
-																		class="form-control search">
-																	<div style="margin-top: -5px"
-																		class="input-group-prepend">
-																		<span class="input-group-text search_btn"><i
-																			class="fas fa-search"></i></span>
+																<form th:action="@{/chat}" method="get">
+																<div style="display: inline-flex;">
+																	<div class="input-group">
+																		<input type="text" placeholder="Search..." name="who" th:value="${who}"
+																			class="form-control search">
+																		<div style="margin-top: -5px"
+																			class="input-group-prepend">
+																			<span class="input-group-text search_btn"><i
+																				class="fas fa-search"></i></span>
+																		</div>
 																	</div>
-																</div>
-
+																	<button style="height: 30px;margin-left: 3px;margin-top: 4px" type="submit" class="btn btn-secondary btn-sm">search</button>
+																	</div>
+																</form>
 
 
 																<h6 class="text text-light">
@@ -870,9 +879,10 @@
 																			<div class="msg_cotainer_send">
 																				<div th:text="${sen.msg}"></div>
 																				<th:block th:each="sn :${sen.seenn}">
-																				<span class="msg_time_send" th:if="${sn.id}==2"
-																					th:text="seen"></span> <span class="msg_time_send"
-																					th:if="${sn.id}==1" th:text="sent"></span>
+																					<span class="msg_time_send" th:if="${sn.id}==2"
+																						th:text="seen"></span>
+																					<span class="msg_time_send" th:if="${sn.id}==1"
+																						th:text="sent"></span>
 																				</th:block>
 																			</div>
 																			<div class="img_cont_msg">
@@ -901,10 +911,12 @@
 																				<th:block th:if="${ehh}==2"
 																					th:each="alll :${allstd}">
 																					<th:block th:each="fr :${rceive.getStdfrom}">
-																					<span th:if="${alll}==${fr}" th:text="${alll.first}" style="font-size: 10px;color: white;">anu</span>
+																						<span th:if="${alll}==${fr}"
+																							th:text="${alll.first}"
+																							style="font-size: 10px; color: white;">anu</span>
 																					</th:block>
 																				</th:block>
-																			
+
 																				<div th:text="${rceive.msg}"></div>
 
 																				<span style="margin-left: 10px" class="msg_time"
@@ -974,21 +986,21 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-document.getElementById("ind").onclick=function(){
-	document.getElementById("mimii").checked=true;
-}
-</script>
+		document.getElementById("ind").onclick = function() {
+			document.getElementById("mimii").checked = true;
+		}
+	</script>
 	<script type="text/javascript">
-document.getElementById("grpp").onclick=function(){
-	document.getElementById("iddd").checked=true;
-}
-</script>
+		document.getElementById("grpp").onclick = function() {
+			document.getElementById("iddd").checked = true;
+		}
+	</script>
 	<script type="text/javascript">
-		window.onload=onPageLosd();
-	function onPageLosd(){
-		document.getElementById("mimi").checked=true;
-		document.getElementById("mam").style.display="none";
-	}
+		window.onload = onPageLosd();
+		function onPageLosd() {
+			document.getElementById("mimi").checked = true;
+			document.getElementById("mam").style.display = "none";
+		}
 	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>

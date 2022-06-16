@@ -892,15 +892,15 @@
 														</div>
 													</div>
 													<div class="p-15 p-b-0">
-														<form class="form-material">
+														<form th:ction="@{/resource}" method="get" class="form-material">
 															<div style="display: inline-flex;">
 																<div class="form-group form-primary">
-																	<input type="text" name="footer-email"
+																	<input type="text" name="tagfile" th:value="${tagfile}"
 																		class="form-control" required> <span
 																		class="form-bar"></span> <label class="float-label"><i
 																		class="fa fa-search m-r-10"></i>Search File</label>
 																</div>
-																<button style="height: 40px; margin-left: 5px"
+																<button type="submit" style="height: 40px; margin-left: 5px"
 																	class="btn btn-info">search</button>
 															</div>
 														</form>
@@ -943,15 +943,15 @@
 														<span id="cont"></span> <span>files</span>
 													</h6>
 													<div class="p-15 p-b-0">
-														<form class="form-material">
+														<form th:action="@{/resource}" method="get" class="form-material">
 															<div style="display: inline-flex;">
 																<div class="form-group form-primary">
-																	<input type="text" name="footer-email"
+																	<input type="text" name="keyword" th:value="${keyword}"
 																		class="form-control" required> <span
 																		class="form-bar"></span> <label class="float-label"><i
 																		class="fa fa-search m-r-10"></i>Search File</label>
 																</div>
-																<button style="height: 40px; margin-left: 5px"
+																<button type="submit" style="height: 40px; margin-left: 5px"
 																	class="btn btn-info">search</button>
 															</div>
 														</form>
@@ -1015,15 +1015,15 @@
 													</div>
 												</div>
 												<div class="p-15 p-b-0">
-													<form class="form-material">
+													<form th:action="@{/resource}" method="get" class="form-material">
 														<div style="display: inline-flex;">
 															<div class="form-group form-primary">
-																<input type="text" name="footer-email"
+																<input type="text" name="keyword2" th:value="${keyword2}"
 																	class="form-control" required> <span
 																	class="form-bar"></span> <label class="float-label"><i
 																	class="fa fa-search m-r-10"></i>Search Friend</label>
 															</div>
-															<button style="height: 40px; margin-left: 5px"
+															<button onclick="carFr()" type="submit" style="height: 40px; margin-left: 5px"
 																class="btn btn-info">search</button>
 														</div>
 													</form>
@@ -1202,6 +1202,12 @@
 					: "none";
 			isExpanded = !isExpanded;
 		}
+	</script>
+	<script type="text/javascript">
+	function carFr(){
+		document.getElementById("closeFr").style.display="block";
+	}
+		
 	</script>
 	<script type="text/javascript">
 		var isExpanded = false;

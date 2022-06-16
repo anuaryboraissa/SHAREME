@@ -27,6 +27,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.stereotype.Indexed;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sun.istack.NotNull;

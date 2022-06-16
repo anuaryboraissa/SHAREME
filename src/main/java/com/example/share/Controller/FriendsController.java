@@ -246,17 +246,24 @@ public class FriendsController {
 
 	}
 	@GetMapping("/chat")
-	public String getChat(Model m,Authentication auth,HttpServletRequest request) {
+	public String getChat(Model m,Authentication auth,HttpServletRequest request,String who) {
 		Principal userPrincipal = request.getUserPrincipal();
 		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
 		Collection<Student> whosendMetxt=service.whoSendMsgToMe(mystd.getId(),1,1);
+		Collection<Student> searchWhosendTome=stdrepol.searchmgsWhoSendToMeByKey(mystd.getId(),1,1,who);
 		Collection<Messages> msgss=service.getAllMessagesReceived(mystd.getId(),1,1,1);
 		Collection<Groups> stdgroups=service.getStudentGroups(mystd.getId());
 		Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1,1);
 		m.addAttribute("mygrps", stdgroups);
 		m.addAttribute("tmsgs", msgss);
 		m.addAttribute("tmsg", msgss.size()+grpmsgs.size());
-		m.addAttribute("whosendMetxt",whosendMetxt);
+		if (who==null) {
+			m.addAttribute("whosendMetxt",whosendMetxt);
+		} else {
+			m.addAttribute("who",who);
+			m.addAttribute("whosendMetxt",searchWhosendTome);
+		}
+	
 		m.addAttribute("userimage", mystd.getPhotosImagePath());
 		m.addAttribute("first", mystd.getFirst());
 		m.addAttribute("last", mystd.getLast());
@@ -474,7 +481,7 @@ public class FriendsController {
 	}
 	@GetMapping("/friends")
 	public String viewFrinds(Model m,Authentication auth,HttpServletRequest request,
-			RedirectAttributes direct) {
+			RedirectAttributes direct,String friend,String blockedd,String suggest) {
 		Principal userPrincipal = request.getUserPrincipal();
 		Student mystd=service.selectStudent(userPrincipal.getName());
 		m.addAttribute("userimage", mystd.getPhotosImagePath());
@@ -487,7 +494,7 @@ public class FriendsController {
 		Requests reques=new Requests();
 		m.addAttribute("reques", reques);
 		Collection<Student> listOfStud=service.selectSuggestedRequests(userPrincipal.getName(), 1,0,4,3,mystd.getId());
-		m.addAttribute("listOfStudents", listOfStud);
+		
 		Collection<Student> requests=service.selectRequests(1,mystd.getId());
 		Collection<Student> newFriends=service.selectNewFriends(userPrincipal.getName(), 0,mystd.getId());
 		Collection<Student> blocked=service.selectBlockedFriends(userPrincipal.getName(),3,mystd.getId());
@@ -505,9 +512,32 @@ public class FriendsController {
 		}
 
 		m.addAttribute("whoConcel",whoConcel);
-		m.addAttribute("newFriends",newFriends);
+		 Collection<Student> serchedFr=stdrepol.searchByKey(userPrincipal.getName(),0,mystd.getId(),friend);
+		 Collection<Student> searchBlocked=stdrepol.searchBlockeByKey(userPrincipal.getName(),3,mystd.getId(),blockedd);
+		 Collection<Student> searchsuggested=stdrepol.searchSuggestedByKey(suggest,userPrincipal.getName(), 1,0,4,3,mystd.getId());
+		if (friend==null) {
+			m.addAttribute("newFriends",newFriends);
+		} else {
+			m.addAttribute("friend",friend);
+			m.addAttribute("newFriends",serchedFr);
+		}
+		if (blockedd==null) {
+			m.addAttribute("blocked", blocked);
+		} else {
+			m.addAttribute("blockedd",blockedd);
+			m.addAttribute("blocked",searchBlocked);
+		}
+		if (suggest==null) {
+			m.addAttribute("listOfStudents", listOfStud);
+		} else {
+			m.addAttribute("suggest",suggest);
+			m.addAttribute("listOfStudents",searchsuggested);
+		}
+		
+		
 		m.addAttribute("requests", requests);
-		m.addAttribute("blocked", blocked);
+		
+		
 		return "friends";
 	}
 	@PostMapping("/sendReq")

@@ -15,8 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.stereotype.Indexed;
+
+import groovy.transform.Field;
 
 
+@Indexed
 @Entity
 @Table(name = "Resources")
 public class Files {

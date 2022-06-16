@@ -65,9 +65,13 @@ public class Mycontroller {
 		return "index1";
 	}
 	@RequestMapping("/history")
-	public String test(Authentication auth,HttpServletRequest request,Model m) {
+	public String test(Authentication auth,HttpServletRequest request,Model m,String keyword,String keyword2,String tagfile) {
 		Principal userPrincipal = request.getUserPrincipal();
 		 Student mystd=stdrepol.findByEmail(userPrincipal.getName());
+		 Collection<Files> pubFiles=filerepo.searchHistryFilesByKey(3,mystd.getId(), keyword);
+		  Collection<Files> tagFiles=filerepo.searchHistryFilesByKey(5,  mystd.getId(), tagfile);
+		  Collection<Files> prifile=filerepo.searchHistryFilesByKey(4, mystd.getId(), keyword2);
+	
 		Collection<Files> pubfiles=service.getFileHistory(3, mystd.getId());
 		Collection<Files> prifiles=service.getFileHistory(4, mystd.getId());
 		Collection<Files> taggedfiles=service.getFileHistory(5, mystd.getId());
@@ -75,12 +79,39 @@ public class Mycontroller {
 		m.addAttribute("userimage", mystd.getPhotosImagePath());
 		 m.addAttribute("first", mystd.getFirst());
 		 m.addAttribute("last", mystd.getLast());
-		m.addAttribute("public", pubfiles);
-		m.addAttribute("pubsize", pubfiles.size());
-		m.addAttribute("private", prifiles);
-		m.addAttribute("prisize", prifiles.size());
-		m.addAttribute("tagged", taggedfiles);
-		m.addAttribute("taggsize", taggedfiles.size());
+		  if(keyword==null) {
+		 m.addAttribute("public", pubfiles);
+		 m.addAttribute("pubsize", pubfiles.size());
+		  }
+		  else {
+			  m.addAttribute("keyword",keyword); 
+			  m.addAttribute("public",pubFiles);
+			  m.addAttribute("pubsize", pubFiles.size());
+		  }
+		
+		
+		  if(keyword2==null) {
+			  m.addAttribute("private", prifiles);
+				m.addAttribute("prisize", prifiles.size());
+				  }
+				  else {
+					  m.addAttribute("keyword2",keyword2); 
+					  m.addAttribute("private",prifile); 
+						m.addAttribute("prisize", prifile.size());
+				  }
+		
+	
+		  if(tagfile==null) {
+			  m.addAttribute("tagged", taggedfiles);
+			  m.addAttribute("taggsize", taggedfiles.size());
+				  }
+				  else {
+					
+					  m.addAttribute("tagfile",tagfile); 
+					  m.addAttribute("tagged",tagFiles); 
+					  m.addAttribute("taggsize", tagFiles.size());
+				  }
+	     
 		
 		Collection<Messages> msgs=services.getAllAchievedReceived(mystd.getId(),2,1);
 		Collection<Student> stds=services.archieved(mystd.getId(),1,2); 

@@ -885,15 +885,15 @@
 														</ul>
 													</div>
 													<div class="p-15 p-b-0">
-														<form class="form-material">
+														<form th:action="@{/friends}" method="get" class="form-material">
 															<div style="display: inline-flex;">
 																<div class="form-group form-primary">
-																	<input type="text" name="footer-email"
+																	<input type="text" name="suggest" th:value="${suggest}"
 																		class="form-control" required> <span
 																		class="form-bar"></span> <label class="float-label"><i
 																		class="fa fa-search m-r-10"></i>Search Friend</label>
 																</div>
-																<button style="height: 40px; margin-left: 5px"
+																<button type="submit" style="height: 40px; margin-left: 5px"
 																	class="btn btn-info">search</button>
 															</div>
 														</form>
@@ -1041,15 +1041,15 @@
 														</ul>
 													</div>
 													<div class="p-15 p-b-0">
-														<form class="form-material">
+														<form th:action="@{/friends}" class="form-material">
 															<div style="display: inline-flex;">
 																<div class="form-group form-primary">
-																	<input type="text" name="footer-email"
+																	<input type="text" name="friend" th:value="${friend}"
 																		class="form-control" required> <span
 																		class="form-bar"></span> <label class="float-label"><i
 																		class="fa fa-search m-r-10"></i>Search Friend</label>
 																</div>
-																<button style="height: 40px; margin-left: 5px"
+																<button type="submit" style="height: 40px; margin-left: 5px"
 																	class="btn btn-info">search</button>
 															</div>
 														</form>
@@ -1222,15 +1222,15 @@
 													</ul>
 												</div>
 												<div class="p-15 p-b-0">
-													<form class="form-material">
+													<form th:actio="@{/friends}" class="form-material">
 														<div style="display: inline-flex;">
 															<div class="form-group form-primary">
-																<input type="text" name="footer-email"
+																<input type="text" name="blockedd" th:value="${blockedd}"
 																	class="form-control" required> <span
 																	class="form-bar"></span> <label class="float-label"><i
 																	class="fa fa-search m-r-10"></i>Search Friend</label>
 															</div>
-															<button style="height: 40px; margin-left: 5px"
+															<button type="submit" style="height: 40px; margin-left: 5px"
 																class="btn btn-info">search</button>
 														</div>
 													</form>
