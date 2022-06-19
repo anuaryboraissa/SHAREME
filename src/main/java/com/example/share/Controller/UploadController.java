@@ -1,10 +1,13 @@
 package com.example.share.Controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,21 +26,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.share.Entities.Course;
 import com.example.share.Entities.Files;
-
+import com.example.share.Entities.ImageGallery;
 import com.example.share.Entities.Student;
 import com.example.share.Repositories.CourseRepostry;
 import com.example.share.Repositories.FilesRepostry;
 
 import com.example.share.Repositories.StudentRepostry;
 import com.example.share.Services.Implement.FileServiceImple2;
+import com.example.share.Services.Implement.ImageGalleryService;
 import com.example.share.Services.Implement.StudentsServices;
 
 @Controller
 public class UploadController {
+
+	
 	@Autowired
 	private javax.servlet.ServletContext context;
 	@Autowired
@@ -124,6 +132,7 @@ public class UploadController {
 		  m.addAttribute("userimage", mystd.getPhotosImagePath());
 		  m.addAttribute("first", mystd.getFirst());
 		  m.addAttribute("last", mystd.getLast());
+		  m.addAttribute("ownid", mystd.getId());
 		return "resource";
 	}
 	@GetMapping(value = "/morepub")
@@ -200,4 +209,6 @@ public class UploadController {
 		return "redirect:/resource";
 		 
 	 }
+	 
+
 }

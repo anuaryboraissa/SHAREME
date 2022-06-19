@@ -31,4 +31,6 @@ public interface MessageRepo extends JpaRepository<Messages, Long> {
 	Collection<Messages> allAchievedById(long ownid,int status,int status1);
 	@Query(value = "select * from message m where m.msg_id=?1",nativeQuery = true)
 	Messages findMsgById(long id);
+	@Query(value = "select * from message m inner join msg_deleted d on d.msg_id=m.msg_id inner join msgfrom_std f on f.msg_id=m.msg_id where d.delete_id=?2 and f.std_id=?1",nativeQuery = true)
+	Collection<Messages> allMsgsentById(long ownid,int status);
 }

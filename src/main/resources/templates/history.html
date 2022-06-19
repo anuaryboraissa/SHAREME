@@ -204,7 +204,7 @@
 										<li class="waves-effect waves-red">
 											<div class="media">
 												<img class="d-flex align-self-center img-radius"
-													th:src="${conf.getPhotosImagePath}"
+													th:src="@{${'/image/display/'+ conf.id}}"
 													alt="Generic placeholder image">
 												<div class="media-body">
 													<h5 class="notification-user">
@@ -222,7 +222,7 @@
 										<li class="waves-effect waves-red">
 											<div class="media">
 												<img class="d-flex align-self-center img-radius"
-													th:src="${conf.getPhotosImagePath}"
+													th:src="@{${'/image/display/'+ conf.id}}"
 													alt="Generic placeholder image">
 												<div class="media-body">
 													<h5 class="notification-user">
@@ -239,7 +239,7 @@
 							</li>
 							<li class="user-profile header-notification"><a href="#!"
 								class="waves-effect waves-light"> <img
-									th:src="@{${userimage}}" class="img-radius"
+									th:src="@{${'/image/display/'+ logid}}" class="img-radius"
 									alt="User-Profile-Image"> <em><span
 										th:text="${first}"></span> <span th:text="${last}"></span></em> <i
 									class="ti-angle-down"></i>
@@ -275,11 +275,11 @@
 						<div class="sidebar_toggle">
 							<a href="#"><i class="icon-close icons"></i></a>
 						</div>
-						<div class="pcoded-inner-navbar main-menu">
+						<div style="background: black;" class="pcoded-inner-navbar main-menu">
 							<div style="background: black; color: white">
 								<div class="">
 									<div class="main-menu-header">
-										<img class="img-80 img-radius" th:src="@{${userimage}}"
+										<img class="img-80 img-radius" th:src="@{${'/image/display/'+ logid}}"
 											alt="User-Profile-Image">
 										<div class="user-details">
 											<h4>
@@ -302,106 +302,17 @@
 									</div>
 								</div>
 
-								<div class="p-15 p-b-0">
-									<form class="form-material">
-										<div class="form-group form-primary">
-											<input type="text" name="footer-email" class="form-control"
-												required=""> <span class="form-bar"></span> <label
-												class="float-label"><i class="fa fa-search m-r-10"></i>Search
-												Friend</label>
-										</div>
-									</form>
-								</div>
+					
 								<div class="pcoded-navigation-label"
-									data-i18n="nav.category.navigation">Layout</div>
+									data-i18n="nav.category.navigation">My Home</div>
 								<ul class="pcoded-item pcoded-left-item">
-									<li class="active"><a href="index.html"
+									<li class="active"><a th:href="@{/}"
 										class="waves-effect waves-dark"> <span
 											class="pcoded-micon"><i class="ti-home"></i><b>D</b></span> <span
 											class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
 											<span class="pcoded-mcaret"></span>
 									</a></li>
-									<li class="pcoded-hasmenu"><a href="javascript:void(0)"
-										class="waves-effect waves-dark"> <span
-											class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-											<span class="pcoded-mtext"
-											data-i18n="nav.basic-components.main">Components</span> <span
-											class="pcoded-mcaret"></span>
-									</a>
-										<ul style="background: black; color: white"
-											class="pcoded-submenu">
-											<li class=" "><a href="accordion.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Accordion</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="breadcrumb.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="button.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Button</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="tabs.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Tabs</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="color.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Color</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="label-badge.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Label
-														Badge</span> <span class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="tooltip.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Tooltip</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="typography.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Typography</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="notification.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Notification</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="icon-themify.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Themify</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-
-										</ul></li>
+								
 								</ul>
 								<div class="pcoded-navigation-label"
 									data-i18n="nav.category.forms">Manage Resources</div>
@@ -482,7 +393,7 @@
 
 							<div class="row align-items-center">
 								<header
-									style="height: 150px; padding-top: 70px; padding-left: 400px"
+									style="height: 110px; padding-top: 70px; padding-left: 400px"
 									id="header" class="fixed-top d-flex align-items-center">
 									<div
 										class="container d-flex align-items-center justify-content-between">
@@ -508,39 +419,7 @@
 							</div>
 
 						</div>
-			
-						<section id="all">
-							<div class="container">
-								<div style="margin: 50px" class="card">
-									<div class="media" th:if="${message}">
-
-										<div class="alert alert-info alert-dismissible fade show"
-											th:text="${message}">
-											<span class="text text-danger">x</span>
-										</div>
-									</div>
-									<div class="card-header">
-
-										<h5>Friends Evaluations</h5>
-
-										<span class="text-muted">Get 15% Off on <a
-											href="https://www.amcharts.com/" target="_blank">amCharts</a>
-											licences. Use code "codedthemes" and get the discount.
-										</span>
-										<div class="card-header-right">
-											<ul class="list-unstyled card-option">
-												<li><i class="fa fa fa-wrench open-card-option"></i></li>
-												<li><i class="fa fa-window-maximize full-card"></i></li>
-												<li><i class="fa fa-minus minimize-card"></i></li>
-												<li><i class="fa fa-refresh reload-card"></i></li>
-												<li><i class="fa fa-trash close-card"></i></li>
-											</ul>
-										</div>
-									</div>
-									<div class="card-block"></div>
-								</div>
-							</div>
-						</section>
+		
 						<main id="main">
 							<section id="request" class="about">
 								<div class="container">
@@ -825,13 +704,11 @@
 																</div>
 																<div style="float: right; width: 80px;">
 																<form th:action="@{/unachieve}" method="post">
-																	<button type="submit" th:name="from" th:value="${req.id}" class="btn btn-dark btn-sm" style="text-decoration: none;height: 30px">
-																	un achieve</button><br>
+										                           <div style="float: right;width: 70px">
+																	<button name="from" th:value="${req.id}" type="submit" class="btn btn-dark btn-sm" style="text-decoration: none;height: 30px">
+																	un-archieve</button><br>
 																	<span></span>
-																		
-																		<a href="#"><button type="submit"
-																				style="text-decoration: none; height: 30px"
-																				class="btn btn-link btn-sm">More details</button></a>
+																	</div>						
 																	</form>
 																</div>
 															
@@ -863,42 +740,7 @@
 													</div>
 												</div>
 												<div class="card-block">
-													<form th:action="@{/blockSt}" th:object="${reques}"
-														method="post">
-														<th:block th:each="req :${newFriends}">
-															<div style="color: black;" class="align-middle m-b-30">
-																<img th:src="${req.getPhotosImagePath}" alt="user image"
-																	class="img-radius img-40 align-top m-r-15">
-																<div class="d-inline-block">
-																	<h6>
-																		<span th:text="${req.first}"></span> <span
-																			th:text="${req.last}"></span>
-																	</h6>
-																	<p class="text-muted m-b-0">Developer</p>
-																</div>
-																<div style="display: inline-flex; float: right;">
-																	<div th:if="${v1}!='1'">
-																		<th:block th:each="my :${v1}">
-																			<div th:if="${my.id}==${req.id}"
-																				style="float: right; margin-left: 5px; margin-right: 10px">
-																				<a><button type="submit" class="text text-info"
-																						th:name="block" th:value="${req.id}">block</button></a>
-																			</div>
-																		</th:block>
-																	</div>
-																	<div style="float: right">
-
-																		<a><button th:formaction="@{/chating}"
-																				th:method="get" th:name="toid" type="submit"
-																				class="text text-info" th:value="${req.id}">
-
-
-																				Message</button></a>
-																	</div>
-																</div>
-															</div>
-														</th:block>
-													</form>
+											
 													<div class="text-center">
 														<a href="#!" class="b-b-primary text-primary">View all
 															friends</a>
@@ -924,39 +766,7 @@
 												<div class="card-block">
 													<form th:action="@{/blockSt}" th:object="${reques}"
 														method="post">
-														<th:block th:each="req :${newFriends}">
-															<div style="color: black;" class="align-middle m-b-30">
-																<img th:src="${req.getPhotosImagePath}" alt="user image"
-																	class="img-radius img-40 align-top m-r-15">
-																<div class="d-inline-block">
-																	<h6>
-																		<span th:text="${req.first}"></span> <span
-																			th:text="${req.last}"></span>
-																	</h6>
-																	<p class="text-muted m-b-0">Developer</p>
-																</div>
-																<div style="display: inline-flex; float: right;">
-																	<div th:if="${v1}!='1'">
-																		<th:block th:each="my :${v1}">
-																			<div th:if="${my.id}==${req.id}"
-																				style="float: right; margin-left: 5px; margin-right: 10px">
-																				<a><button type="submit" class="text text-info"
-																						th:name="block" th:value="${req.id}">block</button></a>
-																			</div>
-																		</th:block>
-																	</div>
-																	<div style="float: right">
-
-																		<a><button th:formaction="@{/chating}"
-																				th:method="get" th:name="toid" type="submit"
-																				class="text text-info" th:value="${req.id}">
-
-
-																				Message</button></a>
-																	</div>
-																</div>
-															</div>
-														</th:block>
+													
 													</form>
 													<div class="text-center">
 														<a href="#!" class="b-b-primary text-primary">View all

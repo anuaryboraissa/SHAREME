@@ -204,7 +204,7 @@
 										<li class="waves-effect waves-red">
 											<div class="media">
 												<img class="d-flex align-self-center img-radius"
-													th:src="${conf.getPhotosImagePath}"
+													th:src="@{${'/image/display/'+ conf.id}}"
 													alt="Generic placeholder image">
 												<div class="media-body">
 													<h5 class="notification-user">
@@ -222,7 +222,7 @@
 										<li class="waves-effect waves-red">
 											<div class="media">
 												<img class="d-flex align-self-center img-radius"
-													th:src="${conf.getPhotosImagePath}"
+													th:src="@{${'/image/display/'+ conf.id}}"
 													alt="Generic placeholder image">
 												<div class="media-body">
 													<h5 class="notification-user">
@@ -239,7 +239,7 @@
 							</li>
 							<li class="user-profile header-notification"><a href="#!"
 								class="waves-effect waves-light"> <img
-									th:src="@{${userimage}}" class="img-radius"
+									th:src="@{${'/image/display/'+ login}}" class="img-radius"
 									alt="User-Profile-Image"> <em><span
 										th:text="${first}"></span> <span th:text="${last}"></span></em> <i
 									class="ti-angle-down"></i>
@@ -301,7 +301,8 @@
 								</div>
 								<div class="form-group form-primary">
 									<label>Group icon</label> <input id="fileimage" type="file"
-										name="image" accept="image/jpg,image/jpeg">
+										onchange="previewFile(this)" name="image"
+										accept="image/jpg,image/jpeg">
 								</div>
 								<p id="thumb" style="display: none" align="center">
 									<img style="border-radius: 50%; width: 100px; height: 100px"
@@ -329,8 +330,8 @@
 									</div>
 									<th:block th:each="req :${newFriends}">
 										<div style="color: black;" class="align-middle m-b-30">
-											<img th:src="${req.getPhotosImagePath}" alt="user image"
-												class="img-radius img-40 align-top m-r-15">
+											<img th:src="@{${'/image/display/'+ req.id}}"
+												alt="user image" class="img-radius img-40 align-top m-r-15">
 											<div class="d-inline-block">
 												<h6>
 													<span th:text="${req.first}"></span> <span
@@ -411,16 +412,17 @@
 
 
 			<div class="pcoded-main-container">
-				<div class="pcoded-wrapper">
-					<nav class="pcoded-navbar">
+				<div  class="pcoded-wrapper">
+					<nav class="pcoded-navbar bg-black">
 						<div class="sidebar_toggle">
 							<a href="#"><i class="icon-close icons"></i></a>
 						</div>
-						<div class="pcoded-inner-navbar main-menu">
-							<div style="background: black; color: white">
+						<div style="background: black;" class="pcoded-inner-navbar main-menu">
+							<div style="color: white;height: 100%">
 								<div class="">
 									<div class="main-menu-header">
-										<img class="img-80 img-radius" th:src="@{${userimage}}"
+										<img class="img-80 img-radius"
+											th:src="@{${'/image/display/'+ login}}"
 											alt="User-Profile-Image">
 										<div class="user-details">
 											<h4>
@@ -443,106 +445,17 @@
 									</div>
 								</div>
 
-								<div class="p-15 p-b-0">
-									<form class="form-material">
-										<div class="form-group form-primary">
-											<input type="text" name="footer-email" class="form-control"
-												required=""> <span class="form-bar"></span> <label
-												class="float-label"><i class="fa fa-search m-r-10"></i>Search
-												Friend</label>
-										</div>
-									</form>
-								</div>
+							
 								<div class="pcoded-navigation-label"
-									data-i18n="nav.category.navigation">Layout</div>
+									data-i18n="nav.category.navigation">My home</div>
 								<ul class="pcoded-item pcoded-left-item">
-									<li class="active"><a href="index.html"
+									<li class="active"><a th:href="@{/}"
 										class="waves-effect waves-dark"> <span
 											class="pcoded-micon"><i class="ti-home"></i><b>D</b></span> <span
 											class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
 											<span class="pcoded-mcaret"></span>
 									</a></li>
-									<li class="pcoded-hasmenu"><a href="javascript:void(0)"
-										class="waves-effect waves-dark"> <span
-											class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-											<span class="pcoded-mtext"
-											data-i18n="nav.basic-components.main">Components</span> <span
-											class="pcoded-mcaret"></span>
-									</a>
-										<ul style="background: black; color: white"
-											class="pcoded-submenu">
-											<li class=" "><a href="accordion.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Accordion</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="breadcrumb.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="button.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Button</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="tabs.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Tabs</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="color.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Color</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="label-badge.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Label
-														Badge</span> <span class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="tooltip.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Tooltip</span> <span
-													class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="typography.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Typography</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="notification.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.alert">Notification</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-											<li class=" "><a href="icon-themify.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Themify</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-
-										</ul></li>
+							
 								</ul>
 								<div class="pcoded-navigation-label"
 									data-i18n="nav.category.forms">Manage Resources</div>
@@ -614,7 +527,7 @@
 
 							<div class="row align-items-center">
 								<header
-									style="height: 150px; padding-top: 70px; padding-left: 400px"
+									style="height: 110px; padding-top: 70px; padding-left: 400px"
 									id="header" class="fixed-top d-flex align-items-center">
 									<div
 										class="container d-flex align-items-center justify-content-between">
@@ -643,29 +556,31 @@
 						</div>
 						<section id="all" style="margin-top: -10px">
 							<div class="container">
-								<div style="float: right; margin-top: 5px" class="media"
-									th:if="${messagee}">
+								<div style="margin-top: 5px" class="media" th:if="${messagee}">
 									<div class="alert alert-info alert-dismissible fade show">
 										<span th:text="${messagee}"></span> <span
 											class="text text-danger close" data-dismiss="alert">x</span>
 									</div>
 								</div>
-								<div style="float: right;display:inline-flex; margin-top: 5px" class="media"
-									th:if="${message}">
+								<div style="float: right; display: inline-flex; margin-top: 5px"
+									class="media" th:if="${message}">
 
 									<div class="alert alert-info alert-dismissible fade show">
 										<div th:text="${message}"></div>
 
 
 									</div>
-									
+
 								</div>
 								<div id="cad1" class="col-xl-4 col-md-12">
 									<div class="card ">
 										<div class="card-header">
 											<h5>Groups</h5>
-
+											<p style="float: right" data-toggle="modal" data-target="#myModal">
+												<i class="fa fa-plus m-r-10"></i>
+											</p>
 											<div class="card-header-right">
+
 												<ul class="list-unstyled card-option">
 													<li><i class="fa fa fa-wrench open-card-option"></i></li>
 													<li><i class="fa fa-window-maximize full-card"></i></li>
@@ -679,40 +594,7 @@
 										</div>
 										<div class="card-block">
 											<form th:action="@{/updateReq}" th:object="${reques}"
-												method="post">
-												<th:block th:each="req :${requests}">
-													<div style="color: black;" class="align-middle m-b-30">
-														<img th:src="${req.getPhotosImagePath}" alt="user image"
-															class="img-radius img-40 align-top m-r-15">
-														<div class="d-inline-block">
-															<h6>
-																<span th:text="${req.first}"></span> <span
-																	th:text="${req.last}"></span>
-															</h6>
-															<div style="display: inline-flex">
-																<p class="text-muted m-b-0">Developer</p>
-																<a style="margin-left: 10px">
-																	<button style="height: 27px; text-decoration: none;"
-																		class="btn btn-link btn-sm" th:formaction="@{/moreD}"
-																		type="submit" th:name="morer" th:value="${req.id}">view
-																		profile</button>
-																</a>
-															</div>
-														</div>
-														<div class="d-inline-block" style="float: right;">
-															<a><button type="submit"
-																	class="btn btn-primary btn-sm" style="height: 30px"
-																	th:formaction="@{/Reqconcel}" th:name="conf"
-																	th:value="${req.id}">confirm</button></a> <br> <a><button
-																	class="btn btn-danger btn-sm"
-																	style="margin-top: 5px; height: 30px" type="submit"
-																	th:name="fromid" th:formaction="@{/updateReq}"
-																	th:value="${req.id}">cancel</button></a>
-														</div>
-
-													</div>
-												</th:block>
-											</form>
+												method="post"></form>
 											<div class="text-center">
 												<a href="#!" class="b-b-primary text-primary">View all
 													Requests</a>
@@ -747,7 +629,8 @@
 														method="post">
 														<th:block th:each="req :${requests}">
 															<div style="color: black;" class="align-middle m-b-30">
-																<img th:src="${req.getPhotosImagePath}" alt="user image"
+																<img th:src="@{${'/image/display/'+ req.id}}"
+																	alt="user image"
 																	class="img-radius img-40 align-top m-r-15">
 																<div class="d-inline-block">
 																	<h6>
@@ -807,7 +690,7 @@
 												<div class="card-block">
 													<div class="text-center">
 														<span style="color: green">Profile Photo</span><br> <img
-															th:src="${photo}" alt="user image"
+															th:src="@{${'/image/display/'+ stdid}}" alt="user image"
 															class="img-radius img-40 align-top m-r-15">
 													</div>
 													<div style="padding: 10px">
@@ -842,7 +725,8 @@
 															friends</h6>
 														<div class="align-middle m-b-30">
 															<th:block th:each="cl,b :${closee}">
-																<img th:src="${cl.getPhotosImagePath}" alt="user image"
+																<img th:src="@{${'/image/display/'+ cl.id}}"
+																	alt="user image"
 																	class="img-radius img-40 align-top m-r-15">
 																<div class="d-inline-block">
 																	<h6 class="text text-info">
@@ -885,7 +769,8 @@
 														</ul>
 													</div>
 													<div class="p-15 p-b-0">
-														<form th:action="@{/friends}" method="get" class="form-material">
+														<form th:action="@{/friends}" method="get"
+															class="form-material">
 															<div style="display: inline-flex;">
 																<div class="form-group form-primary">
 																	<input type="text" name="suggest" th:value="${suggest}"
@@ -893,7 +778,8 @@
 																		class="form-bar"></span> <label class="float-label"><i
 																		class="fa fa-search m-r-10"></i>Search Friend</label>
 																</div>
-																<button type="submit" style="height: 40px; margin-left: 5px"
+																<button type="submit"
+																	style="height: 40px; margin-left: 5px"
 																	class="btn btn-info">search</button>
 															</div>
 														</form>
@@ -917,7 +803,7 @@
 																		<tr>
 																			<td>
 																				<div class="d-inline-block align-middle">
-																					<img th:src="${std.getPhotosImagePath}"
+																					<img th:src="@{${'/image/display/'+ std.id}}"
 																						alt="user image"
 																						class="img-radius img-40 align-top m-r-15">
 																					<input id="myid" type="hidden">
@@ -990,7 +876,8 @@
 														method="post">
 														<th:block th:each="req :${requests}">
 															<div style="color: black;" class="align-middle m-b-30">
-																<img th:src="${req.getPhotosImagePath}" alt="user image"
+																<img th:src="@{${'/image/display/'+ req.id}}"
+																	alt="user image"
 																	class="img-radius img-40 align-top m-r-15">
 																<div class="d-inline-block">
 																	<h6>
@@ -1049,7 +936,8 @@
 																		class="form-bar"></span> <label class="float-label"><i
 																		class="fa fa-search m-r-10"></i>Search Friend</label>
 																</div>
-																<button type="submit" style="height: 40px; margin-left: 5px"
+																<button type="submit"
+																	style="height: 40px; margin-left: 5px"
 																	class="btn btn-info">search</button>
 															</div>
 														</form>
@@ -1060,7 +948,8 @@
 														method="post">
 														<th:block th:each="req :${newFriends}">
 															<div style="color: black;" class="align-middle m-b-30">
-																<img th:src="${req.getPhotosImagePath}" alt="user image"
+																<img th:src="@{${'/image/display/'+ req.id}}"
+																	alt="user image"
 																	class="img-radius img-40 align-top m-r-15">
 																<div class="d-inline-block">
 																	<h6>
@@ -1139,7 +1028,7 @@
 												<div class="card-block">
 													<div class="text-center">
 														<span style="color: green">Profile Photo</span><br> <img
-															th:src="${photo}" alt="user image"
+															th:src="@{${'/image/display/'+ stdid}}" alt="user image"
 															class="img-radius img-40 align-top m-r-15">
 													</div>
 													<div style="padding: 10px">
@@ -1180,7 +1069,8 @@
 															friends</h6>
 														<div class="align-middle m-b-30">
 															<th:block th:each="cl,b :${closee}">
-																<img th:src="${cl.getPhotosImagePath}" alt="user image"
+																<img th:src="@{${'/image/display/'+ cl.id}}"
+																	alt="user image"
 																	class="img-radius img-40 align-top m-r-15">
 																<div class="d-inline-block">
 																	<h6 class="text text-info">
@@ -1225,12 +1115,14 @@
 													<form th:actio="@{/friends}" class="form-material">
 														<div style="display: inline-flex;">
 															<div class="form-group form-primary">
-																<input type="text" name="blockedd" th:value="${blockedd}"
-																	class="form-control" required> <span
-																	class="form-bar"></span> <label class="float-label"><i
+																<input type="text" name="blockedd"
+																	th:value="${blockedd}" class="form-control" required>
+																<span class="form-bar"></span> <label
+																	class="float-label"><i
 																	class="fa fa-search m-r-10"></i>Search Friend</label>
 															</div>
-															<button type="submit" style="height: 40px; margin-left: 5px"
+															<button type="submit"
+																style="height: 40px; margin-left: 5px"
 																class="btn btn-info">search</button>
 														</div>
 													</form>
@@ -1241,7 +1133,8 @@
 													method="post">
 													<th:block th:each="req :${blocked}">
 														<div style="color: black;" class="align-middle m-b-30">
-															<img th:src="${req.getPhotosImagePath}" alt="user image"
+															<img th:src="@{${'/image/display/'+ req.id}}"
+																alt="user image"
 																class="img-radius img-40 align-top m-r-15">
 															<div class="d-inline-block">
 																<h6>
@@ -1302,24 +1195,7 @@
 		document.getElementById("fm").submit();
 	}
 	</script>
-	<script>
-	$(document).ready(function(){
-		$('#fileimage').change(function(){
-			$('#thumb').show();
-			showImageThumbnail(this);
-		});
-	});
-	</script>
-	<script>
-     function showImageThumbnail(fileinput){
-	file=fileinput.files[0];
-	reader=new FileReader();
-	reader.onload=function(e){
-		$('#thumbnail').attr('src',e.target.result);
-	};
-	reader.readAsDataURL(file);
-}
-</script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 	<script
@@ -1386,6 +1262,22 @@
 
 	<!-- Template Main JS File -->
 	<script src="js1/main.js"></script>
+	<script>
+    function previewFile(input){
+        var file = $("input[type=file]").get(0).files[0];
+ 
+        if(file){
+            var reader = new FileReader();
+ 
+            reader.onload = function(){
+                $("#thumbnail").attr("src", reader.result);
+            }
+ 
+            reader.readAsDataURL(file);
+            $("#thumb").show();
+        }
+    }
+</script>
 </body>
 
 </html>

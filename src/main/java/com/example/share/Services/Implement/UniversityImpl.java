@@ -42,6 +42,7 @@ public Student saveUser(@Valid StudentDTO studentDTO) {
 			studentDTO.getCourses(),
 			studentDTO.getRoles()
 			);
+	student.setImagess(studentDTO.getImagess());
 	return strepo.save(student);
 }
 

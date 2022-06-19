@@ -196,7 +196,7 @@
 								</ul></li>
 							<li class="user-profile header-notification"><a href="#!"
 								class="waves-effect waves-light"> <img
-									th:src="@{${userimage}}" class="img-radius"
+									th:src="@{${'/image/display/'+ ownid}}" class="img-radius"
 									alt="User-Profile-Image"> <span th:text="${first}"></span>
 									<span th:text="${last}"></span> <i class="ti-angle-down"></i>
 							</a>
@@ -230,11 +230,11 @@
 					<div class="sidebar_toggle">
 						<a href="#"><i class="icon-close icons"></i></a>
 					</div>
-					<div class="pcoded-inner-navbar main-menu">
+					<div  style="background: black;" class="pcoded-inner-navbar main-menu">
 						<div style="background: black; color: white">
 							<div class="">
 								<div class="main-menu-header">
-									<img class="img-80 img-radius" th:src="@{${userimage}}"
+									<img class="img-80 img-radius" th:src="@{${'/image/display/'+ ownid}}"
 										alt="User-Profile-Image">
 									<div class="user-details">
 										<em> <span th:text="${first}+' '+${last}" id="more-details"><i
@@ -253,104 +253,19 @@
 									</ul>
 								</div>
 							</div>
-							<div class="p-15 p-b-0">
-								<form class="form-material">
-									<div style="display: inline-flex;">
-										<div class="form-group form-primary">
-											<input type="text" name="footer-email" class="form-control"
-												required> <span class="form-bar"></span> <label
-												class="float-label"><i class="fa fa-search m-r-10"></i>Search
-												Friend</label>
-										</div>
-										<button style="height: 40px; margin-left: 5px"
-											class="btn btn-info">search</button>
-									</div>
-								</form>
-							</div>
+						
 							<div class="pcoded-navigation-label"
-								data-i18n="nav.category.navigation">Layout</div>
+								data-i18n="nav.category.navigation">My home</div>
 							<ul class="pcoded-item pcoded-left-item">
-								<li class=""><a href="index.html"
+								<li class=""><a th:href="@{/}"
 									class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 											class="ti-home"></i><b>D</b></span> <span class="pcoded-mtext"
 										data-i18n="nav.dash.main">Dashboard</span> <span
 										class="pcoded-mcaret"></span>
 								</a></li>
-								<li class="pcoded-hasmenu"><a href="javascript:void(0)"
-									class="waves-effect waves-dark"> <span class="pcoded-micon"><i
-											class="ti-layout-grid2-alt"></i></span> <span class="pcoded-mtext"
-										data-i18n="nav.basic-components.main">Components</span> <span
-										class="pcoded-mcaret"></span>
-								</a>
-									<ul style="background: black; color: white"
-										class="pcoded-submenu">
-										<li class=" "><a href="accordion.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext" data-i18n="nav.basic-components.alert">Accordion</span>
-												<span class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="breadcrumb.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext"
-												data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>
-												<span class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="button.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext" data-i18n="nav.basic-components.alert">Button</span>
-												<span class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="tabs.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext"
-												data-i18n="nav.basic-components.breadcrumbs">Tabs</span> <span
-												class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="color.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>
-												<span class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="label-badge.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext"
-												data-i18n="nav.basic-components.breadcrumbs">Label
-													Badge</span> <span class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="tooltip.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tooltip</span>
-												<span class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="typography.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext"
-												data-i18n="nav.basic-components.breadcrumbs">Typography</span>
-												<span class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="notification.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext" data-i18n="nav.basic-components.alert">Notification</span>
-												<span class="pcoded-mcaret"></span>
-										</a></li>
-										<li class=" "><a href="icon-themify.html"
-											class="waves-effect waves-dark"> <span
-												class="pcoded-micon"><i class="ti-angle-right"></i></span> <span
-												class="pcoded-mtext"
-												data-i18n="nav.basic-components.breadcrumbs">Themify</span>
-												<span class="pcoded-mcaret"></span>
-										</a></li>
-
-									</ul></li>
+						
+									
+								
 							</ul>
 							<div class="pcoded-navigation-label"
 								data-i18n="nav.category.forms">Resources manaegement</div>
@@ -404,13 +319,14 @@
 								</div>
 								<div class="col-md-4">
 									<ul class="breadcrumb-title">
-										<li class="breadcrumb-item"><a href="index.html"> <i
+										<li class="breadcrumb-item"><a th:href="@{/}"> <i
 												class="fa fa-home"></i>
 										</a></li>
+										<li class="breadcrumb-item"><a th:href="@{/}">Dashboard</a>
+										</li>
 										<li class="breadcrumb-item"><a href="#!">My Resource</a>
 										</li>
-										<li class="breadcrumb-item"><a href="#!">course</a></li>
-										<li class="breadcrumb-item"><a id="jibu" href="#!"></a></li>
+					
 									</ul>
 								</div>
 							</div>
@@ -642,7 +558,7 @@
 																						th:field="*{student}" th:value="${friend.id}">
 																						<span class="cr"></span> <span
 																						class="text-inverse"></span>
-																					</label> <img th:src="${friend.getPhotosImagePath}"
+																					</label> <img th:src="@{${'/image/display/'+ friend.id}}"
 																						alt="user image"
 																						class="img-radius img-40 align-top m-r-15">
 																					<div class="d-inline-block">
@@ -1031,7 +947,7 @@
 												<div class="card-block">
 													<th:block th:each="friend :${newFriends}">
 														<div class="align-middle m-b-30">
-															<img th:src="${friend.getPhotosImagePath}"
+															<img th:src="@{${'/image/display/'+ friend.id}}"
 																alt="user image"
 																class="img-radius img-40 align-top m-r-15">
 															<div class="d-inline-block">

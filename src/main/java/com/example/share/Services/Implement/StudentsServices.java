@@ -112,12 +112,15 @@ public class StudentsServices {
     public Collection<Messages> getAllAchievedReceived(long ownid,int status1,int status2) {
   		return msgRepo.allAchievedById(ownid,status1,status2);
       }
+    public Collection<Messages> getAllSentMsgs(long ownid,int status1) {
+  		return msgRepo.allMsgsentById(ownid, status1);
+      }
     public Collection<Messages> updateArchieve(long ownid,long fromid,int status1) {
     	Collection<Messages> msgs=msgRepo.allAchievedById(ownid, fromid, status1);
     	System.out.println("to "+ownid+" from "+fromid+" status "+status1);
     	Collection<Archieve> achieve=achrepo.getArchieved(2);
     	Collection<Archieve> unachieved=achrepo.getArchieved(1);
-    	if(status1==0) {
+    	if(status1==1) {
     		if(!msgs.isEmpty()) {
         		for (Messages messages : msgs) {
             		messages.setAchievedd(achieve);
@@ -128,7 +131,7 @@ public class StudentsServices {
         		return msgs;
         	}
     	}
-    	if(status1==1) {
+    	if(status1==2) {
     		if(!msgs.isEmpty()) {
         		for (Messages messages : msgs) {
             		messages.setAchievedd(unachieved);
@@ -212,6 +215,9 @@ public class StudentsServices {
      }
     public Collection<Student> archieved(long ownid,int status,int status1) {
  		return studeRepo.findmgsArchievedById(ownid, status,status1);
+     }
+    public Collection<Student> exceptLogger(long ownid) {
+ 		return studeRepo.findExceptsStdById(ownid);
      }
     public Collection<Student> goupAdmis(long grpid) {
  		return studeRepo.findGoupAdminsdById(grpid);

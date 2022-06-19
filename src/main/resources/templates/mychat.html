@@ -471,7 +471,7 @@
 								</ul></li>
 							<li class="user-profile header-notification"><a href="#!"
 								class="waves-effect waves-light"> <img
-									th:src="@{${userimage}}" class="img-radius"
+									th:src="@{${'/image/display/'+ ownid}}" class="img-radius"
 									alt="User-Profile-Image"><span th:text="${first}"></span>
 									<span th:text="${last}"></span> <i class="ti-angle-down"></i>
 							</a>
@@ -505,11 +505,11 @@
 						<div class="sidebar_toggle">
 							<a href="#"><i class="icon-close icons"></i></a>
 						</div>
-						<div class="pcoded-inner-navbar main-menu">
+						<div  style="background: black;" class="pcoded-inner-navbar main-menu">
 							<div style="background-color: black; color: white;">
 								<div class="">
 									<div class="main-menu-header">
-										<img class="img-80 img-radius" th:src="@{${userimage}}"
+										<img class="img-80 img-radius" th:src="@{${'/image/display/'+ ownid}}"
 											alt="User-Profile-Image">
 										<div class="user-details">
 											<em> <span th:text="${first}+' '+${last}"
@@ -526,43 +526,17 @@
 										</ul>
 									</div>
 								</div>
-								<div class="p-15 p-b-0">
-									<form class="form-material">
-										<div class="form-group form-primary">
-											<input type="text" name="footer-email" class="form-control"
-												required=""> <span class="form-bar"></span> <label
-												class="float-label"><i class="fa fa-search m-r-10"></i>Search
-												Friend</label>
-										</div>
-									</form>
-								</div>
+							
 								<div class="pcoded-navigation-label"
-									data-i18n="nav.category.navigation">Layout</div>
+									data-i18n="nav.category.navigation">My Home</div>
 								<ul class="pcoded-item pcoded-left-item">
-									<li class="active"><a href="index.html"
+									<li class="active"><a th:href="@{/}"
 										class="waves-effect waves-dark"> <span
 											class="pcoded-micon"><i class="ti-home"></i><b>D</b></span> <span
 											class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
 											<span class="pcoded-mcaret"></span>
 									</a></li>
-									<li class="pcoded-hasmenu"><a href="javascript:void(0)"
-										class="waves-effect waves-dark"> <span
-											class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-											<span class="pcoded-mtext"
-											data-i18n="nav.basic-components.main">Components</span> <span
-											class="pcoded-mcaret"></span>
-									</a>
-										<ul class="pcoded-submenu">
-
-											<li class=" "><a href="icon-themify.html"
-												class="waves-effect waves-dark"> <span
-													class="pcoded-micon"><i class="ti-angle-right"></i></span>
-													<span class="pcoded-mtext"
-													data-i18n="nav.basic-components.breadcrumbs">Themify</span>
-													<span class="pcoded-mcaret"></span>
-											</a></li>
-
-										</ul></li>
+								
 								</ul>
 								<div class="pcoded-navigation-label"
 									data-i18n="nav.category.forms">Resources manaegement</div>
@@ -623,7 +597,9 @@
 								<div class="modal-body">
 									<div class="text-center">
 										<p>Profile Photo</p>
-										<img alt="user" th:src="${picha2}"
+										<img th:if="${ehh}==1" alt="user" th:src="@{${'/image/display/'+ toid}}"
+											class="rounded-circle user_img">
+											<img th:if="${ehh}==2" alt="user" th:src="@{${'/gimage/display/'+ too}}"
 											class="rounded-circle user_img">
 									</div>
 									<div th:if="${ehh}==1" style="padding: 20px">
@@ -656,7 +632,7 @@
 										<th:block th:each="part :${gstd}">
 											<div class="d-flex bd-highlight">
 												<div class="img_cont">
-													<img th:src="${part.getPhotosImagePath}"
+													<img th:src="@{${'/image/display/'+ part.id}}"
 														class="rounded-circle user_img"> <span
 														class="online_icon"></span>
 												</div>
@@ -760,7 +736,7 @@
 																		<li style="margin-top: -17px" class="active">
 																			<div class="d-flex bd-highlight">
 																				<div class="img_cont">
-																					<img th:src="${st.getPhotosImagePath}"
+																					<img th:src="@{${'/image/display/'+ st.id}}"
 																						class="rounded-circle user_img"> <span
 																						class="online_icon"></span>
 																				</div>
@@ -795,7 +771,7 @@
 																		<li style="margin-top: -17px" class="active">
 																			<div class="d-flex bd-highlight">
 																				<div class="img_cont">
-																					<img th:src="${grp.getPhotosImagePath}"
+																					<img th:src="@{${'/gimage/display/'+ grp.id}}"
 																						class="rounded-circle user_img"> <span
 																						class="online_icon"></span>
 																				</div>
@@ -804,7 +780,7 @@
 																					<div style="float: right; margin-left: -10px">
 
 																						<button th:value="${grp.id}" type="submit"
-																							th:formaction="@{/Gchating}" th:name="toid"
+																							th:formaction="@{/Gchating}" th:name="toidd"
 																							style="width: 30px; font-size: 12px;"
 																							class="btn btn-link text-success btn-sm">view</button>
 																						<button th:value="${grp.id}"
@@ -828,7 +804,10 @@
 															<div class="card-header msg_head">
 																<div class="d-flex bd-highlight">
 																	<div class="img_cont">
-																		<img th:src="${picha2}"
+																		<img th:if="${ehh}==1" th:src="@{${'/image/display/'+ toid}}"
+																			class="rounded-circle user_img"> <span
+																			class="online_icon"></span>
+																				<img th:if="${ehh}==2" th:src="@{${'/gimage/display/'+ too}}"
 																			class="rounded-circle user_img"> <span
 																			class="online_icon"></span>
 																	</div>
@@ -847,7 +826,7 @@
 																</div>
 																<span id="action_menu_btn"><i
 																	class="fas fa-ellipsis-v"></i></span>
-																<div class="action_menu">
+																<div id="contain" class="action_menu">
 																	<form th:action="@{/achieve}" method="post">
 																		<ul>
 																			<li data-toggle="modal" data-target="#myModal"><i
@@ -886,7 +865,7 @@
 																				</th:block>
 																			</div>
 																			<div class="img_cont_msg">
-																				<img th:src="${picha}"
+																				<img th:src="@{${'/image/display/'+ ownid}}"
 																					class="rounded-circle user_img_msg">
 																			</div>
 																		</div>
@@ -895,13 +874,13 @@
 																		<div th:if="${rceive}==${all}"
 																			class="d-flex justify-content-start mb-4">
 																			<div class="img_cont_msg">
-																				<img th:if="${ehh}==1" th:src="${picha2}"
+																				<img th:if="${ehh}==1" th:src="@{${'/image/display/'+ toid}}"
 																					class="rounded-circle user_img_msg">
 																				<th:block th:if="${ehh}==2"
 																					th:each="alll :${allstd}">
 																					<th:block th:each="fr :${rceive.getStdfrom}">
 																						<img th:if="${alll}==${fr}"
-																							th:src="${alll.getPhotosImagePath}"
+																							th:src="@{${'/image/display/'+ alll.id}}"
 																							class="rounded-circle user_img_msg">
 																					</th:block>
 																				</th:block>
@@ -947,12 +926,12 @@
 																			placeholder="Type your message..."></textarea>
 																		<div class="input-group-append">
 																			<span class="input-group-text send_btn">
-																				<button id="ind" th:if="${toid}" type="submit"
+																				<button id="ind" th:if="${ehh}==1" type="submit"
 																					style="border-radius: 20px 250px 250px 20px"
 																					class="btn waves-effect waves-light btn-success btn-icon">
 																					<i class="fas fa-location-arrow"></i>
 																				</button>
-																				<button id="grpp" th:if="${toidg}" type="submit"
+																				<button id="grpp" th:if="${ehh}==2" type="submit"
 																					th:formaction="@{msgreq}"
 																					style="border-radius: 20px 250px 250px 20px"
 																					class="btn waves-effect waves-light btn-success btn-icon">
@@ -985,6 +964,14 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+document.addEventListener('mouseup', function(e) {
+    var container = document.getElementById('contain');
+    if (!container.contains(e.target)) {
+        container.style.display = 'none';
+    }
+});
+</script>
 	<script type="text/javascript">
 		document.getElementById("ind").onclick = function() {
 			document.getElementById("mimii").checked = true;

@@ -81,6 +81,7 @@ public class Student {
 	@Transient
 	private List<MultipartFile> files=new ArrayList<MultipartFile>();
 	
+	
 	 @ManyToMany
 		@JoinTable(
 				name="std_courses",
@@ -90,7 +91,25 @@ public class Student {
 						name="course_Id")
 				  )
 	 private Collection<Course> courses;
-    @ManyToMany(mappedBy="student")
+	 @ManyToMany
+		@JoinTable(
+				name="std_photos",
+				joinColumns= @JoinColumn(
+						name="st_Id"),
+				inverseJoinColumns=@JoinColumn(
+						name="img_id")
+				  )
+	 private Collection<ImageGallery> imagess;
+	 
+    public Collection<ImageGallery> getImagess() {
+		return imagess;
+	}
+
+	public void setImagess(Collection<ImageGallery> imagess) {
+		this.imagess = imagess;
+	}
+
+	@ManyToMany(mappedBy="student")
 	private Collection<Groups> groups;
 	 
 	 @ManyToMany(mappedBy="tagged")

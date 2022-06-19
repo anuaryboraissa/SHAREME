@@ -1,5 +1,8 @@
 package com.example.share.Controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Collection;
@@ -31,6 +34,7 @@ import com.example.share.Entities.College;
 import com.example.share.Entities.Course;
 import com.example.share.Entities.FileAploadUtil;
 import com.example.share.Entities.Groups;
+import com.example.share.Entities.ImageGallery;
 import com.example.share.Entities.Programme;
 import com.example.share.Entities.Roles;
 import com.example.share.Entities.Student;
@@ -41,6 +45,7 @@ import com.example.share.Repositories.ProgrammeRepostry;
 import com.example.share.Repositories.RoleRepo;
 import com.example.share.Repositories.StudentRepostry;
 import com.example.share.Repositories.UniversityRepostry;
+import com.example.share.Services.Implement.ImageGalleryService;
 import com.example.share.Services.Implement.StudentsServices;
 import com.example.share.Services.Implement.UniversityImpl;
 
@@ -48,6 +53,8 @@ import antlr.StringUtils;
 @Controller
 @RequestMapping("/signup")
 public class RegisterController {
+	@Autowired
+	private ImageGalleryService imageGalleryService;
 	@Autowired
 	private ProgrammeRepostry progrepo;
 	@Autowired
@@ -110,9 +117,17 @@ public class RegisterController {
 				String filename=org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
 				System.out.println(studentdto.getCourses());
 				studentdto.setPhotos(filename);
+				System.out.println("file name "+filename);
+				byte[] imageData = file.getBytes();
+				ImageGallery imageGallery = new ImageGallery();
+				imageGallery.setImage(imageData);
+				imageGalleryService.saveImage(imageGallery);
+				Collection<ImageGallery> images=imageGalleryService.getImageById(imageGallery.getId());
+				studentdto.setImagess(images);
 				Student sdt=service.saveUser(studentdto);
 				String uploadDir="src/main/resources/static/img1/userphotos/"+sdt.getId();
 				FileAploadUtil.saveFile(uploadDir, filename, file);
+		
 				System.out.println("hayaa");
 			
 				attributes.addFlashAttribute("ok", "Registration successfully.");

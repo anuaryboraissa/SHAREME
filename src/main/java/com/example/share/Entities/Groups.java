@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -35,8 +36,9 @@ public class Groups implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Group_id")
 	private long id;
-	@Column(name="Group_icon",nullable=false)
-	private String grp_icon;
+	@Lob
+    @Column(name = "Group_icon", length = Integer.MAX_VALUE, nullable = false)
+	private byte[] grp_icon;
 	@Column(name="Group_desc",nullable=false)
 	private String grp_desc;
 	@Column(name="Group_capacity",nullable=false)
@@ -91,11 +93,12 @@ public class Groups implements Serializable{
 		this.id = id;
 	}
 
-	public String getGrp_icon() {
+
+	public byte[] getGrp_icon() {
 		return grp_icon;
 	}
 
-	public void setGrp_icon(String grp_icon) {
+	public void setGrp_icon(byte[] grp_icon) {
 		this.grp_icon = grp_icon;
 	}
 

@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,7 @@ import com.example.share.Repositories.MessageRepo;
 import com.example.share.Repositories.StudentRepostry;
 import com.example.share.Services.Implement.FileServiceImple2;
 import com.example.share.Services.Implement.StudentsServices;
+import com.sun.source.tree.IfTree;
 
 @Controller
 public class FriendsController {
@@ -56,11 +58,12 @@ public class FriendsController {
 	}
 	@Autowired
 	private StudentsServices service;
+    
 	@RequestMapping(value = "/Gchating")
-	public String friendsGroupChat(@RequestParam(value ="toid")
-	long id,Model m,Authentication auth,HttpServletRequest request) {
-		Groups grps=service.getGroupById(id);
-		
+	public String friendsGroupChat(@ModelAttribute("toidd")
+	long toidd,Model m,Authentication auth,HttpServletRequest request) {
+		Groups grps=service.getGroupById(toidd);
+		m.addAttribute("grp.id", toidd);
 		Principal userPrincipal = request.getUserPrincipal();
 		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
 		if(grps!=null) {
@@ -84,11 +87,10 @@ public class FriendsController {
 		Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1,1);
 		Collection<Messages> sent=service.getGroupSentBy(mystd.getId(),grps.getId(),1,1);
 		Collection<Messages> receivOrsent=service.allGroupMsgs(grps.getId(),1,1);
-		Student sdddd=new Student();
 		mystd.setSeen(receivOrsent);
 		stdrepol.save(mystd);
 			for (Messages msgsss : grps.getMessages()) {
-							System.out.println("msg id is "+id);
+							System.out.println("msg id is "+toidd);
 							System.out.println("mhhhhhhhhhhhhhhhh");
 							System.out.println("msg is "+msgsss.getMsg());
 							
@@ -151,10 +153,13 @@ public class FriendsController {
 		return "mychat";
 
 	}
+	
+	
 	@RequestMapping(value = "/chating")
-	public String friendsChat(@RequestParam(value ="toid") long id,Model m,Authentication auth,HttpServletRequest request) {
-		Student student=service.findStudent(id);
+	public String friendsChat(@ModelAttribute("toid") long toid,Model m,Authentication auth,HttpServletRequest request) {
+		Student student=service.findStudent(toid);
 		Collection<Seen> seen=service.getSeen(2);
+		m.addAttribute("st.id", toid);
 		Principal userPrincipal = request.getUserPrincipal();
 		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
         Collection<Student> whosendMetxt=service.whoSendMsgToMe(mystd.getId(),1,1);
@@ -166,7 +171,7 @@ public class FriendsController {
 			for (Messages msgsss : student.getMsgfrom()) {
 				for (Student std : msgsss.getStdto()) {
 					if(std.getId()==mystd.getId()) {
-						System.out.println("msg id is "+id);
+						System.out.println("msg id is "+toid);
 						System.out.println("msg is "+msgsss.getMsg());
 						mystd.setSeen(msgs);
 						stdrepol.save(mystd);
@@ -256,6 +261,7 @@ public class FriendsController {
 		Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1,1);
 		m.addAttribute("mygrps", stdgroups);
 		m.addAttribute("tmsgs", msgss);
+		m.addAttribute("ownid", mystd.getId());
 		m.addAttribute("tmsg", msgss.size()+grpmsgs.size());
 		if (who==null) {
 			m.addAttribute("whosendMetxt",whosendMetxt);
@@ -296,6 +302,7 @@ public class FriendsController {
 		redirect.addFlashAttribute("email",student.getEmail());
 		redirect.addFlashAttribute("closee",frindsss);
 		redirect.addFlashAttribute("photo",student.getPhotosImagePath());
+		redirect.addFlashAttribute("stdid",student.getId());
 		redirect.addFlashAttribute("sem",sem);
 		redirect.addFlashAttribute("share",pubfiles.size()+" public files, "+taggedfiles.size()+" tagged files");
 		redirect.addFlashAttribute("couse",student.getCourses().size()+" Courses");
@@ -317,7 +324,8 @@ public class FriendsController {
 		Principal userPrincipal = request.getUserPrincipal();
 		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
 		String filename=org.springframework.util.StringUtils.cleanPath(file.getOriginalFilename());
-		groupDTO.setGrp_icon(filename);
+		byte[] imageData = file.getBytes();
+		groupDTO.setGrp_icon(imageData);
 		Groups saveGroup=service.saveGroup(groupDTO, mystd);
 		String uploadDir="src/main/resources/static/img1/GrpIcons/"+saveGroup.getId();
 		FileAploadUtil.saveFile(uploadDir, filename, file);
@@ -350,6 +358,7 @@ public class FriendsController {
 		redirect.addFlashAttribute("email",student.getEmail());
 		redirect.addFlashAttribute("closee",frindsss);
 		redirect.addFlashAttribute("photo",student.getPhotosImagePath());
+		redirect.addFlashAttribute("stdid",student.getId());
 		redirect.addFlashAttribute("sem",sem);
 		redirect.addFlashAttribute("share",pubfiles.size()+" public files, "+taggedfiles.size()+" tagged files");
 		redirect.addFlashAttribute("couse",student.getCourses().size()+" Courses");
@@ -360,6 +369,7 @@ public class FriendsController {
 	}
 
 
+	
 	@PostMapping("/msgreq")
 	public String sandMsg(Authentication auth,HttpServletRequest request,RedirectAttributes redirect
 			,@ModelAttribute("messag") MessageDTO msg) {
@@ -370,20 +380,28 @@ public class FriendsController {
 		for (Student sttt : msg.getStdto()) {
 			ametumiwa=sttt.getFirst();
 			System.out.println("ametumiwa "+sttt.getFirst());
+			   redirect.addFlashAttribute("toid",sttt.getId());
+		 }
+		if(sd!=null) {
+			System.out.println("success");
+			redirect.addFlashAttribute("messagee", "message sent to "+ametumiwa);
 		}
+		
 		}
 		if (!msg.getGroups().isEmpty()) {
 			for (Groups grp : msg.getGroups()) {
 			ametumiwa=grp.getGrp_name();
 				System.out.println("ametumiwa "+grp.getGrp_name());
+				redirect.addFlashAttribute("toidd",grp.getId());
 			}
+			if(sd!=null) {
+				System.out.println("success");
+				redirect.addFlashAttribute("messagee", "message sent to "+ametumiwa);
+			}
+			return "redirect:/Gchating";
 		}
+		return "redirect:/chating";
 		
-		if(sd!=null) {
-			System.out.println("success");
-			redirect.addFlashAttribute("messagee", "message sent to "+ametumiwa);
-		}
-		return "redirect:/chat";
 	}
 	@PostMapping("/achieve")
 	public String achieveMsg(Authentication auth,HttpServletRequest request,RedirectAttributes redirect
@@ -421,7 +439,7 @@ public class FriendsController {
 		Principal userPrincipal = request.getUserPrincipal();
 		Student student=service.findStudent(fromid);
 		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
-		Collection<Messages> msgs=service.updateArchieve(mystd.getId(),student.getId(),1);
+		Collection<Messages> msgs=service.updateArchieve(mystd.getId(),student.getId(),2);
 		if(msgs!=null) {
 			System.out.println("success");
 			redirect.addFlashAttribute("messagee", "message un-archieved");

@@ -187,7 +187,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                           </li>
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
-                                  <img th:src="@{${userimage}}" class="img-radius" alt="User-Profile-Image">
+                                  <img th:src="@{${'/image/display/'+ logid}}" class="img-radius" alt="User-Profile-Image">
                                   <em><span th:text="${first}"></span> <span th:text="${last}"></span></em>
                                   <i class="ti-angle-down"></i>
                               </a>
@@ -228,11 +228,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
               <div class="pcoded-wrapper">
                   <nav class="pcoded-navbar">
                       <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-                      <div class="pcoded-inner-navbar main-menu">
+                      <div  style="background: black;" class="pcoded-inner-navbar main-menu">
                       <div style="background: black;color: white">
                           <div class="">
                               <div class="main-menu-header">
-                                  <img class="img-80 img-radius" th:src="@{${userimage}}" alt="User-Profile-Image">
+                                  <img class="img-80 img-radius" th:src="@{${'/image/display/'+ logid}}" alt="User-Profile-Image">
                                   <div class="user-details">
                                       <h4><span th:text="${first}"></span><span th:text="${last}"></span></h4>
                                       <em style="color: white;" th:text="${#authentication.getPrincipal().getUsername()}" id="more-details"><i class="fa fa-caret-down"></i></em>
@@ -249,104 +249,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                   </ul>
                               </div>
                           </div>
-                          <div class="p-15 p-b-0">
-                              <form class="form-material">
-                                  <div class="form-group form-primary">
-                                      <input type="text" name="footer-email" class="form-control" required="">
-                                      <span class="form-bar"></span>
-                                      <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
-                                  </div>
-                              </form>
-                          </div>
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div>
+                       
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">My home</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li class="active">
-                                  <a href="index.html" class="waves-effect waves-dark">
+                                  <a th:href="@{/}" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
-                              <li class="pcoded-hasmenu">
-                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Components</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                                  <ul style="background: black;color: white" class="pcoded-submenu">
-                                      <li class=" ">
-                                          <a href="accordion.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Accordion</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="breadcrumb.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="button.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Button</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="tabs.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Tabs</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="color.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="label-badge.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Label Badge</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="tooltip.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tooltip</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="typography.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Typography</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="notification.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Notification</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="icon-themify.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Themify</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                
-                                  </ul>
-                              </li>
+                  
                           </ul>
                           <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Manage Resources</div>
                           <ul class="pcoded-item pcoded-left-item">
@@ -403,7 +316,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                   <div class="col-md-4">
                                       <ul class="breadcrumb-title">
                                           <li class="breadcrumb-item">
-                                              <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                              <a th:href="@{/}"> <i class="fa fa-home"></i> </a>
                                           </li>
                                           <li class="breadcrumb-item"><a href="#!">Dashboard</a>
                                           </li>
@@ -426,8 +339,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">$30200</h4>
-                                                                <h6 class="text-muted m-b-0">All Earnings</h6>
+                                                                <h4 class="text-c-purple" th:text="${totalfl}"></h4>
+                                                                <h6 class="text-muted m-b-0">Shared Documents</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-bar-chart f-28"></i>
@@ -452,8 +365,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">290+</h4>
-                                                                <h6 class="text-muted m-b-0">Page Views</h6>
+                                                                <h4 class="text-c-green" th:text="${totalfr}"></h4>
+                                                                <h6 class="text-muted m-b-0">Total friends</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-file-text-o f-28"></i>
@@ -477,8 +390,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-red">145</h4>
-                                                                <h6 class="text-muted m-b-0">Task Completed</h6>
+                                                                <h4 class="text-c-red" th:text="${totalgrp}"></h4>
+                                                                <h6 class="text-muted m-b-0">Total Groups</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-calendar-check-o f-28"></i>
@@ -502,8 +415,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-blue">500</h4>
-                                                                <h6 class="text-muted m-b-0">Downloads</h6>
+                                                                <h4 class="text-c-blue" th:text="${totalmsgs}"></h4>
+                                                                <h6 class="text-muted m-b-0">Messages Sent</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-hand-o-down f-28"></i>
@@ -522,14 +435,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- task, page, download counter  end -->
-    
-                                            <!--  sale analytics start -->
-                                            <div class="col-xl-8 col-md-12">
-                                                <div class="card">
+                                          <div class="col-xl-4 col-md-12">
+                                                <div class="card ">
                                                     <div class="card-header">
-                                                        <h5>Sales Analytics</h5>
-                                                        <span class="text-muted">Get 15% Off on <a href="https://www.amcharts.com/" target="_blank">amCharts</a> licences. Use code "codedthemes" and get the discount.</span>
+                                                        <h5>Messages Sent</h5>
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -541,192 +450,147 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                         </div>
                                                     </div>
                                                     <div class="card-block">
-                                                        <div id="sales-analytics" style="height: 400px;"></div>
+                                              		<th:block th:each="req,istat :${msgss}">
+														<th:block th:each="std :${req.stdto}">
+		                                        		<div class="align-middle m-b-30">
+																<img th:src="@{${'/image/display/'+ std.id}}"
+																	alt="user image"
+																	class="img-radius img-40 align-top m-r-15">
+																<div class="d-inline-block">
+																
+									                           	<h6> <cite th:text="${std.first}"></cite> <cite th:text="${std.last}"></cite> </h6>
+																
+																	<p style="width: 120px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="text-muted m-b-0" th:text="${req.msg}"></p>
+																</div>
+																<div style="float: right; width: 80px;">
+																<form th:action="@{/unachieve}" method="post">
+										                           <div style="float: right;width: 70px">
+																	<button name="from" th:value="${req.id}" type="submit" class="btn btn-danger btn-sm" style="text-decoration: none;height: 30px">
+																	Delete</button><br>
+																	<span></span>
+																	</div>						
+																	</form>
+																</div>
+															
+															</div>
+
+														
+														</th:block>
+												<th:block th:each="std :${req.groups}">
+														
+														<div style="color: black;" class="align-middle m-b-30">
+															<div class="align-middle m-b-30">
+															<img th:src="@{${'/gimage/display/'+ std.id}}"
+																	alt="user image"
+																	class="img-radius img-40 align-top m-r-15">
+																<div class="d-inline-block">
+																
+									                           	<h6> <span th:text="${std.grp_name}"></span></h6>
+																  
+																	<p style="width: 120px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="text-muted m-b-0" th:text="${req.msg}"></p>
+																</div>
+																<div style="float: right; width: 80px;">
+																<form th:action="@{/unachieve}" method="post">
+										                           <div style="float: right;width: 70px">
+																	<button name="from" th:value="${req.id}" type="submit" class="btn btn-danger btn-sm" style="text-decoration: none;height: 30px">
+																	Delete</button><br>
+																	<span></span>
+																	</div>						
+																	</form>
+																</div>
+															
+															</div>
+
+														</div>
+														</th:block>
+													</th:block>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-block">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <h4>$256.23</h4>
-                                                                <p class="text-muted">This Month</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <label class="label label-success">+20%</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-8">
-                                                                <canvas id="this-month" style="height: 150px;"></canvas>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card quater-card">
-                                                    <div class="card-block">
-                                                        <h6 class="text-muted m-b-15">This Quarter</h6>
-                                                        <h4>$3,9452.50</h4>
-                                                        <p class="text-muted">$3,9452.50</p>
-                                                        <h5>87</h5>
-                                                        <p class="text-muted">Online Revenue<span class="f-right">80%</span></p>
-                                                        <div class="progress"><div class="progress-bar bg-c-blue" style="width: 80%"></div></div>
-                                                        <h5 class="m-t-15">68</h5>
-                                                        <p class="text-muted">Offline Revenue<span class="f-right">50%</span></p>
-                                                        <div class="progress"><div class="progress-bar bg-c-green" style="width: 50%"></div></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--  sale analytics end -->
-    
-                                            <!--  project and team member start -->
-                                            <div class="col-xl-8 col-md-12">
-                                                <div class="card table-card">
-                                                    <div class="card-header">
-                                                        <h5>Projects</h5>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                                                <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
-                                                        <div class="table-responsive">
-                                                            <table style="color: black;" class="table table-hover">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        Assigned</th>
-                                                                    <th>Name</th>
-                                                                    <th>Due Date</th>
-                                                                    <th class="text-right">Priority</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img th:src="@{${userimage}}" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                           <em><span th:text="${first}"></span> <span th:text="${last}"></span></em>
-                                                                                <p class="text-muted m-b-0">Programmer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Able Pro</td>
-                                                                    <td>Jun, 26</td>
-                                                                    <td class="text-right"><label class="label label-danger">Low</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>Jenifer Vintage</h6>
-                                                                                <p class="text-muted m-b-0">Web Designer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Mashable</td>
-                                                                    <td>March, 31</td>
-                                                                    <td class="text-right"><label class="label label-primary">high</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>William Jem</h6>
-                                                                                <p class="text-muted m-b-0">Developer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Flatable</td>
-                                                                    <td>Aug, 02</td>
-                                                                    <td class="text-right"><label class="label label-success">medium</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>David Jones</h6>
-                                                                                <p class="text-muted m-b-0">Developer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Guruable</td>
-                                                                    <td>Sep, 22</td>
-                                                                    <td class="text-right"><label class="label label-primary">high</label></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            <div class="text-right m-r-20">
-                                                                <a href="#!" class=" b-b-primary text-primary">View all Projects</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                     
                                             <div class="col-xl-4 col-md-12">
                                                 <div class="card ">
                                                     <div class="card-header">
-                                                        <h5>Team Members</h5>
+                                                        <h5>Friends</h5>
+                                                        <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option">
+                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                                <li><i class="fa fa-minus minimize-card"></i></li>
+                                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                                                <li><i class="fa fa-trash close-card"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                     <div class="p-15 p-b-0">
+														<form th:action="@{/}" class="form-material">
+															<div style="display: inline-flex;">
+																<div class="form-group form-primary">
+																	<input type="text" name="friend" th:value="${friend}"
+																		class="form-control" required> <span
+																		class="form-bar"></span> <label class="float-label"><i
+																		class="fa fa-search m-r-10"></i>Search Friend</label>
+																</div>
+																<button type="submit"
+																	style="height: 40px; margin-left: 5px"
+																	class="btn btn-info">search</button>
+															</div>
+														</form>
+													</div>
+                                                    </div>
+                                                    <div class="card-block">
+                                                  <form th:action="@{/chating}" th:object="${reques}"
+														method="post">
+														<th:block th:each="req :${newFriends}">
+															<div style="color: black;display: inline-flex;" class="align-middle m-b-30">
+																<img th:src="@{${'/image/display/'+ req.id}}"
+																	alt="user image"
+																	class="img-radius img-40 align-top m-r-15">
+																<div class="d-inline-block">
+																	<h6>
+																		<span th:text="${req.first}"></span> <span
+																			th:text="${req.last}"></span>
+																	</h6>
+
+
+																	<div style="display: inline-flex">
+																		<p class="text-muted m-b-0">Developer</p>
+																		<a style="margin-left: 10px">
+																			<button style="height: 30px; text-decoration: none;"
+																				class="btn btn-link btn-sm" th:formaction="@{/more}"
+																				type="submit" th:name="more" th:value="${req.id}">more
+																				details</button>
+																		</a>
+																	</div>
+
+																</div>
+															
+																	<div style="float: right; width: 80px;">
+
+																		<a><button
+																				style="height: 30px; text-decoration: none;"
+																				th:formaction="@{/chating}" th:method="get"
+																				th:name="toid" type="submit"
+																				class="btn btn-link btn-sm" th:value="${req.id}">
+
+
+																				Message</button></a>
+																	</div>
+
+																
+
+
+															</div>
+														</th:block>
+													</form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                                          <div class="col-xl-4 col-md-12">
+                                                <div class="card ">
+                                                    <div class="card-header">
+                                                        <h5>Groups</h5>
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -738,44 +602,45 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                         </div>
                                                     </div>
                                                     <div class="card-block">
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="images/avatar-1.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-10">
-                                                            <img src="images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-center">
-                                                            <a href="#!" class="b-b-primary text-primary">View all Projects</a>
-                                                        </div>
+                                                     <form th:action="@{/Gchating}" th:object="${grp}"
+														method="post">
+														<th:block th:each="req :${groups}">
+															<div style="color: black;display: inline-flex;" class="align-middle m-b-30">
+																<img th:src="@{${'/gimage/display/'+ req.id}}"
+																	alt="user image"
+																	class="img-radius img-40 align-top m-r-15">
+																<div class="d-inline-block">
+																	<h6>
+																		<span th:text="${req.grp_name}"></span>
+																    </h6>
+
+
+																	<div style="display: inline-flex">
+																		<p class="text-muted m-b-0">Developer</p>
+																		<a style="margin-left: 10px">
+																			<button style="height: 30px; text-decoration: none;"
+																				class="btn btn-link btn-sm" th:formaction="@{/more}"
+																				type="submit" th:name="more" th:value="${req.id}">more
+																				details</button>
+																		</a>
+																	</div>
+
+																</div>
+															
+																	<div style="float: right; width: 80px;">
+
+																		<a><button
+																				style="height: 30px; text-decoration: none;"
+																				th:formaction="@{/Gchating}" th:method="get"
+																				th:name="toidd" type="submit"
+																				class="btn btn-link btn-sm" th:value="${req.id}">
+
+
+																				Message</button></a>
+																	</div>
+                                                                   </div>
+														</th:block>
+													</form>
                                                     </div>
                                                 </div>
                                             </div>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.share.Entities.College;
 import com.example.share.Entities.Course;
+import com.example.share.Entities.ImageGallery;
 import com.example.share.Entities.Permission;
 import com.example.share.Entities.Programme;
 import com.example.share.Entities.Roles;
@@ -26,6 +27,7 @@ public class StudentDTO {
 	private boolean enabled;  
 	private Programme programme;
 	 private Collection<Course> courses;
+	 private Collection<ImageGallery> imagess;
 	@Autowired
 	private Permission permission;
 	Collection<Roles> roles;
@@ -71,6 +73,16 @@ public class StudentDTO {
 
 
 	
+	public Collection<ImageGallery> getImagess() {
+		return imagess;
+	}
+
+
+	public void setImagess(Collection<ImageGallery> imagess) {
+		this.imagess = imagess;
+	}
+
+
 	public long getId() {
 		return id;
 	}

@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 public class GroupDTO {
 	private String grp_name;
-	private String grp_icon;
+	private byte[] grp_icon;
 	private String grp_desc;
 	private int capacity;
 	private Collection<Student> student;
@@ -22,7 +22,7 @@ public class GroupDTO {
 	private Collection<Messages> messages;
 	private Collection<Roles> roles;
 	
-	public GroupDTO(String grp_name, String grp_icon, String grp_desc, int capacity, Collection<Student> student,
+	public GroupDTO(String grp_name, byte[] grp_icon, String grp_desc, int capacity, Collection<Student> student,
 			Collection<Messages> messages) {
 		super();
 		this.grp_name = grp_name;
@@ -58,10 +58,10 @@ public Collection<Student> getGrp_admin() {
 	public void setGrp_name(String grp_name) {
 		this.grp_name = grp_name;
 	}
-	public String getGrp_icon() {
+	public byte[] getGrp_icon() {
 		return grp_icon;
 	}
-	public void setGrp_icon(String grp_icon) {
+	public void setGrp_icon(byte[] grp_icon) {
 		this.grp_icon = grp_icon;
 	}
 	public String getGrp_desc() {
