@@ -716,6 +716,39 @@
 
 														</div>
 													</th:block>
+													
+									            <th:block th:each="req,istat :${gachieved}">
+														
+														<div style="color: black;" class="align-middle m-b-30">
+															<div class="align-middle m-b-30">
+																<div class="d-inline-block">
+									                           	<h6> <cite th:text="${req.grp_name}"></cite> </h6>
+																	<th:block th:each="msg :${gmachieved}">
+																	<th:block th:each="mss :${req.messages}">
+																		<div th:if="${msg}==${mss}" th:text="${mss.msg}"
+																			class="text text-info"
+																			style="width: 120px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+																			<input type="hidden" th:name="msid"
+																				th:value="${mss.id}">
+																		</div>
+																	</th:block>
+																</th:block>
+																	<p class="text-muted m-b-0"></p>
+																</div>
+																<div style="float: right; width: 80px;">
+																<form th:action="@{/gunachieve}" method="post">
+										                           <div style="float: right;width: 70px">
+																	<button name="gid" th:value="${req.id}" type="submit" class="btn btn-dark btn-sm" style="text-decoration: none;height: 30px">
+																	un-archieve</button><br>
+																	<span></span>
+																	</div>						
+																	</form>
+																</div>
+															
+															</div>
+
+														</div>
+													</th:block>
 
 													<div class="text-center">
 														<a href="#!" class="b-b-primary text-primary">View all

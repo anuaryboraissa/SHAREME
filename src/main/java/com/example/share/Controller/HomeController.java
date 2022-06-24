@@ -2,10 +2,11 @@ package com.example.share.Controller;
 
 import java.util.Collection;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,12 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.share.Controller.DTOS.CollegeDTO;
 import com.example.share.Entities.College;
 import com.example.share.Entities.Course;
-import com.example.share.Entities.Intake;
 import com.example.share.Entities.Permission;
 import com.example.share.Entities.Programme;
 import com.example.share.Entities.University;
 import com.example.share.Repositories.CollegeRepostry;
-import com.example.share.Repositories.PermissionRepostry;
 import com.example.share.Repositories.ProgrammeRepostry;
 import com.example.share.Repositories.UniversityRepostry;
 import com.example.share.Services.Implement.CollegeImpl;
@@ -48,7 +47,6 @@ public class HomeController {
 		College college=new College();
 		Permission permission=new Permission();
 		University university=new University();
-		Intake intake=new Intake();
 		Course course=new Course();
 		
 		m.addAttribute("universities", listuni);
@@ -59,7 +57,6 @@ public class HomeController {
 		m.addAttribute("permission",permission);
 		m.addAttribute("college",college);
 		m.addAttribute("university",university);
-		m.addAttribute("intake",intake);
 		m.addAttribute("course",course);
 		m.addAttribute("programme",programme);
 		return "Adminsignup";
@@ -77,10 +74,7 @@ public class HomeController {
 	public Programme chagePr() {
 		return new Programme();
 	}
-	@ModelAttribute
-	public Intake chageIn() {
-		return new Intake();
-	}
+
 	@ModelAttribute
 	public Course chageCs() {
 		return new Course();
@@ -165,18 +159,7 @@ public class HomeController {
 		return "redirect:/admin/adminRegister";
 	}
 	
-	@PostMapping("/saveint")
-	public String saveIntake(@Valid @ModelAttribute
-			Intake intake,BindingResult bindingResult,RedirectAttributes redirect) {
-		if(bindingResult.hasErrors()) {
-			return "Adminsignup";
-		}
-		Intake myint=service.saveIntake(intake);
-		if(myint!=null) {
-			redirect.addFlashAttribute("message", "intake save Successfully..");
-		}
-		return "redirect:/admin/adminRegister";
-	}
+
 	@PostMapping("/savecs")
 	public String saveCourses(@Valid @ModelAttribute
 			Course course,Model m,BindingResult bindingResult,RedirectAttributes redirect) {

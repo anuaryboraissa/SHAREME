@@ -34,15 +34,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.share.Entities.College;
 import com.example.share.Entities.Course;
 import com.example.share.Entities.Files;
 import com.example.share.Entities.Groups;
 import com.example.share.Entities.ImageGallery;
 import com.example.share.Entities.Messages;
 import com.example.share.Entities.Student;
+import com.example.share.Entities.University;
+import com.example.share.Repositories.CollegeRepostry;
 import com.example.share.Repositories.CourseRepostry;
 import com.example.share.Repositories.FilesRepostry;
 import com.example.share.Repositories.StudentRepostry;
+import com.example.share.Repositories.UniversityRepostry;
 import com.example.share.Services.Implement.FileServiceImple2;
 import com.example.share.Services.Implement.ImageGalleryService;
 import com.example.share.Services.Implement.StudentsServices;
@@ -57,6 +61,11 @@ public class Mycontroller {
 	@Autowired
 	private StudentRepostry stdrepol;
 	@Autowired
+	private UniversityRepostry univerrepo;
+	@Autowired
+	private CollegeRepostry collrepo;
+	@Autowired
+	
 	private FilesRepostry filerepo;
 	@Autowired
 	private StudentsServices services;
@@ -107,6 +116,14 @@ public class Mycontroller {
 			 System.out.println("groups "+stdgroups.size());
 			 System.out.println("msgs "+allmsgs.size());
 		 Collection<Course>  courses=Student.findCoursetById(mystd.getId());
+		 Collection<University> uni=univerrepo.findAll();
+		 Collection<College> coll=collrepo.findAll();
+		 for (University university : uni) {
+			for (College college : coll) {
+				 m.addAttribute("unii",university);
+				 m.addAttribute("coll",college);
+			}
+		}
 		  System.out.println(courses);
 		  System.out.println(mystd.getId());
 		  System.out.println(mystd.getPhotos());
@@ -115,11 +132,28 @@ public class Mycontroller {
 		  m.addAttribute("first", mystd.getFirst());
 		  m.addAttribute("last", mystd.getLast());
 		  m.addAttribute("courses",courses);
+		 
 		  m.addAttribute("logid", mystd.getId());
 		  Collection<Student> stds=services.exceptLogger(mystd.getId()); 
 		  m.addAttribute("stds",stds);
 		  m.addAttribute("msgss",allmsgs);
 		return "index";
+	}
+	@PostMapping("/deletemsgg")
+	public String deleteMsg(@RequestParam("msgid") long msgid,Authentication auth,HttpServletRequest request) {
+		 Principal userPrincipal = request.getUserPrincipal();
+		 Student mystd=stdrepol.findByEmail(userPrincipal.getName());
+		Messages msg=services.deletemsg2Byid(msgid);
+		Collection<Messages> msgs=services.findByIdd(msgid);
+		mystd.setDeletee(msgs);
+		stdrepol.save(mystd);
+		if(msg!=null) {
+			System.out.println("message deleted");
+		}
+		else {
+			System.out.println("fail to delete");
+		}
+		return "redirect:/";
 	}
 	@RequestMapping("/home")
 	public String viewHome() {
@@ -180,14 +214,19 @@ public class Mycontroller {
 	     
 		
 		Collection<Messages> msgs=services.getAllAchievedReceived(mystd.getId(),2,1);
+		Collection<Groups> gmsgsarchieve=services.groupArchieved(1,2,mystd.getId());
+		Collection<Messages> grpmsgsarchieved=services.getGroupMsgArchieved(2,1,mystd.getId());
 		Collection<Student> stds=services.archieved(mystd.getId(),1,2); 
+		System.out.println("groups  "+gmsgsarchieve);
 		m.addAttribute("achieved",msgs);
+		m.addAttribute("gachieved",gmsgsarchieve);
+		m.addAttribute("gmachieved",grpmsgsarchieved);
 		m.addAttribute("stds",stds);
-		m.addAttribute("asiz",msgs.size());
+		m.addAttribute("asiz",(msgs.size()+grpmsgsarchieved.size()));
 		for (Messages messages : msgs) {
 			System.out.println("sent by "+messages.getMsg());	
 			//System.out.println("sent by "+messages.getStdFrom().getFirst());	
-		}
+		                       }
 		
 		Calendar cal=Calendar.getInstance();
 		Date date=cal.getTime();
@@ -205,12 +244,19 @@ public class Mycontroller {
 		return "history";
 	}
 	@GetMapping("/image/display/{id}")
-	void showImage(@PathVariable("id") Long id,ImageGallery imageGallery,Groups grps,HttpServletResponse response)
+	void showImage(@PathVariable("id") Long id,ImageGallery imageGallery,HttpServletResponse response)
 			throws ServletException, IOException {
 		imageGallery = imageGalleryService.getStudentPhotoById(id);
-		grps=services.findGroup(id);
 		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
 		response.getOutputStream().write(imageGallery.getImage());
+		response.getOutputStream().close();
+	}
+	@GetMapping("/file/display/{id}")
+	void previewFile(@PathVariable("id") Long id,Files file,HttpServletResponse response)
+			throws ServletException, IOException {
+		file=filerepo.getById(id);
+		response.setContentType("application/pdf,application/docx,image/jpg,image/png, image/gif");
+		response.getOutputStream().write(file.getFile_name().getBytes());
 		response.getOutputStream().close();
 	}
 	@GetMapping("/gimage/display/{id}")

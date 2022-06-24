@@ -1,8 +1,10 @@
 package com.example.share.Services.Implement;
 
 import java.time.LocalTime;
+
+
 import java.time.ZoneId;
-import java.util.Arrays;
+
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +13,27 @@ import org.springframework.stereotype.Service;
 import com.example.share.Controller.DTOS.GroupDTO;
 import com.example.share.Controller.DTOS.MessageDTO;
 import com.example.share.Entities.Archieve;
+import com.example.share.Entities.ClearMsgs;
 import com.example.share.Entities.Delete;
-import com.example.share.Entities.Files;
+
 import com.example.share.Entities.Groups;
+import com.example.share.Entities.LeftGroup;
 import com.example.share.Entities.Messages;
 import com.example.share.Entities.Requests;
-import com.example.share.Entities.Roles;
+
 import com.example.share.Entities.Seen;
 import com.example.share.Entities.Student;
 import com.example.share.Repositories.ArcieveRepo;
+import com.example.share.Repositories.ClearRepo;
 import com.example.share.Repositories.DeleteRepo;
 import com.example.share.Repositories.GroupRepo;
+import com.example.share.Repositories.LeftGroupRepo;
 import com.example.share.Repositories.MessageRepo;
 import com.example.share.Repositories.RequestRepostry;
-import com.example.share.Repositories.RoleRepo;
+
 import com.example.share.Repositories.SeenRepo;
 import com.example.share.Repositories.StudentRepostry;
+
 
 @Service
 public class StudentsServices {
@@ -39,9 +46,13 @@ public class StudentsServices {
 	@Autowired
 	private StudentRepostry studeRepo;
 	@Autowired
+	private ClearRepo clearepo;
+	@Autowired
 	private RequestRepostry reqRepo;
 	@Autowired
 	private MessageRepo msgRepo;
+	@Autowired
+	private LeftGroupRepo leftsrepo;
 	@Autowired
 	private GroupRepo grprepo;
 	public Collection<Archieve> getArchied(long id){
@@ -66,10 +77,30 @@ public class StudentsServices {
     public Collection<Student> selectStudents(Student student,String email) {
     	return studeRepo.findStudentsByEmail(email);
     }
+    public Collection<Student> getStudentLeft(long grp) {
+    	return studeRepo.findStudentLeftGroupById(grp);
+    }
     public Student selectStudent(String email) {
     	return studeRepo.findByEmail(email);
     }
-    
+    public LeftGroup getStudentLeftGrp(Student ownid,Groups grp) {
+        LeftGroup lefts=new LeftGroup();
+        lefts.setGroupsleft(grp);
+        lefts.setStudentleft(ownid);;
+       return  leftsrepo.save(lefts);
+ }
+    public void setStudentSeeGrpMsgs(Student ownid,Messages msgs) {
+    	Seen see=new Seen();
+        see.setMsg(msgs);
+        see.setStudentsee(ownid);
+      seenRepo.save(see);
+ }
+    public void setStudentClearGrpMsgs(Student ownid,Messages msgs) {
+    	ClearMsgs clear=new ClearMsgs();
+    	clear.setStudentclear(ownid);;
+    	clear.setMsgs(msgs);;
+    	clearepo.save(clear);
+ }
     public Student saveRequests(String e1,long id,int status) {
     	Student student=studeRepo.findByEmail(e1);
     	System.out.println(student);
@@ -94,20 +125,26 @@ public class StudentsServices {
     public Collection<Messages> allreciivOrSent(long ownid) {
   		return msgRepo.allMSGSentOrReceivById(ownid);
     }
-    public Collection<Messages> allGroupMsgs(long grpid,int status1,int status2) {
-  		return msgRepo.getAllGroupMSGSById(grpid, status1, status2);
+    public Collection<Messages> allGroupMsgs(long grpid,int status1,int status2,long ownid) {
+  		return msgRepo.getAllGroupMSGSById(grpid, status1,status2,ownid);
     }
-    public Collection<Messages> getGroupSendBy(long from,long to,int status,int status2) {
-  		return msgRepo.getAllGroupSendById(from, to, status,status2);
+    public Collection<Messages> getGroupSendBy(long from,long to,int status) {
+  		return msgRepo.getAllGroupSendById(from, to, status);
       }
-    public Collection<Messages> getGroupSentBy(long from,long to,int status,int status2) {
-  		return msgRepo.getAllGroupSentById(from, to, status,status2);
+    public Collection<Messages> getGroupSentBy(long from,long to,int status) {
+  		return msgRepo.getAllGroupSentById(from, to, status);
       }
-    public Collection<Messages> getAllMessagesReceived(long ownid,int status,int status1,int status2) {
-  		return msgRepo.totalMessagesReceivedById(ownid, status,status1,status2);
+    public Collection<Messages> getGroupMsgArchieved(long status,long status2,long ownid) {
+  		return msgRepo.findAllgrpMsgsArchievedById(status,status2,ownid);
       }
-    public Collection<Messages> getAllGroupMessagesReceived(long ownid,int status,int status2) {
-  		return msgRepo.getAllReceivedGroupSendById(ownid, status2, status);
+    public Collection<Messages> getAllMessagesReceived(long ownid,int status) {
+  		return msgRepo.totalMessagesReceivedById(ownid, status);
+      }
+    public Collection<Messages> getAllMessagesSeen() {
+  		return msgRepo.fingMsgSeenByidd();
+      }
+    public Collection<Messages> getAllGroupMessagesReceived(long ownid,int status) {
+  		return msgRepo.getAllReceivedGroupSendById(ownid, status);
       }
     public Collection<Messages> getAllAchievedReceived(long ownid,int status1,int status2) {
   		return msgRepo.allAchievedById(ownid,status1,status2);
@@ -121,7 +158,7 @@ public class StudentsServices {
     	Collection<Archieve> achieve=achrepo.getArchieved(2);
     	Collection<Archieve> unachieved=achrepo.getArchieved(1);
     	if(status1==1) {
-    		if(!msgs.isEmpty()) {
+    		if(!msgs.isEmpty() || msgs!=null) {
         		for (Messages messages : msgs) {
             		messages.setAchievedd(achieve);
             		msgRepo.save(messages);
@@ -148,6 +185,42 @@ public class StudentsServices {
 		return null;
   		
       }
+
+    
+    public Collection<Messages> updateGrpArchieve(long ownid,long grpid,int status1,int status2,int ck) {
+ 
+    	Collection<Messages> grpmsgs=msgRepo.getAllGroupMSGSById(grpid,status1,status2,ownid);
+    	Collection<Archieve> achieve=achrepo.getArchieved(2);
+    	Collection<Archieve> unachieved=achrepo.getArchieved(1);
+    	if(status1==1 && ck==0) {
+    		if(!grpmsgs.isEmpty()) {
+        		for (Messages messages : grpmsgs) {
+            		messages.setAchievedd(achieve);
+            		msgRepo.save(messages);
+            		
+        		}
+        
+        		return grpmsgs;
+        	}
+    	}
+    	if(status1==2) {
+    		if(!grpmsgs.isEmpty()) {
+        		for (Messages messages : grpmsgs) {
+            		messages.setAchievedd(unachieved);
+            		msgRepo.save(messages);
+        		}
+        		return grpmsgs;
+        	}
+    	}
+    
+    	else {
+    		System.out.println("error occur");
+    		
+    	}
+		return null;
+  		
+      }
+    
     public Messages deletemsgByid(long from,long to,long msgid) {
     	Collection<Delete> delete=deteterepo.getdeleted(2);
     	System.out.println("kutoka "+from+" kwenda "+to);
@@ -159,10 +232,26 @@ public class StudentsServices {
     	}
     	else return null;	
     }
+    
+    public Messages deletemsg2Byid(long msgid) {
+    	Collection<Delete> delete=deteterepo.getdeleted(2);
+    	Messages msg=msgRepo.getById(msgid);
+    	if(msg!=null) {
+    		msg.setDeletee(delete);
+    		msgRepo.save(msg);
+    		return msg;
+    	}
+    	else return null;	
+    }
+    public Collection<Messages> findByIdd(long msgid) {
+    	Collection<Messages> msg=msgRepo.fingByidd(msgid);
+             return msg;	
+    }
+    
+    
     public Student saveMessage(MessageDTO msg,String e1) {
     	LocalTime localTime=LocalTime.now(ZoneId.of("GMT+02:59"));
         Student student=studeRepo.findByEmail(e1);
-        Collection<Seen> seen=seenRepo.getSeen(1);
         Collection<Archieve> achieve=achrepo.getArchieved(1);
         Collection<Delete> delete=deteterepo.getdeleted(1);
     	System.out.println("from "+student);
@@ -170,9 +259,9 @@ public class StudentsServices {
     	message.setMsg(msg.getMsg());
     	message.setTime(localTime.getHour()+":"+localTime.getMinute());
     	message.setStdfrom(msg.getStdfrom());
-    	message.setSeenn(seen);
     	message.setDeletee(delete);
     	message.setAchievedd(achieve);
+    	
     	if(msg.getStdto()!=null) {
     		System.out.println("group id is haijajaa");
     		message.setStdto(msg.getStdto());	
@@ -183,6 +272,7 @@ public class StudentsServices {
     	}
     	
     	msgRepo.save(message);
+    	System.out.println("id yake "+message.getId());
     	System.out.println(msg.getMsg());
     	System.out.println("mgs saved");
     	
@@ -198,6 +288,9 @@ public class StudentsServices {
     public Collection<Student> selectRequests(int status,long ownid) {
 		return studeRepo.findStudRequestByStatus(status, ownid);	
     }
+    public Collection<Groups> groupArchieved(long status,long status1,long ownid) {
+  		return grprepo.getAllGrpArchievedById(ownid, status1, status);	
+      }
     public Collection<Student> selectAll() {
 		return studeRepo.findAll();	
     }
@@ -291,13 +384,15 @@ public class StudentsServices {
     Student std=studeRepo.findStById(student.getId());
     System.out.println("std ni "+std.getFirst());
     Groups groups=new Groups();
+    LeftGroup left=new LeftGroup();
     groups.setCapacity(groupDTO.getCapacity());
     groups.setGrp_desc(groupDTO.getGrp_desc());
     groups.setGrp_name(groupDTO.getGrp_name());
     groups.setStudent(groupDTO.getStudent());
+    left.setStudent(groupDTO.getStudent());
     groups.setGrp_admin(groupDTO.getGrp_admin());
     groups.setGrp_icon(groupDTO.getGrp_icon());
-   Groups grp=grprepo.save(groups);
+    Groups grp=grprepo.save(groups);
     return grp;
     	
     }

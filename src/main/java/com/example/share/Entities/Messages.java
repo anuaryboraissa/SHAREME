@@ -3,8 +3,10 @@ package com.example.share.Entities;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +28,14 @@ public class Messages {
 	private String msg;
 	@Column(name="date")
     private String time;
-	
+	@OneToMany(targetEntity=Seen.class, mappedBy="studentsee",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<Seen> msgseen;
+	@OneToMany(targetEntity=ClearMsgs.class, mappedBy="msgs",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<ClearMsgs> msgcleared;
+	@ManyToMany(mappedBy="achieve")
+	private Collection<Student> stdacheve;
+	@ManyToMany(mappedBy="deletee")
+	private Collection<Student> stdachieve;
 	 @ManyToMany
 		@JoinTable(
 				name="msg_Archieved",
@@ -35,15 +45,6 @@ public class Messages {
 						name="Achieve_id")
 				  )
 	private Collection<Archieve> achievedd;
-	 @ManyToMany
-		@JoinTable(
-				name="msg_Seen",
-				joinColumns= @JoinColumn(
-						name="msg_id"),
-				inverseJoinColumns=@JoinColumn(
-						name="Seen_id")
-				  )
-	private Collection<Seen> seenn;
 	 @ManyToMany
 		@JoinTable(
 				name="msg_deleted",
@@ -64,7 +65,30 @@ public class Messages {
 				  )
 	 private Collection<Groups> groups;
 	 
-	
+	public Collection<ClearMsgs> getMsgcleared() {
+		return msgcleared;
+	}
+
+	public void setMsgcleared(Collection<ClearMsgs> msgcleared) {
+		this.msgcleared = msgcleared;
+	}
+
+	public Collection<Student> getStdacheve() {
+		return stdacheve;
+	}
+
+	public void setStdacheve(Collection<Student> stdacheve) {
+		this.stdacheve = stdacheve;
+	}
+
+	public Collection<Student> getStdachieve() {
+		return stdachieve;
+	}
+
+	public void setStdachieve(Collection<Student> stdachieve) {
+		this.stdachieve = stdachieve;
+	}
+
 	public Collection<Archieve> getAchievedd() {
 		return achievedd;
 	}
@@ -73,12 +97,12 @@ public class Messages {
 		this.achievedd = achievedd;
 	}
 
-	public Collection<Seen> getSeenn() {
-		return seenn;
+	public Collection<Seen> getMsgseen() {
+		return msgseen;
 	}
 
-	public void setSeenn(Collection<Seen> seenn) {
-		this.seenn = seenn;
+	public void setMsgseen(Collection<Seen> msgseen) {
+		this.msgseen = msgseen;
 	}
 
 	public Collection<Delete> getDeletee() {

@@ -605,7 +605,8 @@
 													<div class="modal-body">
 													<h6>Uploaded Course: <span class="text text-primary" th:text="${cos}"></span></h6>
 													<h6>File Description:  <span class="text text-primary" th:text="${desc}"></span></h6>
-													
+													<img th:src="@{${'/file/display/'+fileid}}">
+													 
 													</div>
 
 													<!-- Modal footer -->
@@ -888,7 +889,7 @@
 																			<button id="oii" type="submit"
 																				class="btn btn-link btn-sm" th:name="pubmore"
 																				th:value="${pub.id}"
-																				style="margin-top: -10px; height: 10px; text-decoration: none; margin-left: 20px">more</button>
+																				style="margin-top: -10px; height: 20px; text-decoration: none; margin-left: 20px">more</button>
 																		</form>
 																	</div>
 																</div>

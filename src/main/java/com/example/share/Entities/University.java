@@ -30,9 +30,7 @@ public class University {
 	
 	@OneToMany(targetEntity=Programme.class, mappedBy="university",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	private Collection<Programme> programme;
-	
-	@OneToMany(targetEntity=Intake.class, mappedBy="university",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
-	private Collection<Intake> intake;
+
 	
 	
 	public University() {
@@ -45,23 +43,13 @@ public class University {
 		this.un_name = un_name;
 	}
 
-	public University(String un_name, long id, Collection<College> college,Collection<Intake> intake) {
+	public University(String un_name, long id, Collection<College> college) {
 		super();
 		this.un_name = un_name;
 		this.id = id;
 		this.college = college;
-		this.intake = intake;
 	}
 
-
-	public Collection<Intake> getIntake() {
-		return intake;
-	}
-
-
-	public void setIntake(Collection<Intake> intake) {
-		this.intake = intake;
-	}
 
 
 	public Collection<Programme> getProgramme() {

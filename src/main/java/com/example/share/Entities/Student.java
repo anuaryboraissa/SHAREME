@@ -72,9 +72,14 @@ public class Student {
 	@JoinColumn(name="perm_id", referencedColumnName = "permit_id")    
 	private Permission permission;
 	
-	
 	@OneToMany(targetEntity=Requests.class, mappedBy="studentfrom",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<Requests> fromStd;
+	@OneToMany(targetEntity=LeftGroup.class, mappedBy="studentleft",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	 private Collection<LeftGroup> lefts;
+	@OneToMany(targetEntity=Seen.class, mappedBy="studentsee",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	 private Collection<Seen> msgsee;
+	@OneToMany(targetEntity=ClearMsgs.class, mappedBy="studentclear",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	 private Collection<ClearMsgs> msgclear;
 	@OneToMany(targetEntity=Requests.class, mappedBy="studentTo",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<Requests> toStd;
 	
@@ -111,7 +116,6 @@ public class Student {
 
 	@ManyToMany(mappedBy="student")
 	private Collection<Groups> groups;
-	 
 	 @ManyToMany(mappedBy="tagged")
 		private Set<Files> file;
 	 @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
@@ -132,15 +136,7 @@ public class Student {
 						name="msg_id")
 				  )
 	private Collection<Messages> achieve;
-	 @ManyToMany
-		@JoinTable(
-				name="std_See",
-				joinColumns= @JoinColumn(
-						name="st_Id"),
-				inverseJoinColumns=@JoinColumn(
-						name="msg_id")
-				  )
-	private Collection<Messages> seen;
+	 
 	 @ManyToMany
 		@JoinTable(
 				name="std_delete",
@@ -185,20 +181,36 @@ public class Student {
 		this.roles = roles;
 	}
 
+	
+	public Collection<ClearMsgs> getMsgclear() {
+		return msgclear;
+	}
+
+	public void setMsgclear(Collection<ClearMsgs> msgclear) {
+		this.msgclear = msgclear;
+	}
+
+	public Collection<Seen> getMsgsee() {
+		return msgsee;
+	}
+
+	public void setMsgsee(Collection<Seen> msgsee) {
+		this.msgsee = msgsee;
+	}
+
+	public Collection<LeftGroup> getLefts() {
+		return lefts;
+	}
+
+	public void setLefts(Collection<LeftGroup> lefts) {
+		this.lefts = lefts;
+	}
 	public Collection<Messages> getAchieve() {
 		return achieve;
 	}
 
 	public void setAchieve(Collection<Messages> achieve) {
 		this.achieve = achieve;
-	}
-
-	public Collection<Messages> getSeen() {
-		return seen;
-	}
-
-	public void setSeen(Collection<Messages> seen) {
-		this.seen = seen;
 	}
 
 	public Collection<Messages> getDeletee() {

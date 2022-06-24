@@ -637,18 +637,24 @@
 														class="online_icon"></span>
 												</div>
 												<div class="user_info">
-													<h6>
+													<h6 th:if=${part}!=${logggg}>
 														<span style="color: black" th:text="${part.first}"></span>
 														<span style="color: black" th:text="${part.last}"></span>
 													</h6>
+													<h6 th:if=${part}==${logggg}>
+														<span style="color: black" th:text="You"></span>
+													</h6>
+													
 												</div>
 
 											</div>
 											<div style="float: right; margin-top: -50px">
 												<th:block th:each="admi :${admin}">
-													<button th:if="${admi}==${part}" th:text="Admin"
+													<button style="width: 70px" th:if="${admi}==${part}" th:text="Admin"
 														class="btn btn-secondary btn-sm"></button>
-													<button th:if="${admi}!=${part}" th:text="None"
+													<button style="width: 70px" th:if="${admi}!=${part} and ${#lists.contains(lefts,part)}" th:text=" left "
+														class="btn btn-secondary btn-sm"></button>
+								                    <button style="width: 70px" th:if="${admi}!=${part} and !${#lists.contains(lefts,part)}" th:text="member"
 														class="btn btn-secondary btn-sm"></button>
 												</th:block>
 
@@ -656,8 +662,6 @@
 										</th:block>
 
 									</div>
-
-
 
 								</div>
 
@@ -733,7 +737,7 @@
 																<form th:action="@{/chating}" method="post">
 																	<ul th:each="st: ${whosendMetxt}" class="contacts">
 
-																		<li style="margin-top: -17px" class="active">
+																		<li style="margin-top: -17px;padding: 10px 0px" class="active">
 																			<div class="d-flex bd-highlight">
 																				<div class="img_cont">
 																					<img th:src="@{${'/image/display/'+ st.id}}"
@@ -750,7 +754,7 @@
 																						</th:block>
 																					</th:block>
 
-																					<div style="float: right;">
+																					<div style="float: right; margin-top: 20px;margin-left: 10px">
 
 																						<button type="submit" th:formaction="@{/chating}"
 																							th:name="toid" th:value="${st.id}"
@@ -767,9 +771,9 @@
 
 																		</li>
 																	</ul>
-																	<ul style="padding-left: 10px" th:each="grp :${mygrps}">
-																		<li style="margin-top: -17px" class="active">
-																			<div class="d-flex bd-highlight">
+																	<ul th:each="grp :${mygrps}">
+																		<li style="margin-top: -17px;padding: 10px 0px" class="active">
+																			<div style="padding-left: 10px" class="d-flex bd-highlight">
 																				<div class="img_cont">
 																					<img th:src="@{${'/gimage/display/'+ grp.id}}"
 																						class="rounded-circle user_img"> <span
@@ -777,17 +781,13 @@
 																				</div>
 																				<div class="user_info">
 																					<span th:text="${grp.grp_name}"></span>
-																					<div style="float: right; margin-left: -10px">
+																					<div style="float: right; margin-left: -10px;margin-top: 20px">
 
 																						<button th:value="${grp.id}" type="submit"
 																							th:formaction="@{/Gchating}" th:name="toidd"
 																							style="width: 30px; font-size: 12px;"
 																							class="btn btn-link text-success btn-sm">view</button>
-																						<button th:value="${grp.id}"
-																							th:formaction="@{/deletemsg}" th:name="toid"
-																							type="submit"
-																							style="width: 30px; font-size: 12px;"
-																							class="btn btn-link text-danger btn-sm">delete</button>
+																					
 																					</div>
 																				</div>
 																			</div>
@@ -833,37 +833,52 @@
 																				class="fas fa-user-circle"></i>
 																				<button class="btn btn-link" type="button">view
 																					profile</button></li>
-																			<li><i class="fas fa-users"></i>
+																			<li th:if="${ehh}!=2"><i class="fas fa-users"></i>
 																				<button class="btn btn-link"
 																					th:formaction="@{/deletemsg}" th:name="toid"
 																					th:value="${toid}" type="submit">Delete</button></li>
-																			<li><i class="fas fa-plus"></i>
+																			<li th:if="${ehh}==1"><i class="fas fa-plus"></i>
 																				<button class="btn btn-link"
 																					th:formaction="@{/achieve}" th:name="toid"
 																					th:value="${toid}" type="submit">achieve</button></li>
+																			<li th:if="${ehh}==2 and ${ehhh}==3"><i class="fas fa-plus"></i>
+																				<button class="btn btn-link"
+																					th:formaction="@{/gachieve}" th:name="gid"
+																					th:value="${toidg}" type="submit">achieve</button></li>
 																			<li th:if="${ipo}"><i class="fas fa-ban"></i>
 																				<button class="btn btn-link" th:name="block"
 																					th:value="${toid}" type="submit"
 																					th:formaction="@{/blockSt}">block</button></li>
+																			<li th:if="${ehh}==2 and ${hide}==1"><i class="fas fa-plus"></i>
+																				<button class="btn btn-link" type="button"
+																				data-toggle="modal" data-target="#myModal">Add Admin</button></li>
+																        	<li th:if="${ehh}==2 and ${ehhh}==3"><i class="fas fa-ban"></i>
+																				<button class="btn btn-link" th:name="gid"
+																					th:value="${toidg}" type="submit"
+																					th:formaction="@{/gclear}">Clear chat</button></li>
+																		  <li th:if="${ehh}==2 and ${hide}!=1 and ${ehhh}==3"><i class="fas fa-ban"></i>
+																				<button class="btn btn-link" th:name="gid"
+																					th:value="${toidg}" type="submit"
+																					th:formaction="@{/left}">Exit</button></li>
 																		</ul>
 																	</form>
 																</div>
 															</div>
 															<div class="card-body msg_card_body">
-
-																<th:block th:each="all :${allsentRec}">
+															<div th:if="${ehh}==2" style="text-align: center;padding-bottom: 15px" th:each="adm :${admin}">
+															<cite th:if="${adm}!=${logger}" style="font-size: 10px" class="text text-light" th:text="${adm.first}+' '+${adm.last}+' '+'added you'">anu</cite>
+															</div>
+															  <th:block th:each="all :${allsentRec}">
 																	<th:block th:each="sen :${sent}">
 																		<div th:if="${sen}==${all}"
 																			class="d-flex justify-content-end mb-4">
-																			<div class="msg_cotainer_send">
+																		<div class="msg_cotainer_send">
 																				<div th:text="${sen.msg}"></div>
-																				<th:block th:each="sn :${sen.seenn}">
-																					<span class="msg_time_send" th:if="${sn.id}==2"
+																     <span th:if="${#lists.contains(seenn,sen)}" class="msg_time_send"
 																						th:text="seen"></span>
-																					<span class="msg_time_send" th:if="${sn.id}==1"
+																					<span th:if="!${#lists.contains(seenn,sen)}" class="msg_time_send" 
 																						th:text="sent"></span>
-																				</th:block>
-																			</div>
+																	 </div>
 																			<div class="img_cont_msg">
 																				<img th:src="@{${'/image/display/'+ ownid}}"
 																					class="rounded-circle user_img_msg">
@@ -904,8 +919,14 @@
 																		</div>
 																	</th:block>
 																</th:block>
+															<div th:if="${ehh}==2 and ${ehhh}==3" style="text-align: center;padding-bottom: 15px" th:each="adm :${lefts}">
+															<cite th:if="${adm}!=${logger}" style="font-size: 10px" class="text text-light" th:text="${adm.first}+' '+${adm.last}+' '+' left'">anu</cite>
+															</div>
 															</div>
 															<div class="card-footer">
+																<div th:if="${ehh}==2 and !${ehhh}" style="text-align: center;padding-bottom: 15px">
+															   <cite class="text text-light" style="font-size: 10px" th:text="You+' '+' Left The group'">anu</cite>
+															   </div>
 																<form th:action="@{msgreq}" th:method="post"
 																	th:object="${messag}">
 																	<div class="input-group">
@@ -931,7 +952,7 @@
 																					class="btn waves-effect waves-light btn-success btn-icon">
 																					<i class="fas fa-location-arrow"></i>
 																				</button>
-																				<button id="grpp" th:if="${ehh}==2" type="submit"
+																				<button id="grpp" th:if="${ehh}==2 and ${ehhh}==3" type="submit"
 																					th:formaction="@{msgreq}"
 																					style="border-radius: 20px 250px 250px 20px"
 																					class="btn waves-effect waves-light btn-success btn-icon">

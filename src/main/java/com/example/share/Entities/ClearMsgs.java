@@ -1,49 +1,44 @@
 package com.example.share.Entities;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-
-
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
-@Table(name = "seen")
-public class Seen {
+@Table(name = "Msg_Cleared")
+public class ClearMsgs {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="Seen_id")
+	@Column(name="clear_id")
 	private long id;
 	
 	@ManyToOne()
 	@JoinColumn(name="std_id", referencedColumnName = "st_id")    
-	private Student studentsee;
+	private Student studentclear;
 	@ManyToOne()
 	@JoinColumn(name="msg_id", referencedColumnName = "msg_id")    
-	private Messages msg;
-
+	private Messages msgs;
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Student getStudentsee() {
-		return studentsee;
+	public Student getStudentclear() {
+		return studentclear;
 	}
-	public void setStudentsee(Student studentsee) {
-		this.studentsee = studentsee;
+	public void setStudentclear(Student studentclear) {
+		this.studentclear = studentclear;
 	}
-	public Messages getMsg() {
-		return msg;
+	public Messages getMsgs() {
+		return msgs;
 	}
-	public void setMsg(Messages msg) {
-		this.msg = msg;
+	public void setMsgs(Messages msgs) {
+		this.msgs = msgs;
 	}
-
 	
 }

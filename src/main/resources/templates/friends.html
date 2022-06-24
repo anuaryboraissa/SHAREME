@@ -340,7 +340,7 @@
 
 
 												<div style="display: inline-flex">
-													<p class="text-muted m-b-0">Developer</p>
+													<p class="text-muted m-b-0" th:text="${req.programme.university.un_name}+','+${req.programme.college.coll_name}"></p>
 
 												</div>
 
@@ -638,7 +638,7 @@
 																			th:text="${req.last}"></span>
 																	</h6>
 																	<div style="display: inline-flex">
-																		<p class="text-muted m-b-0">Developer</p>
+																		<p class="text-muted m-b-0" th:text="${req.programme.university.un_name}+','+${req.programme.college.coll_name}"></p>
 																		<a style="margin-left: 10px">
 																			<button style="height: 27px; text-decoration: none;"
 																				class="btn btn-link btn-sm"
@@ -733,7 +733,7 @@
 																		<span th:text="${cl.first}"></span> <span
 																			th:text="${cl.last}"></span>
 																	</h6>
-																	<p class="text-muted m-b-0">Developer</p>
+																	<p class="text-muted m-b-0" th:text="${cl.programme.university.un_name}+','+${cl.programme.college.coll_name}"></p>
 
 																</div>
 																<br>
@@ -812,7 +812,7 @@
 																							<span th:text="${std.first}"></span> <span
 																								th:text="${std.last}"></span>
 																						</h6>
-																						<p class="text-muted m-b-0">Developer</p>
+																						<p class="text-muted m-b-0" th:text="${std.programme.university.un_name}+','+${std.programme.college.coll_name}"></p>
 																					</div>
 																				</div>
 																			</td>
@@ -884,7 +884,7 @@
 																		<span th:text="${req.first}"></span> <span
 																			th:text="${req.last}"></span>
 																	</h6>
-																	<p class="text-muted m-b-0">Developer</p>
+																	<p class="text-muted m-b-0" th:text="${req.programme.university.un_name}+','+${req.programme.college.coll_name}"></p>
 																</div>
 																<div class="d-inline-block" style="float: right;">
 																	<a><button type="submit"
@@ -959,7 +959,7 @@
 
 
 																	<div style="display: inline-flex">
-																		<p class="text-muted m-b-0">Developer</p>
+																		<p class="text-muted m-b-0" th:text="${req.programme.university.un_name}+','+${req.programme.college.coll_name}"></p>
 																		<a style="margin-left: 10px">
 																			<button style="height: 30px; text-decoration: none;"
 																				class="btn btn-link btn-sm" th:formaction="@{/more}"
@@ -1077,7 +1077,7 @@
 																		<span th:text="${cl.first}"></span> <span
 																			th:text="${cl.last}"></span>
 																	</h6>
-																	<p class="text-muted m-b-0">Developer</p>
+																	<p class="text-muted m-b-0" th:text="${cl.programme.university.un_name}+','+${cl.programme.college.coll_name}"></p>
 
 																</div>
 																<br>
@@ -1141,7 +1141,7 @@
 																	<span th:text="${req.first}"></span> <span
 																		th:text="${req.last}"></span>
 																</h6>
-																<p class="text-muted m-b-0">Developer</p>
+																<p class="text-muted m-b-0" th:text="${req.programme.university.un_name}+','+${req.programme.college.coll_name}"></p>
 															</div>
 															<div class="d-inline-block" style="float: right;">
 																<a><button style="height: 30px" type="submit"

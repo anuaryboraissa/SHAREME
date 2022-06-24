@@ -34,6 +34,7 @@ import com.example.share.Entities.Delete;
 import com.example.share.Entities.FileAploadUtil;
 import com.example.share.Entities.Files;
 import com.example.share.Entities.Groups;
+import com.example.share.Entities.LeftGroup;
 import com.example.share.Entities.Messages;
 import com.example.share.Entities.Requests;
 import com.example.share.Entities.Seen;
@@ -66,6 +67,92 @@ public class FriendsController {
 		m.addAttribute("grp.id", toidd);
 		Principal userPrincipal = request.getUserPrincipal();
 		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
+		Collection<Student> lefts=service.getStudentLeft(grps.getId());
+		m.addAttribute("lefts",lefts);
+		if (!lefts.contains(mystd)) {
+			Collection<Messages> seenn=service.getAllMessagesSeen();
+			m.addAttribute("seenn",seenn);
+			Collection<Student> whosendMetxt=service.whoSendMsgToMe(mystd.getId(),1,1);
+			Collection<Student> gpadmis=service.goupAdmis(grps.getId());
+			m.addAttribute("admin",gpadmis);
+			if (gpadmis.contains(mystd)) {
+				m.addAttribute("hide",1);
+			}
+			Collection<Messages> msgs=service.getAllMessagesReceived(mystd.getId(),1);
+			Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1);
+			Collection<Messages> sent=service.getGroupSentBy(mystd.getId(),grps.getId(),1);
+			Collection<Messages> receivOrsent=service.allGroupMsgs(grps.getId(),1,1,mystd.getId());
+			Collection<Messages> sendby=service.getGroupSendBy(mystd.getId(),grps.getId(),1);
+			System.out.println(sendby);
+			System.out.println("seen "+seenn);
+			for (Messages messages : sendby) {
+					if(seenn.isEmpty()) {
+						service.setStudentSeeGrpMsgs(mystd, messages);
+						 System.out.println("seen b4 content");
+					}
+					else if(!seenn.contains(messages)) {
+						service.setStudentSeeGrpMsgs(mystd, messages);
+						 System.out.println("seen after content");
+					} 
+							
+					else {
+						System.out.println("already seen");
+					}
+	}
+	      	 Collection<Student> students=service.selectAll();
+				  m.addAttribute("allstd",students);
+				m.addAttribute("tmsgs", msgs);
+				m.addAttribute("logger", mystd);
+				m.addAttribute("tmsg", msgs.size()+grpmsgs.size());
+				m.addAttribute("whosendMetxt",whosendMetxt);
+				
+				
+				for (Messages messages : sendby) {
+					for (Student sttt : messages.getStdfrom()) {
+						m.addAttribute("pichhh",sttt.getPhotosImagePath());
+					}
+				}
+				
+				m.addAttribute("allsentRec", receivOrsent);
+				m.addAttribute("totConver",(sendby.size()+sent.size()));
+				for (Messages messages : sendby) {
+					m.addAttribute("mess", messages.getId());
+					System.out.println("msgid is "+messages.getId());
+				}
+				for (Student std : whosendMetxt) {
+					m.addAttribute("toidd", std.getId());
+					System.out.println("fromid is "+std.getId());
+				}
+				if(!sent.isEmpty()) {
+					m.addAttribute("sent", sent);
+				}
+
+				m.addAttribute("namee",grps.getGrp_name());
+				m.addAttribute("gstd",grps.getStudent());
+				for (Student grp : grps.getStudent()) {
+					m.addAttribute("name",grp.getFirst()+" "+grp.getLast());
+					m.addAttribute("id",grp.getId());
+					m.addAttribute("university", grp.getProgramme().getUniversity().getUn_name()+","+grp.getProgramme().getCollege().getColl_name());
+					m.addAttribute("couse", grp.getCourses().size()+" courses");
+					m.addAttribute("email", grp.getEmail());
+					m.addAttribute("prog", grp.getProgramme().getProg_name());
+				}
+			  
+				m.addAttribute("sendby", sendby);
+				Messages message=new Messages();
+				m.addAttribute("message", message);
+				m.addAttribute("sents", sent.size());
+				m.addAttribute("ehhh","3");
+				
+
+		}
+		  m.addAttribute("userimage", mystd.getPhotosImagePath());
+	m.addAttribute("first", mystd.getFirst());
+	m.addAttribute("logggg", mystd);
+	m.addAttribute("last", mystd.getLast());
+	m.addAttribute("ownid", mystd.getId());
+		m.addAttribute("ehh","2");
+		m.addAttribute("picha", mystd.getPhotosImagePath());
 		if(grps!=null) {
 			Collection<Groups> stdgroups=service.getStudentGroups(mystd.getId());
 			m.addAttribute("mygrps", stdgroups);
@@ -77,76 +164,7 @@ public class FriendsController {
 			m.addAttribute("too", grps.getId());
 		}
 	
-		m.addAttribute("ehh","2");
-
-		Collection<Student> whosendMetxt=service.whoSendMsgToMe(mystd.getId(),1,1);
-		Collection<Student> gpadmis=service.goupAdmis(grps.getId());
-		m.addAttribute("admin",gpadmis);
-		Collection<Seen> seen=service.getSeen(2);
-		Collection<Messages> msgs=service.getAllMessagesReceived(mystd.getId(),1,1,1);
-		Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1,1);
-		Collection<Messages> sent=service.getGroupSentBy(mystd.getId(),grps.getId(),1,1);
-		Collection<Messages> receivOrsent=service.allGroupMsgs(grps.getId(),1,1);
-		mystd.setSeen(receivOrsent);
-		stdrepol.save(mystd);
-			for (Messages msgsss : grps.getMessages()) {
-							System.out.println("msg id is "+toidd);
-							System.out.println("mhhhhhhhhhhhhhhhh");
-							System.out.println("msg is "+msgsss.getMsg());
-							
-							
-					        msgsss.setSeenn(seen);
-							msrrepo.save(msgsss);
 		
-			}
-			 Collection<Student> students=service.selectAll();
-			  m.addAttribute("allstd",students);
-			m.addAttribute("tmsgs", msgs);
-			m.addAttribute("tmsg", msgs.size()+grpmsgs.size());
-			m.addAttribute("whosendMetxt",whosendMetxt);
-			
-			Collection<Messages> sendby=service.getGroupSendBy(mystd.getId(),grps.getId(),1,1);
-			for (Messages messages : sendby) {
-				for (Student sttt : messages.getStdfrom()) {
-					m.addAttribute("pichhh",sttt.getPhotosImagePath());
-				}
-			}
-			
-			m.addAttribute("allsentRec", receivOrsent);
-			m.addAttribute("totConver",(sendby.size()+sent.size()));
-			for (Messages messages : sendby) {
-				m.addAttribute("mess", messages.getId());
-				System.out.println("msgid is "+messages.getId());
-			}
-			for (Student std : whosendMetxt) {
-				m.addAttribute("toidd", std.getId());
-				System.out.println("fromid is "+std.getId());
-			}
-			if(!sent.isEmpty()) {
-				m.addAttribute("sent", sent);
-			}
-
-			m.addAttribute("namee",grps.getGrp_name());
-			m.addAttribute("gstd",grps.getStudent());
-			for (Student grp : grps.getStudent()) {
-				m.addAttribute("name",grp.getFirst()+" "+grp.getLast());
-				m.addAttribute("id",grp.getId());
-				m.addAttribute("university", grp.getProgramme().getUniversity().getUn_name()+","+grp.getProgramme().getCollege().getColl_name());
-				m.addAttribute("couse", grp.getCourses().size()+" courses");
-				m.addAttribute("email", grp.getEmail());
-				m.addAttribute("prog", grp.getProgramme().getProg_name());
-			}
-		    m.addAttribute("userimage", mystd.getPhotosImagePath());
-			m.addAttribute("first", mystd.getFirst());
-			m.addAttribute("last", mystd.getLast());
-			m.addAttribute("ownid", mystd.getId());
-			m.addAttribute("sendby", sendby);
-			Messages message=new Messages();
-			m.addAttribute("message", message);
-			m.addAttribute("sents", sent.size());
-		
-			m.addAttribute("picha", mystd.getPhotosImagePath());
-
 	
 		LocalTime localTime=LocalTime.now(ZoneId.of("GMT+02:59"));
 		System.out.println("time is "+localTime.getHour()+":"+localTime.getMinute());	
@@ -163,9 +181,33 @@ public class FriendsController {
 		Principal userPrincipal = request.getUserPrincipal();
 		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
         Collection<Student> whosendMetxt=service.whoSendMsgToMe(mystd.getId(),1,1);
-		Collection<Messages> msgs=service.getAllMessagesReceived(mystd.getId(),1,1,1);
+		Collection<Messages> msgs=service.getAllMessagesReceived(mystd.getId(),1);
+		System.out.println("bdo seen "+msgs.size());
+		for (Messages messages : msgs) {
+			System.out.println("bdo seen "+messages.getMsg());
+		}
 		Collection<Groups> stdgroups=service.getStudentGroups(mystd.getId());
-		Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1,1);
+		Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1);
+		Collection<Messages> sent=service.getSentMsgs(mystd.getId(),student.getId(),1,1);
+		
+		Collection<Messages> sendby=service.getSentMsgs(student.getId(),mystd.getId(),1,1);
+		Collection<Messages> receivOrsent=service.allreciivOrSent(mystd.getId());
+		Collection<Messages> seenn=service.getAllMessagesSeen();
+		m.addAttribute("seenn",seenn);
+		for (Messages messages : sendby) {
+			if(seenn.isEmpty()) {
+				service.setStudentSeeGrpMsgs(mystd, messages);
+				 System.out.println("seen b4 content");
+			}
+			else if(!seenn.contains(messages)) {
+				service.setStudentSeeGrpMsgs(mystd, messages);
+				 System.out.println("seen after content");
+			} 
+					
+			else {
+				System.out.println("already seen");
+			}
+}
 		m.addAttribute("mygrps", stdgroups);
 		if (student!=null) {
 			for (Messages msgsss : student.getMsgfrom()) {
@@ -173,10 +215,7 @@ public class FriendsController {
 					if(std.getId()==mystd.getId()) {
 						System.out.println("msg id is "+toid);
 						System.out.println("msg is "+msgsss.getMsg());
-						mystd.setSeen(msgs);
-						stdrepol.save(mystd);
-	                    msgsss.setSeenn(seen);
-						msrrepo.save(msgsss);
+					
 					   
 					}else {
 						System.out.println("amna msg ");
@@ -188,10 +227,7 @@ public class FriendsController {
 			
 			m.addAttribute("tmsg", msgs.size()+grpmsgs.size());
 			m.addAttribute("whosendMetxt",whosendMetxt);
-			Collection<Messages> sent=service.getSentMsgs(mystd.getId(),student.getId(),1,1);
-			System.out.println("amna haijafikaaa ");
-			Collection<Messages> sendby=service.getSentMsgs(student.getId(),mystd.getId(),1,1);
-			Collection<Messages> receivOrsent=service.allreciivOrSent(mystd.getId());
+		
 			m.addAttribute("allsentRec", receivOrsent);
 			m.addAttribute("totConver",(sendby.size()+sent.size()));
 			for (Messages messages : sendby) {
@@ -256,9 +292,9 @@ public class FriendsController {
 		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
 		Collection<Student> whosendMetxt=service.whoSendMsgToMe(mystd.getId(),1,1);
 		Collection<Student> searchWhosendTome=stdrepol.searchmgsWhoSendToMeByKey(mystd.getId(),1,1,who);
-		Collection<Messages> msgss=service.getAllMessagesReceived(mystd.getId(),1,1,1);
+		Collection<Messages> msgss=service.getAllMessagesReceived(mystd.getId(),1);
 		Collection<Groups> stdgroups=service.getStudentGroups(mystd.getId());
-		Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1,1);
+		Collection<Messages> grpmsgs=service.getAllGroupMessagesReceived(mystd.getId(),1);
 		m.addAttribute("mygrps", stdgroups);
 		m.addAttribute("tmsgs", msgss);
 		m.addAttribute("ownid", mystd.getId());
@@ -433,6 +469,63 @@ public class FriendsController {
 		}
 		return "redirect:/chat";
 	}
+	
+	@PostMapping("/gclear")
+	public String clearGroupMsgs(Authentication auth,HttpServletRequest request,RedirectAttributes redirect
+			,@RequestParam("gid") long gid) {
+		Principal userPrincipal = request.getUserPrincipal();
+		Groups grps=service.getGroupById(gid);
+		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
+		Collection<Messages> sent=service.getGroupSentBy(mystd.getId(),grps.getId(),1);
+		Collection<Messages> sendby=service.getGroupSendBy(mystd.getId(),grps.getId(),1);
+		Collection<Messages> receivOrsent=service.allGroupMsgs(grps.getId(),1,1,mystd.getId());
+		if(!sendby.isEmpty() || !sent.isEmpty()) {
+			for (Messages messages : receivOrsent) {
+				service.setStudentClearGrpMsgs(mystd,messages);
+				System.out.println("clear success");
+			}
+		
+		}
+		else {
+			System.out.println("error");
+			redirect.addFlashAttribute("messagee", "message already cleared previous time");
+			redirect.addFlashAttribute("moja", "1");
+		}
+		return "redirect:/chat";
+	}
+	
+	@PostMapping("/gachieve")
+	public String achieveGroupMsgs(Authentication auth,HttpServletRequest request,RedirectAttributes redirect
+			,@RequestParam("gid") long gid) {
+		Principal userPrincipal = request.getUserPrincipal();
+		Groups grps=service.getGroupById(gid);
+		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
+		Collection<Messages> sent=service.getGroupSentBy(mystd.getId(),grps.getId(),1);
+		Collection<Messages> sendby=service.getGroupSendBy(mystd.getId(),grps.getId(),1);
+		if(!sendby.isEmpty() || !sent.isEmpty()) {
+			Collection<Messages> msgs=service.updateGrpArchieve(mystd.getId(), grps.getId(),1,1,0);
+			mystd.setAchieve(msgs);
+			stdrepol.save(mystd);
+			if(msgs!=null) {
+				System.out.println("success");
+				redirect.addFlashAttribute("messagee", "message achieved");
+				redirect.addFlashAttribute("mojaa", "1");
+			}
+			else {
+				System.out.println("error");
+				redirect.addFlashAttribute("messagee", "message already achieved previous time");
+				redirect.addFlashAttribute("moja", "1");
+			}
+		}
+		else {
+			System.out.println("error");
+			redirect.addFlashAttribute("messagee", "message already achieved previous time");
+			redirect.addFlashAttribute("moja", "1");
+		}
+		return "redirect:/chat";
+	}
+
+	
 	@PostMapping("/unachieve")
 	public String unachieveMsg(Authentication auth,HttpServletRequest request,RedirectAttributes redirect
 			,@RequestParam("from") long fromid) {
@@ -450,6 +543,24 @@ public class FriendsController {
 			redirect.addFlashAttribute("moja", "1");
 		}
 
+		return "redirect:/chat";
+	}
+	@PostMapping("/gunachieve")
+	public String groupunachieveMsg(Authentication auth,HttpServletRequest request,RedirectAttributes redirect
+			,@RequestParam("gid") long gid) {
+		Principal userPrincipal = request.getUserPrincipal();
+		Groups grps=service.getGroupById(gid);
+		Student mystd=stdrepol.findByEmail(userPrincipal.getName());
+			Collection<Messages> msgs=service.updateGrpArchieve(mystd.getId(), grps.getId(),2,1,0);
+			if(msgs!=null) {
+				System.out.println("success");
+				redirect.addFlashAttribute("messagee", "message un-achieved");
+			}
+			else {
+				System.out.println("error");
+				redirect.addFlashAttribute("messagee", "message already un-achieved previous time");
+				redirect.addFlashAttribute("moja", "1");
+			}
 		return "redirect:/chat";
 	}
 
@@ -624,5 +735,20 @@ public class FriendsController {
 		return "redirect:/friends";
 
 	}
+	@PostMapping("/left")
+	public String leeftGroup(Authentication auth,HttpServletRequest request,RedirectAttributes redirect
+			,@RequestParam("gid") long gid) {
+		Principal userPrincipal = request.getUserPrincipal();
+		Student mystd=service.selectStudent(userPrincipal.getName());
+		Groups grps=service.getGroupById(gid);
+		LeftGroup grp=service.getStudentLeftGrp(mystd,grps);
+		if(grp!=null) {
+			System.out.println("you left group "+grps.getGrp_name());
+			redirect.addFlashAttribute("messagee","successfull left from "+grps.getGrp_name());
+		}
+		return "redirect:/chat";
+
+	}
+
 
 }

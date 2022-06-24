@@ -14,8 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +46,8 @@ public class Groups implements Serializable{
 	private String grp_desc;
 	@Column(name="Group_capacity",nullable=false)
 	private int capacity;
-	 
+	@OneToMany(targetEntity=LeftGroup.class, mappedBy="groupsleft",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+   private Collection<LeftGroup> lefts;
    @ManyToMany
 		@JoinTable(
 				name="grp_participants",
@@ -53,6 +57,7 @@ public class Groups implements Serializable{
 						name="st_Id")
 				  )
 	 private Collection<Student> student;
+
    @ManyToMany
 		@JoinTable(
 				name="grp_admins",
@@ -77,6 +82,15 @@ public class Groups implements Serializable{
          System.out.println("picha");
         return "img1/GrpIcons/" +id+"/"+grp_icon;
     }
+
+
+	public Collection<LeftGroup> getLefts() {
+		return lefts;
+	}
+
+	public void setLefts(Collection<LeftGroup> lefts) {
+		this.lefts = lefts;
+	}
 
 	public String getGrp_name() {
 		return grp_name;

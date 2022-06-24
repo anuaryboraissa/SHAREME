@@ -350,7 +350,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     <div class="card-footer bg-c-purple">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                                <p class="text-white m-b-0">Documents</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -376,7 +376,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     <div class="card-footer bg-c-green">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                                <p class="text-white m-b-0">Friends</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -401,7 +401,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     <div class="card-footer bg-c-red">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                                <p class="text-white m-b-0">Groups</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -426,7 +426,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                     <div class="card-footer bg-c-blue">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                                <p class="text-white m-b-0">Messages</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -463,9 +463,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 																	<p style="width: 120px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="text-muted m-b-0" th:text="${req.msg}"></p>
 																</div>
 																<div style="float: right; width: 80px;">
-																<form th:action="@{/unachieve}" method="post">
+																<form th:action="@{/deletemsg}" method="post">
 										                           <div style="float: right;width: 70px">
-																	<button name="from" th:value="${req.id}" type="submit" class="btn btn-danger btn-sm" style="text-decoration: none;height: 30px">
+																	<button  th:formaction="@{/deletemsgg}" th:name="msgid" th:value="${req.id}" type="submit" class="btn btn-danger btn-sm" style="text-decoration: none;height: 30px">
 																	Delete</button><br>
 																	<span></span>
 																	</div>						
@@ -490,9 +490,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 																	<p style="width: 120px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="text-muted m-b-0" th:text="${req.msg}"></p>
 																</div>
 																<div style="float: right; width: 80px;">
-																<form th:action="@{/unachieve}" method="post">
+																<form th:action="@{/deletemsgg}" method="post">
 										                           <div style="float: right;width: 70px">
-																	<button name="from" th:value="${req.id}" type="submit" class="btn btn-danger btn-sm" style="text-decoration: none;height: 30px">
+																	<button name="msgid" th:value="${req.id}" type="submit" class="btn btn-danger btn-sm" style="text-decoration: none;height: 30px">
 																	Delete</button><br>
 																	<span></span>
 																	</div>						
@@ -553,8 +553,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 
 																	<div style="display: inline-flex">
-																		<p class="text-muted m-b-0">Developer</p>
-																		<a style="margin-left: 10px">
+											                        <p class="text-muted m-b-0" th:text="${req.programme.university.un_name}+','+${req.programme.college.coll_name}"></p>
+										                        	<a style="margin-left: 10px">
 																			<button style="height: 30px; text-decoration: none;"
 																				class="btn btn-link btn-sm" th:formaction="@{/more}"
 																				type="submit" th:name="more" th:value="${req.id}">more
@@ -616,13 +616,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 
 																	<div style="display: inline-flex">
-																		<p class="text-muted m-b-0">Developer</p>
-																		<a style="margin-left: 10px">
-																			<button style="height: 30px; text-decoration: none;"
-																				class="btn btn-link btn-sm" th:formaction="@{/more}"
-																				type="submit" th:name="more" th:value="${req.id}">more
-																				details</button>
-																		</a>
+																		<p style="width: 150px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="text-muted m-b-0" th:text="${req.grp_desc}">Developer</p>
+																	
 																	</div>
 
 																</div>

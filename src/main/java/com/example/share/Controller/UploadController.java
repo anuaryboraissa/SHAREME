@@ -144,6 +144,7 @@ public class UploadController {
 		 System.out.println("file course "+myfil.getCourse().getCourse_name());
 		 redirect.addFlashAttribute("iddd", "1");
 		 redirect.addFlashAttribute("cos",myfil.getCourse().getCourse_name());
+		 redirect.addFlashAttribute("fileid",myfil.getId());
 		 redirect.addFlashAttribute("desc",myfil.getDescription());
 		 redirect.addFlashAttribute("fname", myfil.getFile_name());
           return "redirect:/resource";
