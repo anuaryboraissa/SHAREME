@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.share.Entities.Requests;
 import com.example.share.Entities.Student;
 
 @Repository
@@ -46,14 +45,21 @@ public interface StudentRepostry extends JpaRepository<Student, Long>{
 	Collection<Student> findwhoConfirmFriedsByStatus(String email,int status,long ownId);
 	@Query(value = "select * from student s inner join requests r on r.stdfrom_id=s.st_id where r.stdto_id=?1 and r.stdfrom_id=?2",nativeQuery = true)
 	Student editRequestStatus(long toId,long fromid);
-	@Query(value = "select distinct s.st_id,s.st_age,s.email,s.st_f_name,s.progr_id,s.st_l_name,s.st_password,s.perm_id,s.st_photo from student s inner join msgfrom_std f on f.std_id=s.st_id where f.msg_id in (select f.msg_id from message s inner join msgfrom_std f on f.msg_id=s.msg_id inner join msg_to_std t on t.msg_id=s.msg_id inner join msg_deleted d on d.msg_id=s.msg_id inner join msg_archieved a on a.msg_id=s.msg_id left join std_delete sd on sd.msg_id=s.msg_id where t.std_id=?1 and (d.delete_id=?2 or not sd.st_id=?1) and a.achieve_id=?3)",nativeQuery = true)
-	Collection<Student> findmgsWhoSendToMeById(long ownId,int status,int status1);
-	@Query(value = "select distinct s.st_id,s.st_age,s.email,s.st_f_name,s.progr_id,s.st_l_name,s.st_password,s.perm_id,s.st_photo from student s inner join msgfrom_std f on f.std_id=s.st_id where f.msg_id in (select f.msg_id from message s inner join msgfrom_std f on f.msg_id=s.msg_id inner join msg_to_std t on t.msg_id=s.msg_id inner join msg_deleted d on d.msg_id=s.msg_id inner join msg_archieved a on a.msg_id=s.msg_id where t.std_id=?1 and d.delete_id=?2 and a.achieve_id=?3) and s.st_id in (select r.st_id from student r where match(r.st_f_name,r.st_l_name,email) against (?4))",nativeQuery = true)
-	Collection<Student> searchmgsWhoSendToMeByKey(long ownId,int status,int status1,String key);
-	@Query(value = "select distinct s.st_id,s.st_age,s.email,s.st_f_name,s.progr_id,s.st_l_name,s.st_password,s.perm_id,s.st_photo from student s inner join msgfrom_std f on f.std_id=s.st_id where f.msg_id in (select f.msg_id from message s inner join msgfrom_std f on f.msg_id=s.msg_id inner join msg_to_std t on t.msg_id=s.msg_id inner join msg_deleted d on d.msg_id=s.msg_id inner join msg_archieved a on a.msg_id=s.msg_id where t.std_id=?1 and d.delete_id=?2 and a.achieve_id=?3)",nativeQuery = true)
-	Collection<Student> findmgsArchievedById(long ownId,int status,int status1);
+	@Query(value = "select distinct s.st_id,s.st_age,s.email,s.st_f_name,s.progr_id,s.st_l_name,s.st_password,s.perm_id,s.st_photo from student s inner join msgfrom_std f on f.std_id=s.st_id where f.msg_id in (select f.msg_id from message s inner join msgfrom_std f on f.msg_id=s.msg_id inner join msg_to_std t on t.msg_id=s.msg_id left join deletee d on d.msg_id=s.msg_id where t.std_id=?1)",nativeQuery = true)
+	Collection<Student> findmgsWhoSendToMeById(long ownId);
+	@Query(value = "select distinct s.st_id,s.st_age,s.email,s.st_f_name,s.progr_id,s.st_l_name,s.st_password,s.perm_id,s.st_photo from student s inner join msgfrom_std f on f.std_id=s.st_id where f.msg_id in (select f.msg_id from message s inner join msgfrom_std f on f.msg_id=s.msg_id inner join msg_to_std t on t.msg_id=s.msg_id left join deletee d on d.msg_id=s.msg_id where t.std_id=?1) and s.st_id in (select r.st_id from student r where match(r.st_f_name,r.st_l_name,email) against (?2))",nativeQuery = true)
+	Collection<Student> searchmgsWhoSendToMeByKey(long ownId,String key);
+	
 	@Query(value = "select * from student s inner join grp_admins g on g.st_id=s.st_id where g.group_id=?1",nativeQuery = true)
 	Collection<Student> findGoupAdminsdById(long grpid);
+	
+	@Query(value = " select * from student ss except select DISTINCT * from student s where s.email=?1 or "
+			+ "(s.st_id NOT IN (select s.st_id from student s inner join requests r on (r.stdfrom_id=s.st_id or r.stdto_id=s.st_id)"
+			+ " where (r.request_status=?2 and s.st_id not in (select p.st_id from grp_participantss p where p.group_id=?4)"
+			+ " and (r.stdto_id=?3 or r.stdfrom_id=?3))))",nativeQuery = true)
+	Collection<Student> findFriendsThatAreNotGrpMemberdById(String email,int status,long ownId,long grpid);
+	@Query(value = "select * from student s inner join grp_participantss gp on gp.st_id=s.st_id where gp.group_id=?1",nativeQuery = true)
+	Collection<Student> findParticipantsById(long grpid);
 	@Query(value = "select * from student s where not s.st_id=?1",nativeQuery = true)
 	Collection<Student> findExceptsStdById(long ownid);
 	@Query(value = "select * from student h where h.st_id in (select r.st_id from student r where match(r.st_f_name,r.st_l_name,email) against (?4)) except select DISTINCT * from student s where s.email=?1 or (s.st_id NOT IN (select s.st_id from student s inner join requests r on (r.stdfrom_id=s.st_id or r.stdto_id=s.st_id) where (r.request_status=?2 and (r.stdto_id=?3 or r.stdfrom_id=?3))))",nativeQuery = true)

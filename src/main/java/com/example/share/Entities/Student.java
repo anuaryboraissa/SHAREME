@@ -71,18 +71,31 @@ public class Student {
 	@ManyToOne()
 	@JoinColumn(name="perm_id", referencedColumnName = "permit_id")    
 	private Permission permission;
-	
+	@OneToMany(targetEntity=Grp_participantss.class, mappedBy="stdId",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<Grp_participantss> grp_part;
+	@OneToMany(targetEntity=GroupAdmin.class, mappedBy="stdId",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<GroupAdmin> grp_admin;
+
 	@OneToMany(targetEntity=Requests.class, mappedBy="studentfrom",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<Requests> fromStd;
+	@OneToMany(targetEntity=RequestFrom.class, mappedBy="std",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	 private Collection<RequestFrom> requestfrom;
+	@OneToMany(targetEntity=RequestTo.class, mappedBy="std",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	 private Collection<RequestTo> requestto;
 	@OneToMany(targetEntity=LeftGroup.class, mappedBy="studentleft",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<LeftGroup> lefts;
 	@OneToMany(targetEntity=Seen.class, mappedBy="studentsee",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<Seen> msgsee;
+	@OneToMany(targetEntity=Archieve.class, mappedBy="studentachiev",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	 private Collection<Archieve> msgsachieve;
+	@OneToMany(targetEntity=Delete.class, mappedBy="studentdel",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	 private Collection<Delete> msgdel;
 	@OneToMany(targetEntity=ClearMsgs.class, mappedBy="studentclear",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<ClearMsgs> msgclear;
 	@OneToMany(targetEntity=Requests.class, mappedBy="studentTo",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	 private Collection<Requests> toStd;
-	
+	@OneToMany(targetEntity=Archieve.class, mappedBy="stdmsgs",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+ 	private Collection<Archieve> achieved;
 	@Transient
 	private List<MultipartFile> files=new ArrayList<MultipartFile>();
 	
@@ -114,8 +127,6 @@ public class Student {
 		this.imagess = imagess;
 	}
 
-	@ManyToMany(mappedBy="student")
-	private Collection<Groups> groups;
 	 @ManyToMany(mappedBy="tagged")
 		private Set<Files> file;
 	 @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
@@ -127,25 +138,9 @@ public class Student {
 						name="ROle_Id")
 				  )
 	private Collection<Roles> roles;
-	 @ManyToMany
-		@JoinTable(
-				name="std_Archieve",
-				joinColumns= @JoinColumn(
-						name="st_Id"),
-				inverseJoinColumns=@JoinColumn(
-						name="msg_id")
-				  )
-	private Collection<Messages> achieve;
+
 	 
-	 @ManyToMany
-		@JoinTable(
-				name="std_delete",
-				joinColumns= @JoinColumn(
-						name="st_Id"),
-				inverseJoinColumns=@JoinColumn(
-						name="msg_id")
-				  )
-	private Collection<Messages> deletee;
+
 	public Student() {
 		super();
 	}
@@ -182,6 +177,63 @@ public class Student {
 	}
 
 	
+	public Collection<Grp_participantss> getGrp_part() {
+		return grp_part;
+	}
+
+	public void setGrp_part(Collection<Grp_participantss> grp_part) {
+		this.grp_part = grp_part;
+	}
+
+	public Collection<GroupAdmin> getGrp_admin() {
+		return grp_admin;
+	}
+
+	public void setGrp_admin(Collection<GroupAdmin> grp_admin) {
+		this.grp_admin = grp_admin;
+	}
+
+
+	public Collection<RequestFrom> getRequestfrom() {
+		return requestfrom;
+	}
+
+	public void setRequestfrom(Collection<RequestFrom> requestfrom) {
+		this.requestfrom = requestfrom;
+	}
+
+	public Collection<RequestTo> getRequestto() {
+		return requestto;
+	}
+
+	public void setRequestto(Collection<RequestTo> requestto) {
+		this.requestto = requestto;
+	}
+
+	public Collection<Archieve> getAchieved() {
+		return achieved;
+	}
+
+	public void setAchieved(Collection<Archieve> achieved) {
+		this.achieved = achieved;
+	}
+
+	public Collection<Archieve> getMsgsachieve() {
+		return msgsachieve;
+	}
+
+	public void setMsgsachieve(Collection<Archieve> msgsachieve) {
+		this.msgsachieve = msgsachieve;
+	}
+
+	public Collection<Delete> getMsgdel() {
+		return msgdel;
+	}
+
+	public void setMsgdel(Collection<Delete> msgdel) {
+		this.msgdel = msgdel;
+	}
+
 	public Collection<ClearMsgs> getMsgclear() {
 		return msgclear;
 	}
@@ -205,29 +257,7 @@ public class Student {
 	public void setLefts(Collection<LeftGroup> lefts) {
 		this.lefts = lefts;
 	}
-	public Collection<Messages> getAchieve() {
-		return achieve;
-	}
 
-	public void setAchieve(Collection<Messages> achieve) {
-		this.achieve = achieve;
-	}
-
-	public Collection<Messages> getDeletee() {
-		return deletee;
-	}
-
-	public void setDeletee(Collection<Messages> deletee) {
-		this.deletee = deletee;
-	}
-
-	public Collection<Groups> getGroups() {
-		return groups;
-	}
-
-	public void setGroups(Collection<Groups> groups) {
-		this.groups = groups;
-	}
 
 	public Set<Files> getFile() {
 		return file;

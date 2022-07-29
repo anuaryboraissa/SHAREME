@@ -46,36 +46,16 @@ public class Groups implements Serializable{
 	private String grp_desc;
 	@Column(name="Group_capacity",nullable=false)
 	private int capacity;
+	@OneToMany(targetEntity=Grp_participantss.class, mappedBy="grpId",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<Grp_participantss> grp_part;
+	@OneToMany(targetEntity=GroupAdmin.class, mappedBy="grpId",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<GroupAdmin> grp_admn;
 	@OneToMany(targetEntity=LeftGroup.class, mappedBy="groupsleft",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
    private Collection<LeftGroup> lefts;
-   @ManyToMany
-		@JoinTable(
-				name="grp_participants",
-				joinColumns= @JoinColumn(
-						name="Group_id"),
-				inverseJoinColumns=@JoinColumn(
-						name="st_Id")
-				  )
-	 private Collection<Student> student;
 
-   @ManyToMany
-		@JoinTable(
-				name="grp_admins",
-				joinColumns= @JoinColumn(
-						name="Group_id"),
-				inverseJoinColumns=@JoinColumn(
-						name="st_Id")
-				  )
-	 private Collection<Student> grp_admin;
 	 @ManyToMany(mappedBy="groups")
 	 private Collection<Messages> messages;
-     public Collection<Student> getGrp_admin() {
-		return grp_admin;
-	}
 
-	public void setGrp_admin(Collection<Student> grp_admin) {
-		this.grp_admin = grp_admin;
-	}
 	@Transient
     public String getPhotosImagePath() {
         if (grp_icon == null) return null;
@@ -130,13 +110,6 @@ public class Groups implements Serializable{
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
-	}
-   public Collection<Student> getStudent() {
-		return student;
-	}
-
-	public void setStudent(Collection<Student> student) {
-		this.student = student;
 	}
 
 	public Collection<Messages> getMessages() {

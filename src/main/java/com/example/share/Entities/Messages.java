@@ -28,33 +28,16 @@ public class Messages {
 	private String msg;
 	@Column(name="date")
     private String time;
-	@OneToMany(targetEntity=Seen.class, mappedBy="studentsee",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	@OneToMany(targetEntity=Seen.class, mappedBy="msg",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	private Collection<Seen> msgseen;
+	@OneToMany(targetEntity=Delete.class, mappedBy="msg",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<Delete> msgdelet;
+	@OneToMany(targetEntity=Archieve.class, mappedBy="msg",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<Archieve> msgachieved;
 	@OneToMany(targetEntity=ClearMsgs.class, mappedBy="msgs",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
 	private Collection<ClearMsgs> msgcleared;
-	@ManyToMany(mappedBy="achieve")
-	private Collection<Student> stdacheve;
-	@ManyToMany(mappedBy="deletee")
-	private Collection<Student> stdachieve;
-	 @ManyToMany
-		@JoinTable(
-				name="msg_Archieved",
-				joinColumns= @JoinColumn(
-						name="msg_id"),
-				inverseJoinColumns=@JoinColumn(
-						name="Achieve_id")
-				  )
-	private Collection<Archieve> achievedd;
-	 @ManyToMany
-		@JoinTable(
-				name="msg_deleted",
-				joinColumns= @JoinColumn(
-						name="msg_id"),
-				inverseJoinColumns=@JoinColumn(
-						name="Delete_id")
-				  )
-	private Collection<Delete> deletee;
-	
+
+
 	 @ManyToMany
 		@JoinTable(
 				name="grp_messages",
@@ -65,6 +48,28 @@ public class Messages {
 				  )
 	 private Collection<Groups> groups;
 	 
+	public Collection<Delete> getMsgdelet() {
+		return msgdelet;
+	}
+
+
+
+	public Collection<Archieve> getMsgachieved() {
+		return msgachieved;
+	}
+
+
+
+	public void setMsgachieved(Collection<Archieve> msgachieved) {
+		this.msgachieved = msgachieved;
+	}
+
+
+
+	public void setMsgdelet(Collection<Delete> msgdelet) {
+		this.msgdelet = msgdelet;
+	}
+
 	public Collection<ClearMsgs> getMsgcleared() {
 		return msgcleared;
 	}
@@ -73,29 +78,6 @@ public class Messages {
 		this.msgcleared = msgcleared;
 	}
 
-	public Collection<Student> getStdacheve() {
-		return stdacheve;
-	}
-
-	public void setStdacheve(Collection<Student> stdacheve) {
-		this.stdacheve = stdacheve;
-	}
-
-	public Collection<Student> getStdachieve() {
-		return stdachieve;
-	}
-
-	public void setStdachieve(Collection<Student> stdachieve) {
-		this.stdachieve = stdachieve;
-	}
-
-	public Collection<Archieve> getAchievedd() {
-		return achievedd;
-	}
-
-	public void setAchievedd(Collection<Archieve> achievedd) {
-		this.achievedd = achievedd;
-	}
 
 	public Collection<Seen> getMsgseen() {
 		return msgseen;
@@ -105,13 +87,7 @@ public class Messages {
 		this.msgseen = msgseen;
 	}
 
-	public Collection<Delete> getDeletee() {
-		return deletee;
-	}
 
-	public void setDeletee(Collection<Delete> deletee) {
-		this.deletee = deletee;
-	}
 
 	public Collection<Groups> getGroups() {
 		return groups;

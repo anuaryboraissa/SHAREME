@@ -580,6 +580,161 @@
 							</div>
 						</div>
 					</nav>
+					
+							<div class="modal fade" id="myModall">
+						<div class="modal-dialog">
+							<div style="background: #e9ecef" class="modal-content">
+
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h5 class="modal-title">
+										Add new Member in <span class="text text-primary"
+											th:text="${namee}"></span>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- Modal body -->
+							<form th:action="@{/addMember}" method="post" th:object="${grp}">
+								<div class="modal-body">
+									<div class="text-center">
+										<p>Profile Photo</p>
+										<img th:if="${ehh}==1" alt="user" th:src="@{${'/image/display/'+ toid}}"
+											class="rounded-circle user_img">
+											<img th:if="${ehh}==2" alt="user" th:src="@{${'/gimage/display/'+ too}}"
+											class="rounded-circle user_img">
+									</div>
+							
+									<div style="padding: 20px">
+										<h6>
+											Participants To Be: <span class="text text-primary"
+												th:text="' '+${sisssze}+'  '+members"></span>
+										</h6>
+								
+                          		<th:block th:each="req :${addMember}">
+										<div style="color: black;" class="align-middle m-b-30">
+											<img th:src="@{${'/image/display/'+ req.id}}"
+												alt="user image" class="img-radius img-40 align-top m-r-15">
+											<div class="d-inline-block">
+												<h6>
+													<span th:text="${req.first}"></span> <span
+														th:text="${req.last}"></span>
+												</h6>
+
+
+												<div style="display: inline-flex">
+													<p class="text-muted m-b-0" th:text="${req.programme.university.un_name}+','+${req.programme.college.coll_name}"></p>
+
+												</div>
+
+											</div>
+											
+											<input type="hidden" th:name="ggid" th:value="${ggid}">
+											<label style="float: right"> <input
+												th:field="*{stdId}" th:value="${req.id}" type="checkbox">
+												<span class="cr"><i
+													class="cr-icon icofont icofont-ui-check txt-primary"></i></span> <span
+												class="text-inverse"></span>
+											</label>
+											
+										</div>
+									</th:block>
+                          
+									</div>
+
+								</div>
+
+								<!-- Modal footer -->
+						<div style="display: inline-flex; float: right"
+							class="modal-footer">
+							<button class="btn btn-success btn-sm" type="submit"
+								id="myButtonn">Save Changes</button>
+							<button type="button" class="btn btn-danger btn-sm"
+								data-dismiss="modal">Close</button>
+						</div>
+                              </form>
+							</div>
+						</div>
+					</div>
+					
+					<div class="modal fade" id="myModalll">
+						<div class="modal-dialog">
+							<div style="background: #e9ecef" class="modal-content">
+
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h5 class="modal-title">
+										Add new Admin in <span class="text text-primary"
+											th:text="${namee}"></span>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- Modal body -->
+								<form th:action="@{/addAdmin}" method="post" th:object="${grpa}">
+								<div class="modal-body">
+									<div class="text-center">
+										<p>Profile Photo</p>
+										<img th:if="${ehh}==1" alt="user" th:src="@{${'/image/display/'+ toid}}"
+											class="rounded-circle user_img">
+											<img th:if="${ehh}==2" alt="user" th:src="@{${'/gimage/display/'+ too}}"
+											class="rounded-circle user_img">
+									</div>
+							
+									<div style="padding: 20px">
+										<h6>
+											Group Participants: <span class="text text-primary"
+												th:text="' '+${psizemin}+'  '+members"></span>
+										</h6>
+								
+   		                            <th:block th:each="req :${gstd}">
+										<div style="color: black;" class="align-middle m-b-30">
+									
+										<div th:if="!${#lists.contains(admin,req)}">
+												<img th:src="@{${'/image/display/'+ req.id}}"
+												alt="user image" class="img-radius img-40 align-top m-r-15">
+											<div class="d-inline-block">
+												<h6>
+													<span th:text="${req.first}"></span> <span
+														th:text="${req.last}"></span>
+												</h6>
+
+
+												<div style="display: inline-flex">
+													<p class="text-muted m-b-0" th:text="${req.programme.university.un_name}+','+${req.programme.college.coll_name}"></p>
+
+												</div>
+
+											</div>
+											<input type="hidden" th:name="ggid" th:value="${ggid}">
+											<label style="float: right"> <input
+												th:field="*{stdId}" th:value="${req.id}" type="checkbox">
+												<span class="cr"><i
+													class="cr-icon icofont icofont-ui-check txt-primary"></i></span> <span
+												class="text-inverse"></span>
+											</label>
+										</div>
+										</div>
+									
+									
+									</th:block>
+									</div>
+
+								</div>
+
+								<!-- Modal footer -->
+						<div style="display: inline-flex; float: right"
+							class="modal-footer">
+							<button class="btn btn-success btn-sm" type="submit"
+								id="myButton">Save Changes</button>
+							<button type="button" class="btn btn-danger btn-sm"
+								data-dismiss="modal">Close</button>
+						</div>
+ </form>
+							</div>
+						</div>
+					</div>
+					
 					<div class="modal fade" id="myModal">
 						<div class="modal-dialog">
 							<div style="background: #e9ecef" class="modal-content">
@@ -627,7 +782,7 @@
 									<div th:if="${ehh}==2" style="padding: 20px">
 										<h6>
 											Group Participants: <span class="text text-primary"
-												th:text="${agee}"></span>
+												th:text="' '+${psize}+'  '+members"></span>
 										</h6>
 										<th:block th:each="part :${gstd}">
 											<div class="d-flex bd-highlight">
@@ -652,12 +807,13 @@
 												<th:block th:each="admi :${admin}">
 													<button style="width: 70px" th:if="${admi}==${part}" th:text="Admin"
 														class="btn btn-secondary btn-sm"></button>
-													<button style="width: 70px" th:if="${admi}!=${part} and ${#lists.contains(lefts,part)}" th:text=" left "
-														class="btn btn-secondary btn-sm"></button>
-								                    <button style="width: 70px" th:if="${admi}!=${part} and !${#lists.contains(lefts,part)}" th:text="member"
-														class="btn btn-secondary btn-sm"></button>
+												
+								                  
 												</th:block>
-
+                                        	<button style="width: 70px" th:if="${#lists.contains(lefts,part)}" th:text=" left "
+														class="btn btn-secondary btn-sm"></button>
+														  <button style="width: 70px" th:if="!${#lists.contains(lefts,part)} and !${#lists.contains(admin,part)}" th:text="member"
+														class="btn btn-secondary btn-sm"></button>
 											</div>
 										</th:block>
 
@@ -680,7 +836,7 @@
 
 						<!-- Page-header end -->
 						<div class="pcoded-inner-content">
-							<div th:if="${messagee}" style="margin-left: 14px; width: 100%"
+							<div th:if="${messagee}" style="margin-left: 14px; width: 100%;text-align: center;padding-top: 15px"
 								class="media">
 
 								<div style="display: inline-flex;"
@@ -738,7 +894,7 @@
 																	<ul th:each="st: ${whosendMetxt}" class="contacts">
 
 																		<li style="margin-top: -17px;padding: 10px 0px" class="active">
-																			<div class="d-flex bd-highlight">
+																			<div style="padding-left: 10px" class="d-flex bd-highlight">
 																				<div class="img_cont">
 																					<img th:src="@{${'/image/display/'+ st.id}}"
 																						class="rounded-circle user_img"> <span
@@ -754,7 +910,7 @@
 																						</th:block>
 																					</th:block>
 
-																					<div style="float: right; margin-top: 20px;margin-left: 10px">
+																					<div style="float: right; margin-top: 20px;margin-left: 50px">
 
 																						<button type="submit" th:formaction="@{/chating}"
 																							th:name="toid" th:value="${st.id}"
@@ -762,7 +918,7 @@
 																							class="btn btn-link text-success btn-sm">view</button>
 																						<button th:formaction="@{/deletemsg}"
 																							th:name="toid" th:value="${st.id}" type="submit"
-																							style="width: 40px; font-size: 12px;"
+																							style="width: 40px; font-size: 12px;margin-left: 20px"
 																							class="btn btn-link text-danger btn-sm">delete</button>
 																					</div>
 																				</div>
@@ -779,9 +935,19 @@
 																						class="rounded-circle user_img"> <span
 																						class="online_icon"></span>
 																				</div>
+																			
 																				<div class="user_info">
 																					<span th:text="${grp.grp_name}"></span>
-																					<div style="float: right; margin-left: -10px;margin-top: 20px">
+																			<div style="float: bottom">
+																				<th:block th:each="x,n :${grpppp}">
+																				<th:block th:each="m :${msgsss[n.index]}">
+																				<cite th:if="${x}==${grp.id}" style="color: white;font-size: 8px" th:text="'('+${m}+'  messages)'"></cite>
+																				</th:block>
+													                       	
+                                                                           </th:block>
+																				</div>	
+																					
+																					<div style="float: right; margin-left: 50px;margin-top: 20px">
 
 																						<button th:value="${grp.id}" type="submit"
 																							th:formaction="@{/Gchating}" th:name="toidd"
@@ -790,6 +956,8 @@
 																					
 																					</div>
 																				</div>
+																				
+																		
 																			</div>
 																		</li>
 																	</ul>
@@ -851,7 +1019,10 @@
 																					th:formaction="@{/blockSt}">block</button></li>
 																			<li th:if="${ehh}==2 and ${hide}==1"><i class="fas fa-plus"></i>
 																				<button class="btn btn-link" type="button"
-																				data-toggle="modal" data-target="#myModal">Add Admin</button></li>
+																				data-toggle="modal" data-target="#myModalll">Add Admin</button></li>
+																				<li th:if="${ehh}==2 and ${hide}==1"><i class="fas fa-plus"></i>
+																				<button class="btn btn-link" type="button"
+																				data-toggle="modal" data-target="#myModall">Add Member</button></li>
 																        	<li th:if="${ehh}==2 and ${ehhh}==3"><i class="fas fa-ban"></i>
 																				<button class="btn btn-link" th:name="gid"
 																					th:value="${toidg}" type="submit"
@@ -985,6 +1156,19 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#myButtonn").click(function() {
+				$("#fm").submit();
+			});
+		});
+		document.getElementById("myButtonn").onclick=function(){
+			document.getElementById("fm").submit();
+		}
+		function save(){
+			return document.getElementById("fm").submit;
+		}
+	</script>
 <script type="text/javascript">
 document.addEventListener('mouseup', function(e) {
     var container = document.getElementById('contain');

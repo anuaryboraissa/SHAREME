@@ -17,6 +17,11 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+	<dependency>
+       <groupId>javassist</groupId>
+       <artifactId>javassist</artifactId>
+       <version>3.12.1.GA</version>
+         </dependency> 
 	   <dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>

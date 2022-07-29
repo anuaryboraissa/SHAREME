@@ -6,14 +6,19 @@ package com.example.share.Entities;
 
 
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,7 +36,10 @@ public class Requests {
 	@ManyToOne()
 	@JoinColumn(name="stdto_id", referencedColumnName = "st_id")    
 	private Student studentTo;
-	
+	@OneToMany(targetEntity=RequestFrom.class, mappedBy="request",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<RequestFrom> requestfrom;
+	@OneToMany(targetEntity=RequestTo.class, mappedBy="request",cascade=CascadeType.ALL, fetch = FetchType.LAZY)    
+	private Collection<RequestTo> requestto;
 	public Requests() {
 		super();
 	}

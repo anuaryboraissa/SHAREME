@@ -1,13 +1,14 @@
 package com.example.share.Entities;
 
-import java.util.Collection;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,26 +16,31 @@ import javax.persistence.Table;
 public class Archieve {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="Achieve_id")
+	@Column(name="achieve_id")
 	private long id;
-	private int status;
 	
+	@ManyToOne()
+	@JoinColumn(name="std_id", referencedColumnName = "st_id")    
+	private Student studentachiev;
+	@ManyToOne()
+	@JoinColumn(name="stdarchieved_id", referencedColumnName = "st_id")    
+	private Student stdmsgs;
+	@ManyToOne()
+	@JoinColumn(name="msg_id", referencedColumnName = "msg_id")    
+	private Messages msg;
+    private int status;
+    
+	public Messages getMsg() {
+		return msg;
+	}
+	public void setMsg(Messages msg) {
+		this.msg = msg;
+	}
 	public int getStatus() {
 		return status;
 	}
 	public void setStatus(int status) {
 		this.status = status;
-	}
-	@ManyToMany(mappedBy="achieve")
-	private Collection<Student> student;
-	@ManyToMany(mappedBy="achievedd")
-	private Collection<Messages> msg;
-	
-	public Collection<Messages> getMsg() {
-		return msg;
-	}
-	public void setMsg(Collection<Messages> msg) {
-		this.msg = msg;
 	}
 	public long getId() {
 		return id;
@@ -42,11 +48,20 @@ public class Archieve {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Collection<Student> getStudent() {
-		return student;
+
+	public Student getStudentachiev() {
+		return studentachiev;
 	}
-	public void setStudent(Collection<Student> student) {
-		this.student = student;
+	public void setStudentachiev(Student studentachiev) {
+		this.studentachiev = studentachiev;
 	}
+	public Student getStdmsgs() {
+		return stdmsgs;
+	}
+	public void setStdmsgs(Student stdmsgs) {
+		this.stdmsgs = stdmsgs;
+	}
+
+
 	
 }

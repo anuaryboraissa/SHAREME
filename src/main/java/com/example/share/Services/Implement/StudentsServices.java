@@ -1,6 +1,8 @@
 package com.example.share.Services.Implement;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+
 
 
 import java.time.ZoneId;
@@ -15,10 +17,13 @@ import com.example.share.Controller.DTOS.MessageDTO;
 import com.example.share.Entities.Archieve;
 import com.example.share.Entities.ClearMsgs;
 import com.example.share.Entities.Delete;
-
+import com.example.share.Entities.GroupAdmin;
 import com.example.share.Entities.Groups;
+import com.example.share.Entities.Grp_participantss;
 import com.example.share.Entities.LeftGroup;
 import com.example.share.Entities.Messages;
+import com.example.share.Entities.RequestFrom;
+import com.example.share.Entities.RequestTo;
 import com.example.share.Entities.Requests;
 
 import com.example.share.Entities.Seen;
@@ -27,18 +32,29 @@ import com.example.share.Repositories.ArcieveRepo;
 import com.example.share.Repositories.ClearRepo;
 import com.example.share.Repositories.DeleteRepo;
 import com.example.share.Repositories.GroupRepo;
+import com.example.share.Repositories.GrpAdminRepo;
+import com.example.share.Repositories.Grp_Partici_Repo;
 import com.example.share.Repositories.LeftGroupRepo;
 import com.example.share.Repositories.MessageRepo;
+import com.example.share.Repositories.ReqFromRepo;
 import com.example.share.Repositories.RequestRepostry;
-
+import com.example.share.Repositories.RequestToRepo;
 import com.example.share.Repositories.SeenRepo;
 import com.example.share.Repositories.StudentRepostry;
 
 
 @Service
-public class StudentsServices {
+public class StudentsServices {//
+	@Autowired
+	private Grp_Partici_Repo grp_part_repo;
+	@Autowired
+	private GrpAdminRepo adminrepo;
 	@Autowired
 	private DeleteRepo deteterepo;
+	@Autowired
+	private RequestToRepo reqtorepo;
+	@Autowired
+	private ReqFromRepo reqfromrepo;
 	@Autowired
 	private ArcieveRepo achrepo;
 	@Autowired
@@ -61,6 +77,10 @@ public class StudentsServices {
 	}
 	public Collection<Delete> getDeleted(long id){
 		return deteterepo.getdeleted(id);
+		
+	}
+	public Collection<Student> getGrpParticipantsById(long grpid){
+		return studeRepo.findParticipantsById(grpid);
 		
 	}
 	public Collection<Seen> getSeen(long id){
@@ -102,6 +122,8 @@ public class StudentsServices {
     	clearepo.save(clear);
  }
     public Student saveRequests(String e1,long id,int status) {
+    	RequestTo to=new RequestTo();
+    	RequestFrom from=new RequestFrom();
     	Student student=studeRepo.findByEmail(e1);
     	System.out.println(student);
     	System.out.println(id);
@@ -112,12 +134,32 @@ public class StudentsServices {
     		request.setStudentTo(std2);
     		reqRepo.save(request);
     		System.out.println("duuh");
+    		to.setRequest(request);
+    		to.setStd(std2);
+    		to.setTime("0");
+    		to.setDate("0");
+    		reqtorepo.save(to);
+    		from.setRequest(request);
+    		from.setStd(student);
+    		reqfromrepo.save(from);
 		return student;	
     }
     public Collection<Messages> getSentMsgs(long from,long to,int status1,int status2) {
-		return msgRepo.getAllMsgSentById(from,to,status1,status2);
+		return msgRepo.getAllMsgSentById(from,to);
     	
     }
+    public Collection<Messages> getSpecificGrpMsgNotseen(long own,long grp) {
+		return msgRepo.fingSpecifricGrpMsgNotSeenById(own, grp);
+    	
+    }
+    public Collection<Messages> getIndividualMsgsArchieved(long own,int status1) {
+  		return msgRepo.allIndividualMsgsAchievedById(own,status1);
+      	
+      }
+    public Collection<Messages> allGrpMsgsAchievedById(long own,int status1) {
+  		return msgRepo.allGrpMsgsAchievedById(own,status1);
+      	
+      }
     public Messages getMsgById(long id) {
   		return msgRepo.findMsgById(id);
       	
@@ -125,124 +167,74 @@ public class StudentsServices {
     public Collection<Messages> allreciivOrSent(long ownid) {
   		return msgRepo.allMSGSentOrReceivById(ownid);
     }
-    public Collection<Messages> allGroupMsgs(long grpid,int status1,int status2,long ownid) {
-  		return msgRepo.getAllGroupMSGSById(grpid, status1,status2,ownid);
+    public Collection<Messages> allGroupMsgs(long grpid,int status2,long ownid) {
+  		return msgRepo.getAllGroupMSGSById(grpid,ownid);
     }
     public Collection<Messages> getGroupSendBy(long from,long to,int status) {
-  		return msgRepo.getAllGroupSendById(from, to, status);
+  		return msgRepo.getAllGroupSendById(from, to);
       }
     public Collection<Messages> getGroupSentBy(long from,long to,int status) {
-  		return msgRepo.getAllGroupSentById(from, to, status);
+  		return msgRepo.getAllGroupSentById(from, to);
       }
-    public Collection<Messages> getGroupMsgArchieved(long status,long status2,long ownid) {
-  		return msgRepo.findAllgrpMsgsArchievedById(status,status2,ownid);
-      }
+    /*
+    public Collection<Messages> getGroupMsgArchieved(long status,long ownid) {
+  		return msgRepo.findAllgrpMsgsArchievedById(status,ownid);
+      }*/
     public Collection<Messages> getAllMessagesReceived(long ownid,int status) {
-  		return msgRepo.totalMessagesReceivedById(ownid, status);
+  		return msgRepo.totalMessagesReceivedById(ownid);
       }
     public Collection<Messages> getAllMessagesSeen() {
   		return msgRepo.fingMsgSeenByidd();
       }
+    public Seen getAllSeen(long own,long msg) {
+  		return seenRepo.getIfSeenById(own, msg);
+      }
     public Collection<Messages> getAllGroupMessagesReceived(long ownid,int status) {
-  		return msgRepo.getAllReceivedGroupSendById(ownid, status);
+  		return msgRepo.getAllReceivedGroupSendById(ownid);
       }
-    public Collection<Messages> getAllAchievedReceived(long ownid,int status1,int status2) {
-  		return msgRepo.allAchievedById(ownid,status1,status2);
+    public Collection<Messages> getAllGroupSpecificMessagesReceived(long ownid,long grp) {
+  		return msgRepo.getAllReceivedSpecificGroupSendById(ownid, grp);
       }
-    public Collection<Messages> getAllSentMsgs(long ownid,int status1) {
-  		return msgRepo.allMsgsentById(ownid, status1);
+    public Collection<Messages> getAllMsgSee(long ownid) {
+  		return msgRepo.fingMsgSeenLoggerByidd(ownid);
       }
-    public Collection<Messages> updateArchieve(long ownid,long fromid,int status1) {
-    	Collection<Messages> msgs=msgRepo.allAchievedById(ownid, fromid, status1);
-    	System.out.println("to "+ownid+" from "+fromid+" status "+status1);
-    	Collection<Archieve> achieve=achrepo.getArchieved(2);
-    	Collection<Archieve> unachieved=achrepo.getArchieved(1);
-    	if(status1==1) {
-    		if(!msgs.isEmpty() || msgs!=null) {
-        		for (Messages messages : msgs) {
-            		messages.setAchievedd(achieve);
-            		msgRepo.save(messages);
-            		
-        		}
-        
-        		return msgs;
-        	}
-    	}
-    	if(status1==2) {
-    		if(!msgs.isEmpty()) {
-        		for (Messages messages : msgs) {
-            		messages.setAchievedd(unachieved);
-            		msgRepo.save(messages);
-        		}
-        		return msgs;
-        	}
-    	}
-    
-    	else {
-    		System.out.println("error occur");
-    		
-    	}
-		return null;
-  		
+    public Collection<Messages> getAllGrpsAchieved(long ownid,int status1) {
+  		return msgRepo.allGrpMsgsAchievedById(ownid,status1);
+      }
+    public Collection<Messages> getStudentsArchieved(long ownid,int status1) {
+  		return msgRepo.allIndividualMsgsAchievedById(ownid,status1);
+      }
+    public Collection<Messages> getAllSentMsgs(long ownid) {
+  		return msgRepo.allMsgsentById(ownid);
       }
 
-    
-    public Collection<Messages> updateGrpArchieve(long ownid,long grpid,int status1,int status2,int ck) {
- 
-    	Collection<Messages> grpmsgs=msgRepo.getAllGroupMSGSById(grpid,status1,status2,ownid);
-    	Collection<Archieve> achieve=achrepo.getArchieved(2);
-    	Collection<Archieve> unachieved=achrepo.getArchieved(1);
-    	if(status1==1 && ck==0) {
-    		if(!grpmsgs.isEmpty()) {
-        		for (Messages messages : grpmsgs) {
-            		messages.setAchievedd(achieve);
-            		msgRepo.save(messages);
-            		
-        		}
-        
-        		return grpmsgs;
-        	}
-    	}
-    	if(status1==2) {
-    		if(!grpmsgs.isEmpty()) {
-        		for (Messages messages : grpmsgs) {
-            		messages.setAchievedd(unachieved);
-            		msgRepo.save(messages);
-        		}
-        		return grpmsgs;
-        	}
-    	}
-    
-    	else {
-    		System.out.println("error occur");
-    		
-    	}
-		return null;
-  		
-      }
-    
-    public Messages deletemsgByid(long from,long to,long msgid) {
-    	Collection<Delete> delete=deteterepo.getdeleted(2);
-    	System.out.println("kutoka "+from+" kwenda "+to);
-    	Messages msg=msgRepo.getMessageByid(from, to, msgid);
-    	if(msg!=null) {
-    		msg.setDeletee(delete);
-    		msgRepo.save(msg);
-    		return msg;
-    	}
-    	else return null;	
+ public Archieve updateGrpArchieve(Student ownid,Student achieved,Messages msg) {
+        Archieve achieve=new Archieve();
+    	System.out.println("mbn hawaukuu "+achieved.getFirst());
+        achieve.setStdmsgs(achieved);
+        achieve.setMsg(msg);
+    	achieve.setStudentachiev(ownid);
+    	achieve.setStatus(1);
+    	return achrepo.save(achieve);
+       }
+   public Archieve checkIfAchieved(long own,long msg,int sts) {
+	return achrepo.getIfArchieveById(own, msg, sts);
+	 
+    }
+    public Delete deletemsgByid(Student ownid,Messages msgs,int status) {
+    	
+       Delete del=new Delete();
+       del.setMsg(msgs);
+       if(status==1) {
+       del.setStatus(1);
+       }
+       if (status==2) {
+    	   del.setStatus(2);
+	}
+    	del.setStudentdel(ownid);
+      return deteterepo.save(del);	
     }
     
-    public Messages deletemsg2Byid(long msgid) {
-    	Collection<Delete> delete=deteterepo.getdeleted(2);
-    	Messages msg=msgRepo.getById(msgid);
-    	if(msg!=null) {
-    		msg.setDeletee(delete);
-    		msgRepo.save(msg);
-    		return msg;
-    	}
-    	else return null;	
-    }
     public Collection<Messages> findByIdd(long msgid) {
     	Collection<Messages> msg=msgRepo.fingByidd(msgid);
              return msg;	
@@ -252,18 +244,14 @@ public class StudentsServices {
     public Student saveMessage(MessageDTO msg,String e1) {
     	LocalTime localTime=LocalTime.now(ZoneId.of("GMT+02:59"));
         Student student=studeRepo.findByEmail(e1);
-        Collection<Archieve> achieve=achrepo.getArchieved(1);
-        Collection<Delete> delete=deteterepo.getdeleted(1);
-    	System.out.println("from "+student);
+
     	Messages message=new Messages();
     	message.setMsg(msg.getMsg());
     	message.setTime(localTime.getHour()+":"+localTime.getMinute());
     	message.setStdfrom(msg.getStdfrom());
-    	message.setDeletee(delete);
-    	message.setAchievedd(achieve);
     	
     	if(msg.getStdto()!=null) {
-    		System.out.println("group id is haijajaa");
+    	
     		message.setStdto(msg.getStdto());	
     	}
     	if(msg.getGroups()!=null) {
@@ -288,15 +276,24 @@ public class StudentsServices {
     public Collection<Student> selectRequests(int status,long ownid) {
 		return studeRepo.findStudRequestByStatus(status, ownid);	
     }
-    public Collection<Groups> groupArchieved(long status,long status1,long ownid) {
-  		return grprepo.getAllGrpArchievedById(ownid, status1, status);	
+    public Collection<Groups> groupArchieved() {
+  		return grprepo.getAllGrpArchievedById();	
       }
+    public Groups getGrpById(long id) {
+    	return grprepo.getById(id);
+    }
     public Collection<Student> selectAll() {
 		return studeRepo.findAll();	
     }
+
     public Collection<Student> selectNewFriends(String email,int status,long toid) {
  		return studeRepo.findSuggestedStudNewFriedsByStatus(email, status,toid);	
      }
+    
+    public Collection<Student> selectFriendsNotGrpMember(String email,int status,long ownid,long grpid) {
+ 		return studeRepo.findFriendsThatAreNotGrpMemberdById(email, status, ownid, grpid);	
+     }
+    
     public Collection<Student> selectBlockedFriends(String email,int status,long toid) {
   		return studeRepo.findBlockedstudentsByStatus(email, status, toid);	
       }
@@ -304,11 +301,9 @@ public class StudentsServices {
  		return studeRepo.findwhoConfirmFriedsByStatus(email, status, fromid);	
      }
     public Collection<Student> whoSendMsgToMe(long ownid,int status,int status1) {
- 		return studeRepo.findmgsWhoSendToMeById(ownid,status,status1);
+ 		return studeRepo.findmgsWhoSendToMeById(ownid);
      }
-    public Collection<Student> archieved(long ownid,int status,int status1) {
- 		return studeRepo.findmgsArchievedById(ownid, status,status1);
-     }
+
     public Collection<Student> exceptLogger(long ownid) {
  		return studeRepo.findExceptsStdById(ownid);
      }
@@ -319,6 +314,9 @@ public class StudentsServices {
 		return studeRepo.findSuggestedStudRequestByStatus(email,status,status1,status2,status3, ownid);	
     }
     public Student editRequestStatus(long toid,long fromid,int status) {
+    	LocalTime localTime=LocalTime.now(ZoneId.of("GMT+02:59"));
+    	LocalDate date=LocalDate.now();
+    	RequestTo to=reqtorepo.findReqToById(toid, fromid);
     	Student student=studeRepo.editRequestStatus(toid,fromid);
     	System.out.println(toid+" "+fromid);
     	Student std2=studeRepo.findStById(toid);
@@ -354,6 +352,9 @@ public class StudentsServices {
     		req.setStatus(status);
     		req.setStudentTo(std2);
     		reqRepo.save(req);
+    		to.setTime(localTime.getHour()+":"+localTime.getMinute());
+    		to.setDate(date.toString());
+    		reqtorepo.save(to);
     	}
     	else if(status==0) {
     		if(req3!=null) {
@@ -361,12 +362,16 @@ public class StudentsServices {
         		req3.setStatus(status);
         		req3.setStudentTo(std2);
         		reqRepo.save(req3);
+        		
     		}
     		else {
     			req.setStudentfrom(student);
         		req.setStatus(status);
         		req.setStudentTo(std2);
         		reqRepo.save(req);
+        		to.setTime(localTime.getHour()+":"+localTime.getMinute());
+        		to.setDate(date.toString());
+        		reqtorepo.save(to);
     		}
     	
 		   }
@@ -380,7 +385,9 @@ public class StudentsServices {
 			return student;
     	
     }
-  public Groups saveGroup(GroupDTO groupDTO,Student student) {
+  public Groups saveGroup(GroupDTO groupDTO,Student student) {//
+	  GroupAdmin gadmn=new GroupAdmin();
+	Grp_participantss gp=new Grp_participantss();
     Student std=studeRepo.findStById(student.getId());
     System.out.println("std ni "+std.getFirst());
     Groups groups=new Groups();
@@ -388,11 +395,18 @@ public class StudentsServices {
     groups.setCapacity(groupDTO.getCapacity());
     groups.setGrp_desc(groupDTO.getGrp_desc());
     groups.setGrp_name(groupDTO.getGrp_name());
-    groups.setStudent(groupDTO.getStudent());
     left.setStudent(groupDTO.getStudent());
-    groups.setGrp_admin(groupDTO.getGrp_admin());
+//    groups.setGrp_admin(groupDTO.getGrp_admin());
     groups.setGrp_icon(groupDTO.getGrp_icon());
     Groups grp=grprepo.save(groups);
+    gp.setGrpId(grp);
+    for (Student sst : groupDTO.getStudent()) {
+    	gp.setStdId(sst);
+        grp_part_repo.save(gp);
+	}
+    gadmn.setGrpId(groups);
+    gadmn.setStdId(student);
+    adminrepo.save(gadmn);
     return grp;
     	
     }

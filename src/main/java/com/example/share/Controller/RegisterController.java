@@ -78,7 +78,7 @@ public class RegisterController {
 		Collection<College> listcoll=collrepo.findAll();
 		Collection<Roles> listroll=rolerepo.findAll();
 		List<Student> std=stdrepo.findAll();
-		Collection<Programme> listprogramme=progrepo.findProgrammeById(4);
+		Collection<Programme> listprogramme=progrepo.findProgrammeById(1);
 		Collection<University> listuni=unirepo.findAll();
 		Collection<Course> listcourse=courserepo.findCourseSemistById(2);
 		Collection<Course> listcourseSEM1=courserepo.findCourseSemistById(1);

@@ -212,7 +212,10 @@
 															th:text="${conf.last}"></span>
 													</h5>
 													<p class="notification-msg">Confirm your request</p>
-													<span class="notification-time">30 minutes ago</span>
+														<th:block th:each="time :${conf.getRequestto}">
+														<span th:if="${time.getDate}!=${now}" th:text="At +'  '+${time.getTime}+'   '+${time.getDate}"></span>
+												   <span th:if="${time.getDate}==${now}" th:text="At +'  '+${time.getTime}+'   '+today"></span>
+													</th:block>
 												</div>
 											</div>
 										</li>
@@ -230,7 +233,10 @@
 															th:text="${conf.last}"></span>
 													</h5>
 													<p class="notification-msg">Cancel your request</p>
-													<span class="notification-time">30 minutes ago</span>
+													<th:block th:each="time :${conf.getRequestto}">
+												   <span th:if="${now}==${time.getDate}" th:text="At +'  '+${time.getTime}+'   '+today"></span>
+													</th:block>
+													
 												</div>
 											</div>
 										</li>

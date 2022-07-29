@@ -34,8 +34,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.share.Entities.Archieve;
 import com.example.share.Entities.College;
 import com.example.share.Entities.Course;
+import com.example.share.Entities.Delete;
 import com.example.share.Entities.Files;
 import com.example.share.Entities.Groups;
 import com.example.share.Entities.ImageGallery;
@@ -45,6 +47,7 @@ import com.example.share.Entities.University;
 import com.example.share.Repositories.CollegeRepostry;
 import com.example.share.Repositories.CourseRepostry;
 import com.example.share.Repositories.FilesRepostry;
+import com.example.share.Repositories.MessageRepo;
 import com.example.share.Repositories.StudentRepostry;
 import com.example.share.Repositories.UniversityRepostry;
 import com.example.share.Services.Implement.FileServiceImple2;
@@ -68,6 +71,8 @@ public class Mycontroller {
 	
 	private FilesRepostry filerepo;
 	@Autowired
+	private MessageRepo msgRepo;
+	@Autowired
 	private StudentsServices services;
 	@Autowired
 	private FileServiceImple2 service;
@@ -86,7 +91,7 @@ public class Mycontroller {
 			Collection<Files> prifiles=service.getFileHistory(4, mystd.getId());
 			Collection<Files> taggedfiles=service.getFileHistory(5, mystd.getId());
 			  Collection<Student> newFriends=services.selectNewFriends(userPrincipal.getName(), 0,mystd.getId());
-			  Collection<Messages> allmsgs=services.getAllSentMsgs(mystd.getId(), 1);
+			  Collection<Messages> allmsgs=services.getAllSentMsgs(mystd.getId());
 			  for (Messages messages : allmsgs) {
 				  System.out.println("to std "+messages.getId());
 				for (Student stdd : messages.getStdto()) {
@@ -143,11 +148,9 @@ public class Mycontroller {
 	public String deleteMsg(@RequestParam("msgid") long msgid,Authentication auth,HttpServletRequest request) {
 		 Principal userPrincipal = request.getUserPrincipal();
 		 Student mystd=stdrepol.findByEmail(userPrincipal.getName());
-		Messages msg=services.deletemsg2Byid(msgid);
-		Collection<Messages> msgs=services.findByIdd(msgid);
-		mystd.setDeletee(msgs);
-		stdrepol.save(mystd);
-		if(msg!=null) {
+		Messages msg=msgRepo.getById(msgid);
+		Delete deleteMsg=services.deletemsgByid(mystd,msg,1);
+		if(deleteMsg!=null) {
 			System.out.println("message deleted");
 		}
 		else {
@@ -213,20 +216,29 @@ public class Mycontroller {
 				  }
 	     
 		
-		Collection<Messages> msgs=services.getAllAchievedReceived(mystd.getId(),2,1);
-		Collection<Groups> gmsgsarchieve=services.groupArchieved(1,2,mystd.getId());
-		Collection<Messages> grpmsgsarchieved=services.getGroupMsgArchieved(2,1,mystd.getId());
-		Collection<Student> stds=services.archieved(mystd.getId(),1,2); 
+		Collection<Messages> msgs=services.getAllGrpsAchieved(mystd.getId(),1);
+		Collection<Messages> msgsbystd=services.getStudentsArchieved(mystd.getId(),1);
+		for (Messages messages : msgsbystd) {
+			for (Archieve achieve : messages.getMsgachieved()) {
+				System.out.println("std achieve is "+achieve.getStdmsgs().getFirst());
+			}
+			for (Student stdd : messages.getStdfrom()) {
+				 m.addAttribute("stdd",stdd);
+			}
+		}
+		Collection<Groups> gmsgsarchieve=services.groupArchieved();
+	    
+		for (Messages msg : msgs) {
+			for (Groups groups : msg.getGroups()) {
+				System.out.println("grp achieve is "+groups.getGrp_name());	
+			}
+		}
+	    
 		System.out.println("groups  "+gmsgsarchieve);
 		m.addAttribute("achieved",msgs);
-		m.addAttribute("gachieved",gmsgsarchieve);
-		m.addAttribute("gmachieved",grpmsgsarchieved);
-		m.addAttribute("stds",stds);
-		m.addAttribute("asiz",(msgs.size()+grpmsgsarchieved.size()));
-		for (Messages messages : msgs) {
-			System.out.println("sent by "+messages.getMsg());	
-			//System.out.println("sent by "+messages.getStdFrom().getFirst());	
-		                       }
+		m.addAttribute("sachieved",msgsbystd);;
+		m.addAttribute("asiz",(msgs.size()+msgsbystd.size()));
+	
 		
 		Calendar cal=Calendar.getInstance();
 		Date date=cal.getTime();
